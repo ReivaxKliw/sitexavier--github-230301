@@ -29,20 +29,16 @@ const ratioFencing2WithTaxAndFee = 3.25*1.2555; //3.25 euros/m² *(25,64% taxe e
 
 // constante de coût SPECIFICITES
 const costSoilReinforcement = 19.87*1.2555 ; // 20 e/m² *(25,64% taxe et frais) pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-
-
 const addedValueOverHeadCraneOnPoles = 126*1.2555; // euros par poteaux différence entre HEA400 et HEA 555
-const addedValueOverHeadCraneFondation = 933*1.2555; // euros par plus value de fondations sous poteau de pont roulant
 const addedValueOverHeadCraneRaceway = 285*1.2555 ;// euros par ml (HEA300 +carré plein 2,5x2,5)
-
-const costDockShelter = (11000+4000)*1.2555; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
-
+const addedValueOverHeadCraneFondation = 933*1.2555; // euros par plus value de fondations sous poteau de pont roulant
+const costDockShelter =11000*1.2555; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
+const costconcreteWorkDockShelter = 4000; //euros par unité
 const costSectionalDoors = 5000; //euros par unité
-
 const costBlueRate = 5000;// coût d'un tarif bleu
 const costYellowRate = 10000;// coût d'un tarif jaune
-const costGreenRate = 60000;// coût d'un tarif vert 15000 Enedis + 45000 de transfo pour l'elctricien
-
+const costGreenRate = 15000;// coût d'un tarif vert 15000 Enedis (+ 45000 de transfo pour l'elctricien autre constante)
+const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité
 const addedValueHeating = 9.22*1.2555;// e/m² pour chauffage aérotherme gaz
 
 const costStair = 20000;// Prix d'un escalier
@@ -790,7 +786,7 @@ function getAreas() {
           };
 
           // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
-          const addedValueDockShelter = (Number(answer6)*(costDockShelter));
+          const addedValueDockShelter = (Number(answer6)*(costDockShelter+costconcreteWorkDockShelter));
           
      // ____________________________________________________
           //COUT ET TEXTES SPECIFICITE Porte Sectionnelle de Plain-Pied
@@ -825,7 +821,7 @@ function getAreas() {
 
           // //Vérification du choix de tarif électricité + Vérification de l'option choisie pour le texte d'affichage
           
-          let costElectricity = [costBlueRate,costYellowRate,costGreenRate,0];
+          let costElectricity = [costBlueRate,costYellowRate,costGreenRate+costGreenRateAddedValueElectricity,0];
 
           let choiceElectricity = {blue :"Le bâtiment est alimenté par un compteur <36kVa", yellow : "Le bâtiment est alimenté par un compteur >36kVa mais < à 250kVa", green : "Le bâtiment est alimenté par un compteur > à 250kVa",nothing:"vous n'avez pas choisi de tarif d'électricité"};
           let x7 = [choiceElectricity.blue, choiceElectricity.yellow,choiceElectricity.green, choiceElectricity.nothing];
