@@ -521,6 +521,7 @@ function getAreas() {
           officesDimensionsOutside=0;
           areaBuilding = Number(document.getElementById("areaStorage").value);
           areaBox = Number(document.getElementById("areaStorage").value);
+          addedValueStair=0;
      };
      console.log(officesAdministrationInsideDimensions);
      console.log(officesAdministrationOutsideDimensions);
