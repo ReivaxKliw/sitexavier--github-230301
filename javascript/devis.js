@@ -40,7 +40,10 @@ const costYellowRate = 10000;// coût d'un tarif jaune
 const costGreenRate = 15000;// coût d'un tarif vert 15000 Enedis (+ 45000 de transfo pour l'elctricien autre constante)
 const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité
 const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall
+const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
 const ratioGasHeatingHall = 9.22*1.2555;// e/m² pour chauffage aérotherme gaz
+const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
+const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne
 
 const costStair = 20000;// Prix d'un escalier
 // ________________________________
@@ -140,15 +143,6 @@ document.body.innerHTML= `
 <input type="text" placeholder="hauteur en m" id="inputHeightHall"> m <br>
 </div>
 
-<div class="questionProject">
-<label for="badSoil"> Votre terrain a t'il besoin de renforcement de sol ? (voir conclusion de l'étude de sol) :</label>
-          <select id="selectStudySoil">
-               <option value="no"> non</option>
-               <option value="yes"> oui</option>
-               <option value="iDontKnow"> Je ne sais pas</option>
-          </select>
-          </p>
-</div>
 <h2> QUESTIONS CONCERNANTS LES BUREAUX</h2>
 <div class="questionProject">
 <label for="positionOfficesInside"> Souhaitez-vous la réalisation de vos bureaux dans le volume du Hall <b>(à l'intérieur)</b> ?</label>
@@ -223,6 +217,16 @@ document.body.innerHTML= `
           </div>
 <h2> SPECIFITES DU BATIMENT</h2>
 <div class="questionProject">
+<label for="badSoil"> Votre terrain a t'il besoin de renforcement de sol ? (voir conclusion de l'étude de sol) :</label>
+          <select id="selectStudySoil">
+               <option value="no"> non</option>
+               <option value="yes"> oui</option>
+               <option value="iDontKnow"> Je ne sais pas</option>
+          </select>
+          </p>
+</div>
+
+<div class="questionProject">
 <label for="partitionInside">Il y a t'il une cloison de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
           <select id="selectPartitionInside">
                <option value="no"> non</option>
@@ -294,12 +298,20 @@ document.body.innerHTML= `
 
 <div class="questionProject">
 <label for="heating"> Voulez vous chauffer le Hall ?:</label>
-          <select id="selectHeating">
+          <select id="selectHeatingHall">
                <option value="no"> non</option>
                <option value="yes"> oui</option>
           </select>
 
            </p>
+</div>
+
+<div class="questionProject">
+<label for="fireNetwork">Le hall est équipé d'un RIA (Réseau Incendie Armé), si vous ne le souhaitez pas vous pouvez indiquer "non":</label>
+          <select id="selectFireNetworkHall">
+               <option value="yes"> oui</option>
+               <option value="no"> non</option>
+          </select>
 </div>
 
 <div class="questionProject">
@@ -680,10 +692,10 @@ function getAreas() {
      // ____________________________________________________________
           //COUT ET TEXTES SPECIFICITE HAUTEUR DU BATIMENT
           // récupération des données
-          const inputHeight = document.getElementById("inputHeightHall").value;
+          const inputHeightHall = document.getElementById("inputHeightHall").value;
           let addedValueHeight;
-          if(inputHeight>7){
-               addedValueHeight=(inputHeight-7)*costHeightAbove7WithTaxesOffGround;
+          if(inputHeightHall>7){
+               addedValueHeight=(inputHeightHall-7)*costHeightAbove7WithTaxesOffGround;
           }
           else {
                addedValueHeight=0;
@@ -750,7 +762,6 @@ function getAreas() {
           choiceStudySoil > 0 ? x2 : x2=y2;
 
      // ____________________________________________________
-
           // COUT ET TEXTES SPECIFITE CLOISON INTERIEURE
           // Récupération des données
           let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
@@ -767,9 +778,14 @@ function getAreas() {
               costPartitionInsideSidingPanel = 0;
               break;
           };
+          console.log(ratioPartitionInsideSidingPanel);
+          console.log(inputWidthHall);
+          console.log(inputHeightHall);
+          console.log(inputPartitionInside);
+          console.log(selectPartitionInside);
           console.log(costPartitionInsideSidingPanel);
 
-
+     // ____________________________________________________
           // COUT ET TEXTES SPECIFITE PONT ROULANT
           //Récupération des données
           const choiceOverHeadCrane = document.getElementById('choiceOverHeadCrane');
@@ -877,11 +893,11 @@ function getAreas() {
           // COUT ET TEXTES SPECIFICIITE CHAUFFAGE DANS LE HALL PAR AEROTHERME GAZ
           
           //Récupération du choix de CHAUFFAGE 
-          const selectHeating = document.getElementById('selectHeating');
+          const selectHeatingHall = document.getElementById('selectHeatingHall');
           
           //Vérification du choix de chauffage
 
-          let choiceHeating = selectHeating.value;
+          let choiceHeating = selectHeatingHall.value;
 
           switch(choiceHeating){
                case'no':
@@ -900,6 +916,22 @@ function getAreas() {
           y8 = answerChoiceHeating.no;
 
           costHeating > 0 ? x8 : x8=y8;
+          
+          
+               // ____________________________________________________
+                    // COUT ET TEXTES RIA Hall
+                //Calcul
+                let costFireNetworkHall=ratioFireNetworkHall*inputAreaHall;
+                let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
+                switch(selectFireNetworkHall){
+                    case'yes':
+                    costFireNetworkHall
+                    break;
+                    case'no':
+                    costFireNetworkHall = 0;
+                    break;
+                };
+                console.log(costFireNetworkHall);
 
      // ____________________________________________________
           // COUT ET TEXTES SPECIFICITE BATIMENT ICPE
@@ -1078,9 +1110,10 @@ function getAreas() {
           console.log(addedValueFloorSectionalDoor);
           console.log(costElectricity);
           console.log(costHeating);
+          console.log(costFireNetworkHall);
           console.log(addedValueIcpe);
           console.log(addedValueStair);
-          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
+          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
           console.log(costProjectWithoutCommercialMargin);
           const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithoutCommercialMargin);// pour affichage number en euros
           // console.log(number);

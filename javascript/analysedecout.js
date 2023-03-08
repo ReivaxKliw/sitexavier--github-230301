@@ -20,9 +20,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const ratioConcreteSlabHall = 30  // 30e/m² de dalle construit hors taxes hors marge
     const ratioRescueDoors = 2500  // 2500 e/u par porte de secours hors taxes hors marge
     const ratioElectricityHall = 22  // 22e/m² de plancher construit pour l'électricité hors taxes hors marge
-    const ratioElectricHeatingHall = 4  // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
-    const ratioGasHeatingHall = 9.22  // 9e/m² de plancher construit pour le chauffage gaz hors taxes hors marge
-    const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
+    
 //constante de coût Bureaux
     const ratioFondationBlockOffices = 1200 // 550e/u de fondation hors taxes hors marge
     const ratioConcreteWorkOffices = 55 // 55e/m² de plancher construit pour le gros oeuvre hors taxes hors marge
@@ -52,6 +50,9 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const costGreenRate = 15000;// coût d'un tarif vert
     const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité
     const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall
+    const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
+    const ratioGasHeatingHall = 9.22  // 9e/m² de plancher construit pour le chauffage gaz hors taxes hors marge
+    const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
     const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne
     const costStair = 20000;// Prix d'un escalier
 // _____________________________________________________________________________
