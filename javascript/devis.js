@@ -223,7 +223,6 @@ document.body.innerHTML= `
                <option value="yes"> oui</option>
                <option value="iDontKnow"> Je ne sais pas</option>
           </select>
-          </p>
 </div>
 
 <div class="questionProject">
@@ -302,8 +301,6 @@ document.body.innerHTML= `
                <option value="no"> non</option>
                <option value="yes"> oui</option>
           </select>
-
-           </p>
 </div>
 
 <div class="questionProject">
@@ -401,8 +398,8 @@ function getAreas() {
 
     
      // SURFACE BUREAUX ; SURFACE BOX ET CONSTRUITE AU SOL Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
-     let areaBuilding;
-     let areaBox;
+     let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
+     let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
      let addedValueStair; // calcul de la plus value escalier
 
      //Bureaux Intérieur avec locaux sociaux intérieurs
@@ -921,7 +918,7 @@ function getAreas() {
                // ____________________________________________________
                     // COUT ET TEXTES RIA Hall
                 //Calcul
-                let costFireNetworkHall=ratioFireNetworkHall*inputAreaHall;
+                let costFireNetworkHall=ratioFireNetworkHall*areaBox;
                 let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
                 switch(selectFireNetworkHall){
                     case'yes':
