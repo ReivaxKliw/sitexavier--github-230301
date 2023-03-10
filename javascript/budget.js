@@ -57,7 +57,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const costStair = 20000;// Prix d'un escalier
 // _____________________________________________________________________________
 // FONCTION
-    function costBreakdown(event) {
+    function budget(event) {
         // _____________________________________________________________________________
         // TEXTE DES ERREURS
         // let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);

@@ -3,36 +3,38 @@
 
 
 // __________________________________
+const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bureau de controle, thermique, SPS, assurance décennale et RC  
+// __________________________________
 // déclaration des valeurs pour les feuilles de calcul
 const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
+// constante de coût VRD
+const ratioBuilding1WithTaxAndFee = 94; //94 euros/m²hors frais de construit si le ration (voirie+Bâtiment)/terrain est <65%
+const ratioBuilding2WithTaxAndFee = 78.5; //78.5 euros/m²hors frais de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioRoadAndUtilities1WithTaxAndFee = 95.5; //95.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioRoadAndUtilities2WithTaxAndFee = 55.5; //55.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioPlantations1WithTaxAndFee = 9.75; //9.75 euros/m²hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioPlantations2WithTaxAndFee = 10.80; //10.80 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioFencing1WithTaxAndFee = 4.75; //4.75 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioFencing2WithTaxAndFee = 3.25; //3.25 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilitiesWithTaxesOffGround = 87;//ratio coût des VRD entreprise uniquement pour la cour +taxes PC hors marge constructeur
 
 // ratio du calcul du devis bâtiment HORS TERRAIN
 // constante de coût Hall
-const costHallCompanyWithTaxesOffGround = 206.45*1.2555;//ratio coût du hall entreprise de construction +taxes PC hors marge constructeur
-const costHeightAbove7WithTaxesOffGround = 14*1.2555;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompanyWithTaxesOffGround
+const costHallCompanyWithTaxesOffGround = 206.45;//ratio coût du hall entreprise de construction +taxes PC hors marge constructeur
+const costHeightAbove7WithTaxesOffGround = 14;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompanyWithTaxesOffGround
 
 // constante de coût Bureaux
-const costOfficesCompanyInsideOpenSpaceWithTaxesOffGround = 710*1.2555; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyOutsideOpenSpaceWithTaxesOffGround = 749.01*1.2555; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyInsidePartitionedWithTaxesOffGround = 830.07*1.2555; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyOutsidePartitionedWithTaxesOffGround = 867.79*1.2555; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyInsideOpenSpaceWithTaxesOffGround = 710; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyOutsideOpenSpaceWithTaxesOffGround = 749.01; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyInsidePartitionedWithTaxesOffGround = 830.07; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyOutsidePartitionedWithTaxesOffGround = 867.79; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
 
-// constante de coût VRD
-const ratioBuilding1WithTaxAndFee = 94*1.2555; //94 euros/m²*(25,64% taxe et frais) de construit si le ration (voirie+Bâtiment)/terrain est <65%
-const ratioBuilding2WithTaxAndFee = 78.5*1.2555; //78.5 euros/m²*(25,64% taxe et frais) de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioRoadAndUtilities1WithTaxAndFee = 95.5*1.2555; //95.5 euros/m² *(25,64% taxe et frais) si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioRoadAndUtilities2WithTaxAndFee = 55.5*1.2555; //55.5 euros/m² *(25,64% taxe et frais) si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioPlantations1WithTaxAndFee = 9.75*1.2555; //9.75 euros/m²*(25,64% taxe et frais) pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioPlantations2WithTaxAndFee = 10.80*1.2555; //10.80 euros/m² *(25,64% taxe et frais) pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioFencing1WithTaxAndFee = 4.75*1.2555; //4.75 euros/m² *(25,64% taxe et frais) pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioFencing2WithTaxAndFee = 3.25*1.2555; //3.25 euros/m² *(25,64% taxe et frais) pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilitiesWithTaxesOffGround = 87;//ratio coût des VRD entreprise uniquement pour la cour +taxes PC hors marge constructeur
 
 // constante de coût SPECIFICITES
-const costSoilReinforcement = 19.87*1.2555 ; // 20 e/m² *(25,64% taxe et frais) pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-const addedValueOverHeadCraneOnPoles = 126*1.2555; // euros par poteaux différence entre HEA400 et HEA 555
-const addedValueOverHeadCraneRaceway = 285*1.2555 ;// euros par ml (HEA300 +carré plein 2,5x2,5)
-const addedValueOverHeadCraneFondation = 933*1.2555; // euros par plus value de fondations sous poteau de pont roulant
-const costDockShelter =11000*1.2555; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
+const costSoilReinforcement = 19.87 ; // 20 e/m² hors frais pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
+const addedValueOverHeadCraneOnPoles = 126; // euros par poteaux différence entre HEA400 et HEA 555
+const addedValueOverHeadCraneRaceway = 285 ;// euros par ml (HEA300 +carré plein 2,5x2,5)
+const addedValueOverHeadCraneFondation = 933; // euros par plus value de fondations sous poteau de pont roulant
+const costDockShelter =11000; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
 const costconcreteWorkDockShelter = 4000; //euros par unité
 const costSectionalDoors = 5000; //euros par unité
 const costBlueRate = 5000;// coût d'un tarif bleu
@@ -41,10 +43,9 @@ const costGreenRate = 15000;// coût d'un tarif vert 15000 Enedis (+ 45000 de tr
 const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité
 const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall
 const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
-const ratioGasHeatingHall = 9.22*1.2555;// e/m² pour chauffage aérotherme gaz
+const ratioGasHeatingHall = 9.22;// e/m² pour chauffage aérotherme gaz
 const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
 const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne
-
 const costStair = 20000;// Prix d'un escalier
 // ________________________________
 // Action en fonction du terrain : je posséde ou pas le terrain
@@ -1110,13 +1111,13 @@ function getAreas() {
           console.log(costFireNetworkHall);
           console.log(addedValueIcpe);
           console.log(addedValueStair);
-          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
+          const costProjectWithoutCommercialMargin= (Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100))*studyFeesAndInsurance;// calcul du coût du bâtiment hors marge commerciale
           console.log(costProjectWithoutCommercialMargin);
           const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithoutCommercialMargin);// pour affichage number en euros
           // console.log(number);
      
      //COUT Frais commercial
-          const CostDeveloppementAndCommercial=Math.round (0.095*costProjectWithoutCommercialMargin)//calcul du coût du bâtiement comprenant la valeur commerciale de 13%
+          const CostDeveloppementAndCommercial=Math.round (0.095*costProjectWithoutCommercialMargin)//calcul du coût du bâtiement comprenant la valeur commerciale de 9,5%
           const number2 = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( CostDeveloppementAndCommercial);// pour affichage number2 en euros
 
      // _______________________________________

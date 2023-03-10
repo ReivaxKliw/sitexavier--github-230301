@@ -19,18 +19,22 @@
     </header>
       
 <section id="imagePrincipale">
-    <p>Vous devez à ce stade pour pouvoir effectuer une décomposition de prix, avoir les plans de votre projet et que celui-ci est fait l'objet d'une remise de prix tout corps d'état. La réponse aux questions ci-dessous vous permettra alors de décomposer le prix général corps d'état par corps d'état et d'en ressortir les quotes parts des marges et taxes. Plus les réponses seront précises plus la décomposition de prix sera juste.</p>
-    <p>La décomposition de prix ne concerne que le clos et couvert. Dans votre prix vous devez exclure les éléments hors immobilier : sprinckler, machines, meubles, ...</p>
-<!____________________________________________________
- PRIX DE VENTE>
- <h2> Le prix de vente</h2>
-    <label for="inputSellingPrice">Quelle est le <b>prix de vente de votre projet</b>?</label>
-    <input type="text" placeholder="prix en euros" id="inputSellingPrice"> euros HT <br>
-    <br>
-<! ____________________________________________________
+    <!-- <section id="mainQuestions">   -->
+        <form name="questionOwner" id="formulaire1">
+            <label for="ground"><strong>Je connais le terrain pour ma construction et donc sa surface et son prix :</strong></label>
+              <br>
+              <input type="radio" id="choice1" name="q1" value="yes" onclick="selectGround()">
+              <label for="choice1">Oui</label>
+              <br>
+              <input type="radio" id="choice2" name="q1" value="no" onclick="selectGround()">
+              <label for="choice2">Non</label>
+              <br>
+          </form>
+          <! ____________________________________________________
+ 
 Questions du TERRAIN>
 <h2> Le terrain</h2>
-    <label for="choiceGroundOwner">L'offre comprend elle l'acquisition du terrain ?</label>
+    <label for="choiceGroundOwner">Voulez vous un budget avec terrain ?</label>
     <select id="choiceGroundOwner">
         <option value="yes"> oui</option>
         <option value="no"> non</option>
@@ -276,14 +280,11 @@ Validation et retour à l'accueil>
             </div>
         
         <!-- bouton valider  -->
-        <div class="button2">
-            <button type="submit" onclick="costBreakdown()">valider les réponses</button>
+        <div class="button">
+            <button type="submit" onclick="budget()">valider la réponse</button>
             </div>
-
-
-
-</section>
-
-    <script src="\javascript\analysedecout.js"></script>
-</body>
-</html>
+    </section>
+      
+        <script src="\javascript\budget.js"></script>
+    </body>
+    </html>
