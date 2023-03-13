@@ -8,25 +8,25 @@ const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bure
 // déclaration des valeurs pour les feuilles de calcul
 const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
 // constante de coût VRDgit 
-const ratioBuilding1WithTaxAndFee = 94; //94 euros/m²hors frais de construit si le ration (voirie+Bâtiment)/terrain est <65%
-const ratioBuilding2WithTaxAndFee = 78.5; //78.5 euros/m²hors frais de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioRoadAndUtilities1WithTaxAndFee = 95.5; //95.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioRoadAndUtilities2WithTaxAndFee = 55.5; //55.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioPlantations1WithTaxAndFee = 9.75; //9.75 euros/m²hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioPlantations2WithTaxAndFee = 10.80; //10.80 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioFencing1WithTaxAndFee = 4.75; //4.75 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioFencing2WithTaxAndFee = 3.25; //3.25 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilitiesWithTaxesOffGround = 87;//ratio coût des VRD entreprise uniquement pour la cour +taxes PC hors marge constructeur
+const ratioBuilding1WithTaxAndFee = 94*studyFeesAndInsurance; //94 euros/m²hors frais de construit si le ration (voirie+Bâtiment)/terrain est <65%
+const ratioBuilding2WithTaxAndFee = 78.5 *studyFeesAndInsurance; //78.5 euros/m²hors frais de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioRoadAndUtilities1WithTaxAndFee = 95.5*studyFeesAndInsurance; //95.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioRoadAndUtilities2WithTaxAndFee = 55.5*studyFeesAndInsurance; //55.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioPlantations1WithTaxAndFee = 9.75*studyFeesAndInsurance; //9.75 euros/m²hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioPlantations2WithTaxAndFee = 10.80*studyFeesAndInsurance; //10.80 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioFencing1WithTaxAndFee = 4.75*studyFeesAndInsurance; //4.75 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioFencing2WithTaxAndFee = 3.25*studyFeesAndInsurance; //3.25 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilitiesWithTaxesOffGround = 87;//ratio coût des VRD entreprise uniquement pour la cour +taxes PC hors marge constructeur
 
 // ratio du calcul du devis bâtiment HORS TERRAIN
 // constante de coût Hall
-const costHallCompanyWithTaxesOffGround = 206.45;//ratio coût du hall entreprise de construction +taxes PC hors marge constructeur
-const costHeightAbove7WithTaxesOffGround = 14;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompanyWithTaxesOffGround
+const costHallCompanyWithTaxesOffGround = 206.45*studyFeesAndInsurance;//ratio coût du hall entreprise de construction +taxes PC hors marge constructeur
+const costHeightAbove7WithTaxesOffGround = 14*studyFeesAndInsurance;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompanyWithTaxesOffGround
 
 // constante de coût Bureaux
-const costOfficesCompanyInsideOpenSpaceWithTaxesOffGround = 710; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyOutsideOpenSpaceWithTaxesOffGround = 749.01; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyInsidePartitionedWithTaxesOffGround = 830.07; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyOutsidePartitionedWithTaxesOffGround = 867.79; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyInsideOpenSpaceWithTaxesOffGround = 710*studyFeesAndInsurance; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyOutsideOpenSpaceWithTaxesOffGround = 749.01*studyFeesAndInsurance; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyInsidePartitionedWithTaxesOffGround = 830.07*studyFeesAndInsurance; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
+const costOfficesCompanyOutsidePartitionedWithTaxesOffGround = 867.79*studyFeesAndInsurance; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée+taxes PC et Maitrise d'Oeuvre à 12% hors marge constructeur
 
 
 // constante de coût SPECIFICITES
