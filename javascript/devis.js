@@ -8,14 +8,14 @@ const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bure
 // déclaration des valeurs pour les feuilles de calcul
 const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
 // constante de coût VRDgit 
-const ratioBuilding1WithTaxAndFee = 94*studyFeesAndInsurance; //94 euros/m²hors frais de construit si le ration (voirie+Bâtiment)/terrain est <65%
-const ratioBuilding2WithTaxAndFee = 78.5 *studyFeesAndInsurance; //78.5 euros/m²hors frais de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioRoadAndUtilities1WithTaxAndFee = 95.5*studyFeesAndInsurance; //95.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioRoadAndUtilities2WithTaxAndFee = 55.5*studyFeesAndInsurance; //55.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioPlantations1WithTaxAndFee = 9.75*studyFeesAndInsurance; //9.75 euros/m²hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioPlantations2WithTaxAndFee = 10.80*studyFeesAndInsurance; //10.80 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioFencing1WithTaxAndFee = 4.75*studyFeesAndInsurance; //4.75 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioFencing2WithTaxAndFee = 3.25*studyFeesAndInsurance; //3.25 euros/m² hors frais pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilitiesWithTaxesOffGround = 87;//ratio coût des VRD entreprise uniquement pour la cour +taxes PC hors marge constructeur
+const ratioBuilding1WithTaxAndFee = 94*studyFeesAndInsurance; //94 euros/m²avec taxes et hors terrain de construit si le ration (voirie+Bâtiment)/terrain est <65%
+const ratioBuilding2WithTaxAndFee = 78.5 *studyFeesAndInsurance; //78.5 euros/m²avec taxes et hors terrain de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioRoadAndUtilities1WithTaxAndFee = 95.5*studyFeesAndInsurance; //95.5 euros/m² avec taxes et hors terrain si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioRoadAndUtilities2WithTaxAndFee = 55.5*studyFeesAndInsurance; //55.5 euros/m² avec taxes et hors terrain si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioPlantations1WithTaxAndFee = 9.75*studyFeesAndInsurance; //9.75 euros/m²avec taxes et hors terrain pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioPlantations2WithTaxAndFee = 10.80*studyFeesAndInsurance; //10.80 euros/m² avec taxes et hors terrain pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
+const ratioFencing1WithTaxAndFee = 4.75*studyFeesAndInsurance; //4.75 euros/m² avec taxes et hors terrain pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+const ratioFencing2WithTaxAndFee = 3.25*studyFeesAndInsurance; //3.25 euros/m² avec taxes et hors terrain pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilitiesWithTaxesOffGround = 87;//ratio coût des VRD entreprise uniquement pour la cour +taxes PC hors marge constructeur
 
 // ratio du calcul du devis bâtiment HORS TERRAIN
 // constante de coût Hall
@@ -30,23 +30,23 @@ const costOfficesCompanyOutsidePartitionedWithTaxesOffGround = 867.79*studyFeesA
 
 
 // constante de coût SPECIFICITES
-const costSoilReinforcement = 19.87 ; // 20 e/m² hors frais pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-const addedValueOverHeadCraneOnPoles = 126; // euros par poteaux différence entre HEA400 et HEA 555
-const addedValueOverHeadCraneRaceway = 285 ;// euros par ml (HEA300 +carré plein 2,5x2,5)
-const addedValueOverHeadCraneFondation = 933; // euros par plus value de fondations sous poteau de pont roulant
-const costDockShelter =11000; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
-const costconcreteWorkDockShelter = 4000; //euros par unité
-const costSectionalDoors = 5000; //euros par unité
+const costSoilReinforcementWithTaxesOffGround = 19.87*studyFeesAndInsurance ; // 20 e/m² avec taxes et hors terrain pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
+const addedValueOverHeadCraneOnPolesWithTaxesOffGround = 126*studyFeesAndInsurance; // 126 euros avec taxes et hors terrain par poteaux différence entre HEA400 et HEA 555
+const addedValueOverHeadCraneRacewayWithTaxesOffGround = 285*studyFeesAndInsurance ;// 285 eurosavec taxes et hors terrain par ml (HEA300 +carré plein 2,5x2,5)
+const addedValueOverHeadCraneFondationWithTaxesOffGround = 933*studyFeesAndInsurance; // 933 euros avec taxes et hors terrainpar plus value de fondations sous poteau de pont roulant
+const costDockShelterWithTaxesOffGround =11000*studyFeesAndInsurance; //euros par unitéavec taxes et hors terrain ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
+const costconcreteWorkDockShelterWithTaxesOffGround = 4000*studyFeesAndInsurance; //euros par unité avec taxes et hors terrain
+const costSectionalDoorsWithTaxesOffGround = 5000*studyFeesAndInsurance; //euros par unité avec taxes et hors terrain
 const costBlueRate = 5000;// coût d'un tarif bleu
 const costYellowRate = 10000;// coût d'un tarif jaune
 const costGreenRate = 15000;// coût d'un tarif vert 15000 Enedis (+ 45000 de transfo pour l'elctricien autre constante)
-const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité
-const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall
-const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
-const ratioGasHeatingHall = 9.22;// e/m² pour chauffage aérotherme gaz
-const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
-const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne
-const costStair = 20000;// Prix d'un escalier
+const costGreenRateAddedValueElectricityWithTaxesOffGround = 45000*studyFeesAndInsurance;// coût du transfo à la charge du lot Electricité euros par unité avec taxes et hors terrain
+const ratioPartitionInsideSidingPanelWithTaxesOffGround = 90*studyFeesAndInsurance;// 90 e/m² pour cloison de division intérieure du hall avec taxes et hors terrain
+const ratioElectricHeatingHallWithTaxesOffGround = 4*studyFeesAndInsurance //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique avec taxes et hors terrain
+const ratioGasHeatingHallWithTaxesOffGround = 9.22*studyFeesAndInsurance;// e/m² pour chauffage aérotherme gaz avec taxes et hors terrain
+const ratioFireNetworkHallWithTaxesOffGround = 5*studyFeesAndInsurance  // 5e/m² de plancher construit pour le réseau RIA avec taxes et hors terrain
+const costElevatorWithTaxesOffGround = 35000*studyFeesAndInsurance;// Prix d'un ascenseur comprenant la cabine et la colonne avec taxes et hors terrain
+const costStairWithTaxesOffGround = 20000*studyFeesAndInsurance;// Prix d'un escalier avec taxes et hors terrain
 // ________________________________
 // Action en fonction du terrain : je posséde ou pas le terrain
 const ground = document.getElementById('choice1');
@@ -415,7 +415,7 @@ function getAreas() {
           else if (officesDimensionsInside > 200){
           areaBuilding = Number(document.getElementById("areaStorage").value)+officesDimensionsInside/2;
           areaBox = Number(document.getElementById("areaStorage").value)+officesDimensionsInside/2;
-          addedValueStair=1*costStair;
+          addedValueStair=1*costStairWithTaxesOffGround;
           }
      }
      //Bureaux Intérieur sans locaux sociaux intérieurs
@@ -429,7 +429,7 @@ function getAreas() {
           else if (officesDimensionsInside > 200){ 
           areaBuilding = Number(document.getElementById("areaStorage").value)+officesDimensionsInside/2;
           areaBox = Number(document.getElementById("areaStorage").value)+officesDimensionsInside/2;
-          addedValueStair=1*costStair;
+          addedValueStair=1*costStairWithTaxesOffGround;
           }
      }
      //Bureaux Extérieur avec locaux sociaux extérieurs
@@ -443,7 +443,7 @@ function getAreas() {
           else if (officesDimensionsOutside > 200){ 
           areaBuilding = Number(document.getElementById("areaStorage").value)+officesDimensionsOutside/2;
           areaBox = Number(document.getElementById("areaStorage").value);
-          addedValueStair=1*costStair;
+          addedValueStair=1*costStairWithTaxesOffGround;
           }
      }
      //Bureaux Extérieurs sans locaux sociaux extérieur
@@ -457,7 +457,7 @@ function getAreas() {
           else if (officesDimensionsOutside > 200){ 
           areaBuilding = Number(document.getElementById("areaStorage").value)+officesDimensionsOutside/2;
           areaBox = Number(document.getElementById("areaStorage").value);
-          addedValueStair=1*costStair;
+          addedValueStair=1*costStairWithTaxesOffGround;
           }
      }
      //Bureaux Intérieur + Extérieurs avec locaux sociaux intérieurs
@@ -471,17 +471,17 @@ function getAreas() {
           else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2;
-               addedValueStair=2*costStair;
+               addedValueStair=2*costStairWithTaxesOffGround;
           }
           else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside;
-               addedValueStair=1*costStair;
+               addedValueStair=1*costStairWithTaxesOffGround;
           }
           else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2;
-               addedValueStair=2*costStair;
+               addedValueStair=2*costStairWithTaxesOffGround;
           }
      }
      //Bureaux Intérieur + Extérieurs avec locaux sociaux extérieurs
@@ -495,17 +495,17 @@ function getAreas() {
           else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2;
-               addedValueStair=1*costStair;
+               addedValueStair=1*costStairWithTaxesOffGround;
           }
           else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside;
-               addedValueStair=1*costStair;
+               addedValueStair=1*costStairWithTaxesOffGround;
           }
           else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2;
-               addedValueStair=2*costStair;
+               addedValueStair=2*costStairWithTaxesOffGround;
           }
      }
      //Bureaux Intérieur + Extérieur avec locaux sociaux intérieurs + Extérieurs
@@ -519,17 +519,17 @@ function getAreas() {
           else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2;
-               addedValueStair=1*costStair;
+               addedValueStair=1*costStairWithTaxesOffGround;
           }
           else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside;
-               addedValueStair=1*costStair;
+               addedValueStair=1*costStairWithTaxesOffGround;
           }
           else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("areaStorage").value)+ officesDimensionsInside/2;
-               addedValueStair=2*costStair;
+               addedValueStair=2*costStairWithTaxesOffGround;
           }
      }
      else{
@@ -750,7 +750,7 @@ function getAreas() {
                // console.log(choiceStudySoil);// vérification de la valeur de choiceStudySoil
                break; 
           };
-          const costChoiceSoil = Number(choiceStudySoil*costSoilReinforcement);//calcul de la valeur de renfort de Sol
+          const costChoiceSoil = Number(choiceStudySoil*costSoilReinforcementWithTaxesOffGround);//calcul de la valeur de renfort de Sol
           // console.log(costChoiceSoil);// vérification de la valeur de costChoiceSoil
           //Vérification de l'option choisie pour le texte d'affichage
           const answerChoiceStudySoil = {yes :"Le bâtiment a besoin de renforcement de sol qui sont calculés dans le coût", no : "le chiffrage est réalisé sans renforcement de sol"};
@@ -765,7 +765,7 @@ function getAreas() {
           let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
           //Calcul
           let inputWidthHall= Math.sqrt(areaBox);
-          let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputPartitionInside;
+          let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanelWithTaxesOffGround*(inputWidthHall*inputHeightHall)*inputPartitionInside;
 
           let selectPartitionInside = document.getElementById("selectPartitionInside").value;
           switch(selectPartitionInside){
@@ -776,7 +776,7 @@ function getAreas() {
               costPartitionInsideSidingPanel = 0;
               break;
           };
-          console.log(ratioPartitionInsideSidingPanel);
+          console.log(ratioPartitionInsideSidingPanelWithTaxesOffGround);
           console.log(inputWidthHall);
           console.log(inputHeightHall);
           console.log(inputPartitionInside);
@@ -806,7 +806,7 @@ function getAreas() {
                const polesUnderOverHeadCrane = ((((Math.sqrt(areaBox))/6)+1)*2);
                const lengthRaceway = ((Math.sqrt(areaBox))*2);
           // coût de la plus value pont roulant
-          const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation+lengthRaceway*addedValueOverHeadCraneRaceway);
+          const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPolesWithTaxesOffGround+polesUnderOverHeadCrane*addedValueOverHeadCraneFondationWithTaxesOffGround+lengthRaceway*addedValueOverHeadCraneRacewayWithTaxesOffGround);
           // console.log(addedValueOverHeadCrane);//vérification de la plus value pour pont roulant
 
           //Vérification de l'option choisie pour le texte d'affichage Réalisée directement dans le texte avec la variable answer5
@@ -830,7 +830,7 @@ function getAreas() {
           };
 
           // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
-          const addedValueDockShelter = (Number(answer6)*(costDockShelter+costconcreteWorkDockShelter));
+          const addedValueDockShelter = (Number(answer6)*(costDockShelterWithTaxesOffGround+costconcreteWorkDockShelterWithTaxesOffGround));
           
      // ____________________________________________________
           //COUT ET TEXTES SPECIFICITE Porte Sectionnelle de Plain-Pied
@@ -852,7 +852,7 @@ function getAreas() {
           };
 
           // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
-          const addedValueFloorSectionalDoor = (Number(answer7)*(costSectionalDoors));
+          const addedValueFloorSectionalDoor = (Number(answer7)*(costSectionalDoorsWithTaxesOffGround));
           
      // ____________________________________________________
 
@@ -865,7 +865,7 @@ function getAreas() {
 
           // //Vérification du choix de tarif électricité + Vérification de l'option choisie pour le texte d'affichage
           
-          let costElectricity = [costBlueRate,costYellowRate,costGreenRate+costGreenRateAddedValueElectricity,0];
+          let costElectricity = [costBlueRate,costYellowRate,costGreenRate+costGreenRateAddedValueElectricityWithTaxesOffGround,0];
 
           let choiceElectricity = {blue :"Le bâtiment est alimenté par un compteur <36kVa", yellow : "Le bâtiment est alimenté par un compteur >36kVa mais < à 250kVa", green : "Le bâtiment est alimenté par un compteur > à 250kVa",nothing:"vous n'avez pas choisi de tarif d'électricité"};
           let x7 = [choiceElectricity.blue, choiceElectricity.yellow,choiceElectricity.green, choiceElectricity.nothing];
@@ -904,7 +904,7 @@ function getAreas() {
                break;
                case'yes':
                // calcul du chauffage dans le Hall
-               costHeating=areaBox*ratioGasHeatingHall;
+               costHeating=areaBox*ratioGasHeatingHallWithTaxesOffGround;
                break; 
           };
 
@@ -919,7 +919,7 @@ function getAreas() {
                // ____________________________________________________
                     // COUT ET TEXTES RIA Hall
                 //Calcul
-                let costFireNetworkHall=ratioFireNetworkHall*areaBox;
+                let costFireNetworkHall=ratioFireNetworkHallWithTaxesOffGround*areaBox;
                 let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
                 switch(selectFireNetworkHall){
                     case'yes':
@@ -1111,7 +1111,7 @@ function getAreas() {
           console.log(costFireNetworkHall);
           console.log(addedValueIcpe);
           console.log(addedValueStair);
-          const costProjectWithoutCommercialMargin= (Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100))*studyFeesAndInsurance;// calcul du coût du bâtiment hors marge commerciale
+          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
           console.log(costProjectWithoutCommercialMargin);
           const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithoutCommercialMargin);// pour affichage number en euros
           // console.log(number);
