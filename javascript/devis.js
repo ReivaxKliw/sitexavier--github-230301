@@ -7,7 +7,7 @@ const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bure
 // __________________________________
 // déclaration des valeurs pour les feuilles de calcul
 const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
-// constante de coût VRD
+// constante de coût VRDgit 
 const ratioBuilding1WithTaxAndFee = 94; //94 euros/m²hors frais de construit si le ration (voirie+Bâtiment)/terrain est <65%
 const ratioBuilding2WithTaxAndFee = 78.5; //78.5 euros/m²hors frais de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
 const ratioRoadAndUtilities1WithTaxAndFee = 95.5; //95.5 euros/m² hors frais si le ratio (voirie+Bâtiment)/terrain est <65% 
