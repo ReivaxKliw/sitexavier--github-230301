@@ -18,18 +18,6 @@
         </nav>
     </header>
       
-<section id="imagePrincipale">
-    <!-- <section id="mainQuestions">   -->
-        <form name="questionOwner" id="formulaire1">
-            <label for="ground"><strong>Je connais le terrain pour ma construction et donc sa surface et son prix :</strong></label>
-              <br>
-              <input type="radio" id="choice1" name="q1" value="yes" onclick="selectGround()">
-              <label for="choice1">Oui</label>
-              <br>
-              <input type="radio" id="choice2" name="q1" value="no" onclick="selectGround()">
-              <label for="choice2">Non</label>
-              <br>
-          </form>
           <! ____________________________________________________
  
 Questions du TERRAIN>
@@ -56,6 +44,10 @@ Questions du TERRAIN>
     <label for="inputAreaGround">Si oui, quelle est la <b>surface de votre terrain</b>?</label>
     <input type="text" placeholder="surface en m²" id="inputAreaGround"> m² <br>
     <br>
+<!____________________________________________________
+SUrface de voirie à supprimer ! méthode de calcul de la voirie selon devis.js mais avec les m^mes constant que pour ce fichier
+
+
     <label for="choiceAreaRoadAndUtilities">Connaissez-vous la <b>surface de voirie</b> de votre bâtiment ? (cas de bâtiment situé dans une zone commune)</label>
     <select id="choiceAreaRoadAndUtilities">
         <option value="yes"> oui</option>

@@ -600,7 +600,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     }
                     if (numberDockShelter<=0 && numberFloorSectionalDoor<=0) {
                         areaRoadAndUtilitiesDockShelter=0;
-                        areaRoadAndUtilitiesFloorSectionelDoor=0;
+                        areaRoadAndUtilitiesFloorSectionelDoor=0; 
                     };
                 console.log(areaRoadAndUtilitiesDockShelter);
                 console.log(areaRoadAndUtilitiesFloorSectionelDoor);
