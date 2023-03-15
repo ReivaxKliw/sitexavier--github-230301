@@ -209,18 +209,19 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
         //Pont roulant :
         let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
+        let inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value; 
 
         //Niveleur de quai :
         let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
-        let numberDockShelter = document.getElementById("numberDockShelter").value; 
+        let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
         
         //Porte Sectionnelle de plein pied :
         let choiceSectionalDoors = document.getElementById("choiceSectionalDoors").value; 
-        let numberFloorSectionalDoor = document.getElementById("numberFloorSectionalDoor").value; 
+        let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
         
         //Stockage extérieur :
         let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
-        let areaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("areaRoadAndUtilitiesStorageOutdoor").value); 
+        let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
 
         //Puissance électrique : voir calcul pour les choixrécupération de donnée intégrée dans le calcul _ ici récupération des quantités tarif bleus et jaune
         let inputBlueRate = document.getElementById("inputBlueRate").value; 
@@ -422,19 +423,19 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 switch(choiceOverHeadCrane){
                     case'yes':
                         polesUnderOverHeadCrane = (Math.ceil((inputLengthHall/6)+1)*2);
-                        lengthRaceway = ((inputLengthHall)*2);
-                        addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles+lengthRaceway*addedValueOverHeadCraneRaceway);
-                        addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole
+                        //lengthRaceway = ((inputLengthHall)*2); Neutralisé travail du poseur de pont
+                        addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
+                        addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole*inputNumberOverHeadCrane;
                         break;
                     case'no':
                         polesUnderOverHeadCrane= 0;
-                        lengthRaceway= 0;
+                        //lengthRaceway= 0;neutralisé à la charge du fournisseur de pont
                         addedValueOverHeadCrane= 0;
                         addedValueOverHeadCraneFondations=0;
                         break;
                     };
             console.log(polesUnderOverHeadCrane);
-            console.log(lengthRaceway);
+            console.log(inputNumberOverHeadCrane);
             console.log(addedValueOverHeadCrane);
             console.log(addedValueOverHeadCraneFondations);
 
@@ -445,9 +446,9 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     switch(choiceDockShelter){
                         case'yes':
                             // coût de la plus value pour les quais + plus value pour la voirie aire de manoeuvre
-                            addedValueDockShelter = Number(numberDockShelter)*(costDockShelter);
+                            addedValueDockShelter = Number(inputNumberDockShelter)*(costDockShelter);
                             //Plus value VRD compté dans le calcul VRD;
-                            addedValueConcreteWorkDockShelter = Number(numberDockShelter) *costconcreteWorkDockShelter;//coût de la fosse à haillon
+                            addedValueConcreteWorkDockShelter = Number(inputNumberDockShelter) *costconcreteWorkDockShelter;//coût de la fosse à haillon
                             break;
                         case'no':
                             addedValueDockShelter = 0;
@@ -463,14 +464,14 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     switch(choiceSectionalDoors){
                         case'yes':
                             // coût de la plus value pour porte sectionnelles
-                            addedValueSectionalDoors = Number(numberFloorSectionalDoor)*(costSectionalDoors);
+                            addedValueSectionalDoors = Number(inputNumberFloorSectionalDoor)*(costSectionalDoors);
                             //Plus value VRD compté dans le calcul VRD;
                             break;
                         case'no':
                             addedValueSectionalDoors = 0;
                             break;
                         };
-            console.log(numberFloorSectionalDoor);
+            console.log(inputNumberFloorSectionalDoor);
             console.log(addedValueSectionalDoors);
             //Stockage extérieur compté dans le VRD
 
@@ -586,25 +587,25 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     let areaRoadAndUtilitiesDockShelter;
                     let areaRoadAndUtilitiesFloorSectionelDoor;
         
-                    if (numberDockShelter>0 && numberFloorSectionalDoor>0) {
-                        areaRoadAndUtilitiesDockShelter=Number(numberDockShelter*5*35+20*5);
-                        areaRoadAndUtilitiesFloorSectionelDoor =Number(numberFloorSectionalDoor*(5*20));
+                    if (inputNumberDockShelter>0 && inputNumberFloorSectionalDoor>0) {
+                        areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*5*35+20*5);
+                        areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20));
                     }
-                    if (numberDockShelter>0 && numberFloorSectionalDoor<=0) {
-                        areaRoadAndUtilitiesDockShelter=Number(numberDockShelter*5*20+20*20);
+                    if (inputNumberDockShelter>0 && inputNumberFloorSectionalDoor<=0) {
+                        areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*5*20+20*20);
                         areaRoadAndUtilitiesFloorSectionelDoor =0;
                     }
-                    if (numberDockShelter<=0 && numberFloorSectionalDoor>0) {
+                    if (inputNumberDockShelter<=0 && inputNumberFloorSectionalDoor>0) {
                         areaRoadAndUtilitiesDockShelter=0;
-                        areaRoadAndUtilitiesFloorSectionelDoor =Number(numberFloorSectionalDoor*(5*20)+20*5);
+                        areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)+20*5);
                     }
-                    if (numberDockShelter<=0 && numberFloorSectionalDoor<=0) {
+                    if (inputNumberDockShelter<=0 && inputNumberFloorSectionalDoor<=0) {
                         areaRoadAndUtilitiesDockShelter=0;
                         areaRoadAndUtilitiesFloorSectionelDoor=0;
                     };
                 console.log(areaRoadAndUtilitiesDockShelter);
                 console.log(areaRoadAndUtilitiesFloorSectionelDoor);
-                console.log(areaRoadAndUtilitiesStorageOutdoor);
+                console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
 
              //calcul de la surface du terrain quand elle n'est pas connue
                 let areaGround;
@@ -613,7 +614,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     areaGround = (inputAreaGround);
                     break;
                     case'no':
-                    areaGround =(inputAreaBox+inputAreaOfficesGroundOutside+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2)))*1.2;
+                    areaGround =(inputAreaBox+inputAreaOfficesGroundOutside+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2)))*1.2;
                     break;
                     };
                 console.log(areaGround);
@@ -666,22 +667,22 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     break;
                     case'no':
                         if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                        areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));// quand on ne connait pas la surface de voiries, elle est calculé en fonction des quais, portes sectionneLles, stockage ext et besoin de parking des bureaux
+                        areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));// quand on ne connait pas la surface de voiries, elle est calculé en fonction des quais, portes sectionneLles, stockage ext et besoin de parking des bureaux
                         areaBuilding = inputAreaBox;
                         areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                     }
                     if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
                         areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
                         areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                         }
                     if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
                         areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
                         areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                         }
                     if (choiceOfficesInside==='no' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
                         areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
                         areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                         }
