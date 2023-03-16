@@ -39,8 +39,8 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const ratioInteriorDesignOfficesWithoutOpenSPace = 450  // 300e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge sans Open Space, Show room, atelier….
 //constante des spécificités
     const ratioSoilReinforcement = 19.87 ; // 20 e/m² pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-    const addedValueOverHeadCraneOnPoles = 126; // euros par poteaux
-    const addedValueOverHeadCraneRaceway = 285;// euros par ml 
+    const addedValueOverHeadCraneOnPoles = 120 ; // euros par ml de poteaux sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
+    //const addedValueOverHeadCraneRaceway = 285;// euros par ml non utilisé car rail considéré comme à la charge du fournisseur de pont roulant
     const addedValueOverHeadCraneFondationByPole = 933; // euros par plus value de fondations sous poteau de pont roulant
     const costDockShelter = 11000; //euros par unité
     const costconcreteWorkDockShelter = 4000; //euros par unité
@@ -424,7 +424,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     case'yes':
                         polesUnderOverHeadCrane = (Math.ceil((inputLengthHall/6)+1)*2);
                         //lengthRaceway = ((inputLengthHall)*2); Neutralisé travail du poseur de pont
-                        addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
+                        addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputHeightHall*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
                         addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole*inputNumberOverHeadCrane;
                         break;
                     case'no':
@@ -435,6 +435,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                         break;
                     };
             console.log(polesUnderOverHeadCrane);
+            console.log(inputHeightHall);
             console.log(inputNumberOverHeadCrane);
             console.log(addedValueOverHeadCrane);
             console.log(addedValueOverHeadCraneFondations);

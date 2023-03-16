@@ -31,8 +31,8 @@ const costOfficesCompanyOutsidePartitionedWithTaxesOffGround = 867.79*studyFeesA
 
 // constante de coût SPECIFICITES
 const costSoilReinforcementWithTaxesOffGround = 19.87*studyFeesAndInsurance ; // 20 e/m² avec taxes et hors terrain pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-const addedValueOverHeadCraneOnPolesWithTaxesOffGround = 126*studyFeesAndInsurance; // 126 euros avec taxes et hors terrain par poteaux différence entre HEA400 et HEA 555
-const addedValueOverHeadCraneRacewayWithTaxesOffGround = 285*studyFeesAndInsurance ;// 285 eurosavec taxes et hors terrain par ml (HEA300 +carré plein 2,5x2,5)
+const addedValueOverHeadCraneOnPolesWithTaxesOffGround = 120*studyFeesAndInsurance; // 126 euros/ml avec taxes et hors terrain sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
+//const addedValueOverHeadCraneRacewayWithTaxesOffGround = 285*studyFeesAndInsurance ;// 285 eurosavec taxes et hors terrain par ml (HEA300 +carré plein 2,5x2,5) considéré à la charge du fournisseur de pont
 const addedValueOverHeadCraneFondationWithTaxesOffGround = 933*studyFeesAndInsurance; // 933 euros avec taxes et hors terrainpar plus value de fondations sous poteau de pont roulant
 const costDockShelterWithTaxesOffGround =11000*studyFeesAndInsurance; //euros par unitéavec taxes et hors terrain ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
 const costconcreteWorkDockShelterWithTaxesOffGround = 4000*studyFeesAndInsurance; //euros par unité avec taxes et hors terrain
@@ -242,7 +242,7 @@ document.body.innerHTML= `
                <option value="yes"> oui</option>
           </select>
           </br>
-          <label for="overHeadCrane">Si oui combien de pont roulant ?: (nécessaire pour le renfort de charpente, le renfort de fondations et la création de chemin de roulement mais hors fourniture et pose des ponts) </label>
+          <label for="overHeadCrane">Si oui combien de pont roulant ?: (nécessaire pour le renfort de charpente, le renfort de fondations mais fourniture ponts et rail hors calcul bâtiment) </label>
            <input type="text" id="inputNumberOverHeadCrane" name="overHeadCrane" placeholder="indiquez le nombre de pont" > unité(s)
            <br>
 </div>
@@ -802,12 +802,15 @@ function getAreas() {
                // console.log(answer5); // vérification de la valeur de answer5
                break;
           };
-          // calcul du nombre de poteaux renforcés et longeur rail de roulement
-               const polesUnderOverHeadCrane = ((((Math.sqrt(areaBox))/6)+1)*2);
-               const lengthRaceway = ((Math.sqrt(areaBox))*2);
+          // calcul du nombre de poteaux renforcés 
+          const polesUnderOverHeadCrane = (Math.ceil((((Math.sqrt(areaBox))/6)+1)*2));
+               //const lengthRaceway = ((Math.sqrt(areaBox))*2); considéré comme à la charge du fournisseur de pont
           // coût de la plus value pont roulant
-          const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPolesWithTaxesOffGround+polesUnderOverHeadCrane*addedValueOverHeadCraneFondationWithTaxesOffGround+lengthRaceway*addedValueOverHeadCraneRacewayWithTaxesOffGround);
-          // console.log(addedValueOverHeadCrane);//vérification de la plus value pour pont roulant
+          const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPolesWithTaxesOffGround*inputHeightHall+polesUnderOverHeadCrane*addedValueOverHeadCraneFondationWithTaxesOffGround);
+          console.log(polesUnderOverHeadCrane);
+          console.log(inputHeightHall);
+          console.log(inputNumberOverHeadCrane);
+          console.log(addedValueOverHeadCrane);
 
           //Vérification de l'option choisie pour le texte d'affichage Réalisée directement dans le texte avec la variable answer5
      // ____________________________________________________
@@ -1017,7 +1020,7 @@ function getAreas() {
 // ___________________________________________
 //CALCUL COUTS
      //COUT TERRAIN
-          const inputCostGround = Number(inputCostGround); //on connait le coût du terrain; inputCostGround c'est la valeur rentrée
+          //const inputCostGround = Number(inputCostGround); //on connait le coût du terrain; inputCostGround c'est la valeur rentrée
           inputAreaGround===0? costNeedAreaGround= Number(inputNeedAreaGround)*inputCostGroundByRegion: costNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
      //COUT HALL
           const costBox = Number(areaBox)*(costHallCompanyWithTaxesOffGround +addedValueHeight);
