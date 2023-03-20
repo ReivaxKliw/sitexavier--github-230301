@@ -60,15 +60,16 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     function costBreakdown(event) {
         // _____________________________________________________________________________
         // TEXTE DES ERREURS
-        // let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);
-        // let inputAreaGround = Number(document.getElementById("inputAreaGround").value);
-        // let inputCostGround =  Number(document.getElementById("inputCostGround").value);
-        // let inputAreaBox = Number(document.getElementById("inputAreaBox").value);
-        // let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);
-        // let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);
-        // const choiceBlueRate = document.getElementById('choiceBlueRate');
-        // const choiceYellowRate = document.getElementById('choiceYellowRate');
-        // const choiceGreenRate = document.getElementById('choiceGreenRate');
+        let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);
+        let inputAreaGround = Number(document.getElementById("inputAreaGround").value);
+        let inputCostGround =  Number(document.getElementById("inputCostGround").value);
+        let inputAreaBox = Number(document.getElementById("inputAreaBox").value);
+        let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);
+        let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);
+        const choiceBlueRate = document.getElementById('choiceBlueRate');
+        const choiceYellowRate = document.getElementById('choiceYellowRate');
+        const choiceGreenRate = document.getElementById('choiceGreenRate');
+        
         // if (inputSellingPrice==0){
         //     alert("vous n'avez pas indiqué le prix de vente de votre projet");
         //     event.stopPropagation();
@@ -104,7 +105,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 // RECUPERATION DES DONNEES et CALCULS CARACTERISTIQUES BATIMENTS
 
     //Prix de vente du bâtimet clef en main________________________________________________________
-            let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);
+            //let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
         console.log(inputSellingPrice);
             
     //récupération Hauteur hall
@@ -115,7 +116,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         //Bureaux Intérieurs
         let choiceOfficesInside = document.getElementById("choiceOfficesInside").value;
             //Surface Longueur Largeur bureaux
-            let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);
+            //let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
             let inputLengthOfficesInside = Number(document.getElementById("inputLengthOfficesInside").value);
             let inputWidthOfficesInside = Number(document.getElementById("inputWidthOfficesInside").value);
             //Etage bureaux
@@ -145,7 +146,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         //Bureaux Extérieurs
         let choiceOfficesOutside = document.getElementById("choiceOfficesOutside").value;
             //Surface Longueur Largeur bureaux
-            let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);
+            //let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
             let inputLengthOfficesOutside = Number(document.getElementById("inputLengthOfficesOutside").value);
             let inputWidthOfficesOutside = Number(document.getElementById("inputWidthOfficesOutside").value);
             //Etage bureaux
@@ -175,7 +176,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     //Le Hall du Bâtiment____________________________________________________
     //Surface hall
         //inputHeightHall récupérée au début car nécessaire dans les bureaux
-        let inputAreaBox = Number(document.getElementById("inputAreaBox").value);
+        //let inputAreaBox = Number(document.getElementById("inputAreaBox").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
         let inputLengthHall = Number(document.getElementById("inputLengthHall").value);
         let inputWidthHall = Number(document.getElementById("inputWidthHall").value);
         inputLengthHall==0? inputLengthHall=(Math.sqrt(inputAreaBox)):inputLengthHall ; 
@@ -224,8 +225,12 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
 
         //Puissance électrique : voir calcul pour les choixrécupération de donnée intégrée dans le calcul _ ici récupération des quantités tarif bleus et jaune
+        //const choiceBlueRate = document.getElementById('choiceBlueRate');récupérée dans le texte des erreurs
+        //const choiceYellowRate = document.getElementById('choiceYellowRate');récupérée dans le texte des erreurs
+        //const choiceGreenRate = document.getElementById('choiceGreenRate');récupérée dans le texte des erreurs
         let inputBlueRate = document.getElementById("inputBlueRate").value; 
         let inputYellowRate = document.getElementById("inputYellowRate").value; 
+
         //Open Space dans les bureaux_______________________________________
             let selectOpenSpace = document.getElementById("selectOpenSpace").value;
             let ratioInteriorDesignOffices
@@ -257,9 +262,9 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     //Terrain________________________________________________________
         let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
         let choiceAreaGround = document.getElementById("choiceAreaGround").value;
-        let inputAreaGround = document.getElementById("inputAreaGround").value;
+        //let inputAreaGround = document.getElementById("inputAreaGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
         let choiceCostGround = document.getElementById("choiceCostGround").value;
-        let inputCostGround = document.getElementById("inputCostGround").value;
+        //let inputCostGround = document.getElementById("inputCostGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
     //VRD________________________________________________________
         let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
         let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
@@ -477,8 +482,6 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             //Stockage extérieur compté dans le VRD
 
             // Puissance Electrique
-            //Récupération des données
-                    //à l'origine de la fonction costBreakdown(event) sauf pour les quantités
             //Calcul
                     let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
                     
@@ -517,6 +520,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(inputBlueRate);
             console.log(inputYellowRate);
             console.log(costElectricalConnection);
+            
             //Chauffage Hall
                 //Calcul
                 //  ATTENTION TIENT COMPTE UNIQUEMENT DU CHAUFFAGE AEROTHERME GAZ 

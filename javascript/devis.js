@@ -283,17 +283,20 @@ document.body.innerHTML= `
 </div>
 
 <div class="questionProject">
-<label for="electricity"> Quel est votre besoin de puissance électrique ?:</label>
-          <br>
-          <input type="radio" id="choiceBlueRate" name="q4" value="blueRate">
-          <label for="choiceBlueRate"> tarif Bleu < à 36 kVA (~36kW) </label>
-          <br>
-          <input type="radio" id="choiceYellowRate" name="q4" value="yellowRate>
-          <label for="choiceYellowRate"> tarif Jaune > à 36 kVA (~36kW) et < à 250 kVA (~250kW)</label>
-          <br>
-          <input type="radio" id="choiceGreenRate" name="q4" value="greenRate">
-          <label for="choiceGreenRate"> tarif Vert > à 250 kVA (~250kW) </label>
-          <br>
+<label for="electricity"> Quel sont le(s) type(s) de compteur(s) électrique(s) installé(s) ?:</label>
+        <input type="checkbox" id="choiceBlueRate" name="blueRate">
+        <label for="choiceBlueRate"> tarif Bleu < à 36 kVA (~36kW)</label>
+        <label for="inputBlueRate"> / indiquez le Nombre(si vous divisez votre bâtiment par exemple): </label>
+        <input type="text" id="inputBlueRate" name="BlueRate" placeholder="indiquez le nombre" > unité(s)
+        <br>
+        <input type="checkbox" id="choiceYellowRate" name="yellowRate">
+        <label for="choiceYellowRate"> tarif Jaune > à 36 kVA (~36kW) et < à 250 kVA (~250kW)</label>
+        <label for="inputYellowRate"> /indiquez le Nombre (si vous divisez votre bâtiment par exemple): </label>
+        <input type="text" id="inputYellowRate" name="YellowRate" placeholder="indiquez le nombre" > unité(s)
+        <br>
+        <input type="checkbox" id="choiceGreenRate" name="greenRate">
+        <label for="choiceGreenRate"> tarif Vert > à 250 kVA (~250kW) </label>
+
 </div>
 
 <div class="questionProject">
@@ -340,11 +343,18 @@ function getAreas() {
 
      const inputWorkersOfficesInside =  Number(document.getElementById("inputWorkersOfficesInside").value);
      const inputWorkersOfficesOutside =  Number(document.getElementById("inputWorkersOfficesOutside").value);
-     // if (inputWorkersOfficesOutside==0 &&inputWorkersOfficesInside==0){
+     const choiceBlueRate = document.getElementById('choiceBlueRate');
+     const choiceYellowRate = document.getElementById('choiceYellowRate');
+     const choiceGreenRate = document.getElementById('choiceGreenRate');
+     
+        // if (inputWorkersOfficesOutside==0 &&inputWorkersOfficesInside==0){
      //          alert("vous n'avez pas indiqué de données pour les locaux sociaux de votre projet, il faut des vestiaires pour le personnel hors administratif");
      //          event.stopPropagation();
      //      }
-          
+          // if (choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===false){
+     //     alert("vous n'avez pas indiqué la puissance de raccordement électrique de votre bâtiment");
+     //     event.stopPropagation();
+        // }     
      // ___________________________________________ 
      //SURFACE DES BUREAUX
      // récupération des données
@@ -862,34 +872,79 @@ function getAreas() {
           // COUT ET TEXTES SPECIFICITE TARIF ELECTRICTE
 
           //Récupération du choix dU TARIF ELECTRICITE
-          const choiceBlueRate = document.getElementById('choiceBlueRate');
-          const choiceYellowRate = document.getElementById('choiceYellowRate');
-          const choiceGreenRate = document.getElementById('choiceGreenRate');
-
-          // //Vérification du choix de tarif électricité + Vérification de l'option choisie pour le texte d'affichage
+          //const choiceBlueRate = document.getElementById('choiceBlueRate');déclarée dans le texte des erreures
+          //const choiceYellowRate = document.getElementById('choiceYellowRate');déclarée dans le texte des erreures
+          //const choiceGreenRate = document.getElementById('choiceGreenRate');déclarée dans le texte des erreures
+          let inputBlueRate = document.getElementById("inputBlueRate").value; 
+          let inputYellowRate = document.getElementById("inputYellowRate").value; 
           
-          let costElectricity = [costBlueRate,costYellowRate,costGreenRate+costGreenRateAddedValueElectricityWithTaxesOffGround,0];
-
-          let choiceElectricity = {blue :"Le bâtiment est alimenté par un compteur <36kVa", yellow : "Le bâtiment est alimenté par un compteur >36kVa mais < à 250kVa", green : "Le bâtiment est alimenté par un compteur > à 250kVa",nothing:"vous n'avez pas choisi de tarif d'électricité"};
-          let x7 = [choiceElectricity.blue, choiceElectricity.yellow,choiceElectricity.green, choiceElectricity.nothing];
+          // Calcul Puissance Electrique
           
-          if (choiceBlueRate.checked===true){
-               costElectricity=costElectricity[0];
-               x7=x7[0];
-          }
-          else if (choiceYellowRate.checked===true){
-               costElectricity=costElectricity[1];
-               x7=x7[1];
-          }
-          else if (choiceGreenRate.checked===true){
-               costElectricity=costElectricity[2];
-               x7=x7[2];
-          }
-          else {
-               costElectricity=costElectricity[3];
-               x7= x7[3];
-          };
-          // console.log(answer7); //vérification de answer7
+          let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
+                    
+                    if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
+                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                    costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate+(costElectricalConnection[2]+costGreenRateAddedValueElectricityWithTaxesOffGround);
+                }
+                    else if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
+                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate;
+                }
+                    else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===false ){
+                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate;
+                }
+                    else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
+                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                        costElectricalConnection=costElectricalConnection[1]*inputYellowRate;
+                }
+                    else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===true ){
+                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                        costElectricalConnection= costElectricalConnection[1]*inputYellowRate+(costElectricalConnection[2]+costGreenRateAddedValueElectricityWithTaxesOffGround);
+                }
+                    else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
+                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate +(costElectricalConnection[2]+costGreenRateAddedValueElectricityWithTaxesOffGround);
+                }
+                    else if (choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
+                        costElectricalConnection= (costElectricalConnection[2]+costGreenRateAddedValueElectricityWithTaxesOffGround);
+                }
+                    else{
+                        costElectricalConnection=costElectricalConnection[3];
+                    };
+            console.log(inputBlueRate);
+            console.log(inputYellowRate);
+            console.log(costElectricalConnection);
+
+          // Texte Puissance Electrique
+          let verificationElectricalConnection = { blue :`Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu`, yellow : `Raccordement électrique : Vous avez choisi ${inputYellowRate} tarif(s) jaune`, blueyellow : `Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu et ${inputYellowRate} tarif(s) jaune` ,green : `Raccordement électrique : Vous avez choisi le tarif vert`, bluegreen : `Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu et 1 tarif vert`, yellowgreen : `Raccordement électrique : Vous avez choisi ${inputYellowRate} tarif(s) jaune et 1 tarif vert`, blueyellowgreen : `Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu, ${inputYellowRate} tarif(s) jaune et 1 tarif vert` };
+
+        if( choiceBlueRate.checked===true&& choiceYellowRate.checked===false && choiceGreenRate.checked===false ){ 
+            x4 =verificationElectricalConnection.blue;
+        }
+        else if( choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===false){ 
+            x4 =verificationElectricalConnection.yellow;
+        }
+        else if( choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===true){ 
+            x4 =verificationElectricalConnection.green;
+        }
+        else if( choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){ 
+            x4 =verificationElectricalConnection.blueyellow;
+        }
+        else if( choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===true){ 
+            x4 =verificationElectricalConnection.yellowgreen;
+        }
+        else if( choiceBlueRate.checked===true && choiceYellowRate.checked===false &&choiceGreenRate.checked===true){ 
+            x4 =verificationElectricalConnection.bluegreen;
+        }
+        else if( choiceBlueRate.checked===true && choiceYellowRate.checked===true &&choiceGreenRate.checked===true){ 
+            x4 =verificationElectricalConnection.blueyellowgreen;
+        }
+        else{ 
+            x4 ="je n'ai pas sélectionné de type de connection électrique, phrase à supprimer quand les messages d'erreurs seront réactivés";
+        };
      // ____________________________________________________
           // COUT ET TEXTES SPECIFICIITE CHAUFFAGE DANS LE HALL PAR AEROTHERME GAZ
           
@@ -1109,12 +1164,12 @@ function getAreas() {
           console.log(addedValueOverHeadCrane);
           console.log(addedValueDockShelter);
           console.log(addedValueFloorSectionalDoor);
-          console.log(costElectricity);
+          console.log(costElectricalConnection);
           console.log(costHeating);
           console.log(costFireNetworkHall);
           console.log(addedValueIcpe);
           console.log(addedValueStair);
-          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricity+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
+          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricalConnection+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
           console.log(costProjectWithoutCommercialMargin);
           const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithoutCommercialMargin);// pour affichage number en euros
           // console.log(number);
