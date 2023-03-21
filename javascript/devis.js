@@ -284,6 +284,7 @@ document.body.innerHTML= `
 
 <div class="questionProject">
 <label for="electricity"> Quel sont le(s) type(s) de compteur(s) électrique(s) installé(s) ?:</label>
+          <br>
         <input type="checkbox" id="choiceBlueRate" name="blueRate">
         <label for="choiceBlueRate"> tarif Bleu < à 36 kVA (~36kW)</label>
         <label for="inputBlueRate"> / indiquez le Nombre(si vous divisez votre bâtiment par exemple): </label>
@@ -664,7 +665,7 @@ function getAreas() {
                areaRoadAndUtilitiesFloorSectionelDoor=0;
           };
 
-          let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés
+          let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
           if (inputAreaGround===0){
                inputNeedAreaGround = ((areaBuilding+areaRoadAndUtilities)*1.2);
           }
@@ -681,7 +682,7 @@ function getAreas() {
           console.log(inputClercksOfficesOutside);
           console.log(inputWorkersOfficesInside);
           console.log(inputWorkersOfficesOutside);
-          console.log(Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2)));
+          console.log(Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2)));// multiplie par 2 car il faut la surface de parking et la surface de la route d'accés au parking
           console.log(areaRoadAndUtilitiesDockShelter);
           console.log(areaRoadAndUtilitiesFloorSectionelDoor);
           console.log(areaRoadAndUtilities);
@@ -922,28 +923,28 @@ function getAreas() {
           let verificationElectricalConnection = { blue :`Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu`, yellow : `Raccordement électrique : Vous avez choisi ${inputYellowRate} tarif(s) jaune`, blueyellow : `Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu et ${inputYellowRate} tarif(s) jaune` ,green : `Raccordement électrique : Vous avez choisi le tarif vert`, bluegreen : `Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu et 1 tarif vert`, yellowgreen : `Raccordement électrique : Vous avez choisi ${inputYellowRate} tarif(s) jaune et 1 tarif vert`, blueyellowgreen : `Raccordement électrique : Vous avez choisi ${inputBlueRate} tarif(s) bleu, ${inputYellowRate} tarif(s) jaune et 1 tarif vert` };
 
         if( choiceBlueRate.checked===true&& choiceYellowRate.checked===false && choiceGreenRate.checked===false ){ 
-            x4 =verificationElectricalConnection.blue;
+            x7 =verificationElectricalConnection.blue;
         }
         else if( choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===false){ 
-            x4 =verificationElectricalConnection.yellow;
+            x7 =verificationElectricalConnection.yellow;
         }
         else if( choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===true){ 
-            x4 =verificationElectricalConnection.green;
+            x7 =verificationElectricalConnection.green;
         }
         else if( choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){ 
-            x4 =verificationElectricalConnection.blueyellow;
+            x7 =verificationElectricalConnection.blueyellow;
         }
         else if( choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===true){ 
-            x4 =verificationElectricalConnection.yellowgreen;
+            x7 =verificationElectricalConnection.yellowgreen;
         }
         else if( choiceBlueRate.checked===true && choiceYellowRate.checked===false &&choiceGreenRate.checked===true){ 
-            x4 =verificationElectricalConnection.bluegreen;
+            x7 =verificationElectricalConnection.bluegreen;
         }
         else if( choiceBlueRate.checked===true && choiceYellowRate.checked===true &&choiceGreenRate.checked===true){ 
-            x4 =verificationElectricalConnection.blueyellowgreen;
+            x7 =verificationElectricalConnection.blueyellowgreen;
         }
         else{ 
-            x4 ="je n'ai pas sélectionné de type de connection électrique, phrase à supprimer quand les messages d'erreurs seront réactivés";
+            x7 ="je n'ai pas sélectionné de type de connection électrique, phrase à supprimer quand les messages d'erreurs seront réactivés";
         };
      // ____________________________________________________
           // COUT ET TEXTES SPECIFICIITE CHAUFFAGE DANS LE HALL PAR AEROTHERME GAZ
@@ -1198,6 +1199,7 @@ function getAreas() {
                <ul>
                <li><h3>y compris Frais (Architecte, bureaux controle, Suivi de chantier(environ 12%), assurance...)</li> 
                <li><h3>y compris Taxes(Permis de construire)</li>
+               <li><h3>y compris Terrain</li>
                <li><h3>non compris marges commerciales promotion et agences (environ 9,5% de la valeur travaux soit ${number2} ) </h3>
                </ul>
                
