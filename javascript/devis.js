@@ -120,7 +120,7 @@ document.body.innerHTML= `
           }; 
 
      console.log(inputAreaGround);//retour de inputAreaGround?
-     // console.log(inputCostGround);//retour de inputAreaGround?
+     console.log(inputCostGround);
 
  document.body.innerHTML= `
  <header>
@@ -639,7 +639,7 @@ function getAreas() {
 
           // Si on ne connait pas le terrain :Calcul du terrain necessaire lorsque le choix non a été fait quand on ne connait pas son terrain , peut être fait aprés détermination des variables areaBuilding / officesDimensionsOutside et inside / areaRoadAndUtilities est calculée
 
-          let inputNeedAreaGround;
+          let CalculationNeedAreaGround;
           let groundValue
           
           let  inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value;
@@ -667,13 +667,13 @@ function getAreas() {
 
           let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
           if (inputAreaGround===0){
-               inputNeedAreaGround = ((areaBuilding+areaRoadAndUtilities)*1.2);
+               CalculationNeedAreaGround = ((areaBuilding+areaRoadAndUtilities)*1.2);
           }
           else {
-               inputNeedAreaGround = 0;
+               CalculationNeedAreaGround = 0;
           };
           
-          (inputAreaGround===0)? groundValue= inputNeedAreaGround: groundValue= inputAreaGround;
+          (inputAreaGround===0)? groundValue= CalculationNeedAreaGround: groundValue= inputAreaGround;
           
           console.log(inputNumberDockShelter);
           console.log(inputNumberFloorSectionalDoor);
@@ -687,7 +687,7 @@ function getAreas() {
           console.log(areaRoadAndUtilitiesFloorSectionelDoor);
           console.log(areaRoadAndUtilities);
           console.log(inputAreaGround);
-          console.log(inputNeedAreaGround);
+          console.log(CalculationNeedAreaGround);
           console.log(groundValue);
           // _________________________________________________________________
           //___________________________________________________________________________
@@ -998,7 +998,7 @@ function getAreas() {
      
           const areaIcpe = Math.round((Math.pow(((Math.sqrt(areaBox))+40),2)));
 
-          sufficientGround = [(Number(groundValue)- areaIcpe),(Number(inputNeedAreaGround)- areaIcpe)];
+          sufficientGround = [(Number(groundValue)- areaIcpe),(Number(CalculationNeedAreaGround)- areaIcpe)];
           groundValue === 0? sufficientGround = sufficientGround[1]:sufficientGround = sufficientGround[0];
 
           //Récupération du choix Icpe
@@ -1031,7 +1031,7 @@ function getAreas() {
           z9 = answerChoiceIcpe.no;
 
 
-          const answerAreaGround=[areaIcpe,inputNeedAreaGround];
+          const answerAreaGround=[areaIcpe,CalculationNeedAreaGround];
           let u9= answerAreaGround[0];
           let v9= answerAreaGround[1];
           
@@ -1064,20 +1064,24 @@ function getAreas() {
 
           additionalGroundAreaIcpe!== 0 ? addedValueIcpe : addedValueIcpe=0;
 
-          // console.log(inputNeedAreaGround);
+          // console.log(CalculationNeedAreaGround);
           // console.log(groundValue);
           // console.log(areaIcpe);
           // console.log(sufficientGround);
           // console.log(additionalGroundAreaIcpe);
           // console.log(addedValueIcpe); //vérification des valeurs de addedValueIcpe
           // console.log(inputCostGround);
-          // console.log(costNeedAreaGround);
+          // console.log(costCalculationNeedAreaGround);
 
 // ___________________________________________
 //CALCUL COUTS
      //COUT TERRAIN
-          //const inputCostGround = Number(inputCostGround); //on connait le coût du terrain; inputCostGround c'est la valeur rentrée
-          inputAreaGround===0? costNeedAreaGround= Number(inputNeedAreaGround)*inputCostGroundByRegion: costNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
+          // je connais le coût et la surface du terrain
+          let costGround= Number(inputCostGround*inputAreaGround); //on connait le coût du terrain; inputCostGround c'est la valeur rentrée et la valeur du terrain
+
+          // je ne connais pas le coût et la surface du terrain
+          let costCalculationNeedAreaGround;
+          inputAreaGround===0? costCalculationNeedAreaGround= Number(CalculationNeedAreaGround)*inputCostGroundByRegion: costCalculationNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
      //COUT HALL
           const costBox = Number(areaBox)*(costHallCompanyWithTaxesOffGround +addedValueHeight);
      //COUT DES BUREAUX
@@ -1155,8 +1159,8 @@ function getAreas() {
 
      //COUT TOTAL
           // log des données du TOTAL
-          console.log(inputCostGround);
-          console.log(costNeedAreaGround);
+          console.log(costGround);
+          console.log(costCalculationNeedAreaGround);
           console.log(costBox);
           console.log(costOffices);
           console.log(costRoadAndUtilities);
@@ -1170,7 +1174,7 @@ function getAreas() {
           console.log(costFireNetworkHall);
           console.log(addedValueIcpe);
           console.log(addedValueStair);
-          const costProjectWithoutCommercialMargin= Math.round ((Number(inputCostGround) + Number(costNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricalConnection+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
+          const costProjectWithoutCommercialMargin= Math.round ((Number(costGround) + Number(costCalculationNeedAreaGround) + costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costElectricalConnection+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul du coût du bâtiment hors marge commerciale
           console.log(costProjectWithoutCommercialMargin);
           const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithoutCommercialMargin);// pour affichage number en euros
           // console.log(number);
@@ -1205,7 +1209,7 @@ function getAreas() {
                
      <ul>
      <h2>Avec les conditions suivantes :</h2>
-     <li><h4> vous avez besoin de ${inputNeedAreaGround} m² minimum de terrain sans classement ICPE. les dimensions de votre terrain sont ${x1} avec un stockage extérieur de ${inputOutdoorStorage}m2</h4></li>
+     <li><h4> vous avez besoin de ${CalculationNeedAreaGround} m² minimum de terrain sans classement ICPE. les dimensions de votre terrain sont ${x1} avec un stockage extérieur de ${inputOutdoorStorage}m2</h4></li>
      <li><h4>${x2}</h4></li>
      <li><h4>${y31}</h4></li>
      <li><h4>${y32}</h4></li>

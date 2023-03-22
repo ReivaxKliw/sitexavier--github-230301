@@ -483,7 +483,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
             // Puissance Electrique
             //Calcul
-                    let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
+                    let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];gi
                     
                     if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
                         inputBlueRate==''?inputBlueRate=1:inputBlueRate;
