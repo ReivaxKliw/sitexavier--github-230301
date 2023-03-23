@@ -36,7 +36,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const ratioAirConditionningOffices = 90  // 90e/m² de plancher construit pour l'air conditionnée hors taxes hors marge
     const ratioElectrityHeatingOffices = 40  // 40e/m² de plancher construit pour le chauffage par convecteur électrique hors taxes hors marge
     const ratioInteriorDesignOfficesWithOpenSPace = 300  // 300e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge avec Open Space, Show room, atelier….
-    const ratioInteriorDesignOfficesWithoutOpenSPace = 450  // 300e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge sans Open Space, Show room, atelier….
+    const ratioInteriorDesignOfficesWithoutOpenSPace = 450  // 450e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge sans Open Space, Show room, atelier….
 //constante des spécificités
     const ratioSoilReinforcement = 19.87 ; // 20 e/m² pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
     const addedValueOverHeadCraneOnPoles = 120 ; // euros par ml de poteaux sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
@@ -483,7 +483,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
             // Puissance Electrique
             //Calcul
-                    let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];gi
+                    let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
                     
                     if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
                         inputBlueRate==''?inputBlueRate=1:inputBlueRate;
