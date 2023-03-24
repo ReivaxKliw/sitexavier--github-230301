@@ -283,7 +283,7 @@ document.body.innerHTML= `
 </div>
 
 <div class="questionProject">
-<label for="electricity"> Quel sont le(s) type(s) de compteur(s) électrique(s) installé(s) ?:</label>
+<label for="electricity"> Quel est (sont) le(s) type(s) de compteur(s) électrique(s) dont vous avez besoin ?:</label>
           <br>
         <input type="checkbox" id="choiceBlueRate" name="blueRate">
         <label for="choiceBlueRate"> tarif Bleu < à 36 kVA (~36kW)</label>

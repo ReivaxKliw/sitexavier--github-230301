@@ -219,7 +219,7 @@ document.body.innerHTML= `
 <h2> SPECIFITES DU BATIMENT</h2>
 <div class="questionProject">
 <label for="badSoil"> Votre terrain a t'il besoin de renforcement de sol ? (voir conclusion de l'étude de sol) :</label>
-          <select id="selectStudySoil">
+          <select id="selectSoilReinforcement">
                <option value="no"> non</option>
                <option value="yes"> oui</option>
                <option value="iDontKnow"> Je ne sais pas</option>
@@ -260,7 +260,7 @@ document.body.innerHTML= `
 </div>
 <div class="questionProject">
 <label for="floorSectionalDoor"> Avez-vous besoin de porte de plein pied (accés camion à niveau) ?:</label>
-          <select id="choiceFloorSectionalDoor">
+          <select id="choiceSectionalDoors">
                <option value="no"> non</option>
                <option value="yes"> oui</option>
           </select>
@@ -272,7 +272,7 @@ document.body.innerHTML= `
 </div>
 <div class="questionProject">
 <label for="inputAreaRoadAndUtilitiesStorageOutdoor"> Avez-vous besoin d'une cour de stockage ?:</label>
-          <select id="choiceAreaStorageOutdoor">
+          <select id="choiceStorageOutdoor">
                <option value="no"> non</option>
                <option value="yes"> oui</option>
           </select>
@@ -741,10 +741,10 @@ function getAreas() {
           // calcul du coût du renfort de sol
 
           //Récupération du choix de renfort de sol
-          const selectStudySoil = document.getElementById('selectStudySoil');
+          const selectSoilReinforcement = document.getElementById('selectSoilReinforcement');
           
           //Vérification du choix de renfort de sol
-          let choice = selectStudySoil.value;
+          let choice = selectSoilReinforcement.value;
           let answer2 = [0,Number(areaBuilding)];
 
           switch(choice){
@@ -849,9 +849,9 @@ function getAreas() {
      // ____________________________________________________
           //COUT ET TEXTES SPECIFICITE Porte Sectionnelle de Plain-Pied
           //Récupération des données
-          const choiceFloorSectionalDoor = document.getElementById('choiceFloorSectionalDoor');
+          const choiceSectionalDoors = document.getElementById('choiceSectionalDoors');
           //Vérification du choix
-          let valueFloorSectionalDoor = choiceFloorSectionalDoor.value;
+          let valueFloorSectionalDoor = choiceSectionalDoors.value;
           let answer7 = [0,inputNumberFloorSectionalDoor];
 
           switch(valueFloorSectionalDoor){
