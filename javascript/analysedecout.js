@@ -281,8 +281,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     //Promoteur________________________________________________________
         let choiceDevelopper = document.getElementById("choiceDevelopper").value;
         
-//_____________________________________________________________________________________________
-    // CALCULS TRAVAUX
+//__________________________________________________________________________________________// CALCULS DES COUTS
         //HALL
             //Massif de fondations Hall
                 let numberFondationBlockHall;
@@ -787,7 +786,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     console.log(costDifference);
 
 //_____________________________________________________________________________________________
-// Affichage de répartition des Lots
+// AFFICHAGE DE REPARTITION DES LOTS
                 // DEMOLITION : sans objet
                 // VRD + PORTAIL/CLOTURE+EV
                     console.log(costRoadAndUtilities);
@@ -885,7 +884,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     console.log(desplayDifference);                    
                     
                 
-                // TEXTES_______________________________________
+// TEXTES_______________________________________
     //HALL
         // si la surface n'est pas égal à la longueur x largeur
         let verificationAreaHall = {null : "vous n'avez pas rentré de valeur pour la longueur et la largeur du Hall, celles-ci ont été déduites", yes :"la surface du hall corresponds à la largeur par la longueur", no : "Attention : la surface du hall que vous avez rentrée ne corresponds pas à la largeur x la longueur"};
