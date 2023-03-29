@@ -1,5 +1,9 @@
+//déclaration des variables utilisées dans le code
 
-// déclaration des valeurs pour les calculs
+
+// __________________________________
+const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bureau de controle, thermique, SPS, assurance décennale et RC  
+// __________________________________
 const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
 // constante de coût VRD
     const ratioBuilding1 = 94; //94 euros/m² de construit hors taxes hors marge si le ration (voirie+Bâtiment)/terrain est <65%

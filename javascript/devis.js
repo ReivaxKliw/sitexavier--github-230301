@@ -1,52 +1,50 @@
-// _________________________________
 //déclaration des variables utilisées dans le code
 
 
 // __________________________________
 const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bureau de controle, thermique, SPS, assurance décennale et RC  
 // __________________________________
-// déclaration des valeurs pour les feuilles de calcul
 const inputCostGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
 // constante de coût VRDgit 
-const ratioBuilding1 = 94; //94 euros/m² de construit si le ration (voirie+Bâtiment)/terrain est <65%
-const ratioBuilding2 = 78.5 ; //78.5 euros/m² de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioRoadAndUtilities1 = 95.5; //95.5 euros/m²  si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioRoadAndUtilities2 = 55.5; //55.5 euros/m²  si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioPlantations1 = 9.75; //9.75 euros/m² pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioPlantations2 = 10.80; //10.80 euros/m²  pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
-const ratioFencing1 = 4.75; //4.75 euros/m²  pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
-const ratioFencing2 = 3.25; //3.25 euros/m²  pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilities = 87;//ratio coût des VRD entreprise uniquement pour la cour  hors marge constructeur
+     const ratioBuilding1 = 94; //94 euros/m² de construit si le ration (voirie+Bâtiment)/terrain est <65%
+     const ratioBuilding2 = 78.5 ; //78.5 euros/m² de construit si le ratio (voirie+Bâtiment)/terrain est >65% 
+     const ratioRoadAndUtilities1 = 95.5; //95.5 euros/m²  si le ratio (voirie+Bâtiment)/terrain est <65% 
+     const ratioRoadAndUtilities2 = 55.5; //55.5 euros/m²  si le ratio (voirie+Bâtiment)/terrain est >65% 
+     const ratioPlantations1 = 9.75; //9.75 euros/m² pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+     const ratioPlantations2 = 10.80; //10.80 euros/m²  pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% 
+     const ratioFencing1 = 4.75; //4.75 euros/m²  pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est <65% 
+     const ratioFencing2 = 3.25; //3.25 euros/m²  pour les espaces vert si le ratio (voirie+Bâtiment)/terrain est >65% const costRoadAndUtilities = 87;//ratio coût des VRD entreprise uniquement pour la cour  hors marge constructeur
 
 // ratio du calcul du devis bâtiment HORS TERRAIN
 // constante de coût Hall
-const costHallCompany = 206.45;//ratio coût du hall entreprise de construction  hors marge constructeur
-const costHeightAbove7 = 14;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompany
+     const costHallCompany = 255.89;//ratio coût du hall entreprise de construction  hors marge constructeur
+     const costHeightAbove7 = 14;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompany
 
 // constante de coût Bureaux
-const costOfficesCompanyInsideOpenSpace = 710; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyOutsideOpenSpace = 749.01; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyInsidePartitioned = 830.07; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
-const costOfficesCompanyOutsidePartitioned = 867.79; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
+     const costOfficesCompanyInsideOpenSpace = 710; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
+     const costOfficesCompanyOutsideOpenSpace = 749.01; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
+     const costOfficesCompanyInsidePartitioned = 830.07; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
+     const costOfficesCompanyOutsidePartitioned = 867.79; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
 
 
 // constante de coût SPECIFICITES
-const costSoilReinforcement = 19.87 ; // 20 e/m²  pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-const addedValueOverHeadCraneOnPoles = 120; // 126 euros/ml  sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
-//const addedValueOverHeadCraneRaceway = 285 ;// 285 euros par ml (HEA300 +carré plein 2,5x2,5) considéré à la charge du fournisseur de pont
-const addedValueOverHeadCraneFondation = 933; // 933 euros par plus value de fondations sous poteau de pont roulant
-const costDockShelter =11000; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
-const costconcreteWorkDockShelter = 4000; //euros par unité 
-const costSectionalDoors = 5000; //euros par unité 
-const costBlueRate = 5000;// coût d'un tarif bleu
-const costYellowRate = 10000;// coût d'un tarif jaune
-const costGreenRate = 15000;// coût d'un tarif vert 15000 Enedis (+ 45000 de transfo pour l'elctricien autre constante)
-const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité euros par unité 
-const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall 
-const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique 
-const ratioGasHeatingHall = 9.22;// e/m² pour chauffage aérotherme gaz 
-const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA 
-const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne 
-const costStair = 20000;// Prix d'un escalier 
+     const costSoilReinforcement = 19.87 ; // 20 e/m²  pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
+     const addedValueOverHeadCraneOnPoles = 120; // 126 euros/ml  sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
+     //const addedValueOverHeadCraneRaceway = 285 ;// 285 euros par ml (HEA300 +carré plein 2,5x2,5) considéré à la charge du fournisseur de pont
+     const addedValueOverHeadCraneFondation = 933; // 933 euros par plus value de fondations sous poteau de pont roulant
+     const costDockShelter =11000; //euros par unité ( voir ratio 11000 de matériel quai et 4000 de Gros Oeuvre quai )
+     const costconcreteWorkDockShelter = 4000; //euros par unité 
+     const costSectionalDoors = 5000; //euros par unité 
+     const costBlueRate = 5000;// coût d'un tarif bleu
+     const costYellowRate = 10000;// coût d'un tarif jaune
+     const costGreenRate = 15000;// coût d'un tarif vert 15000 Enedis (+ 45000 de transfo pour l'elctricien autre constante)
+     const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité euros par unité 
+     const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall 
+     const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique 
+     const ratioGasHeatingHall = 9.22;// e/m² pour chauffage aérotherme gaz 
+     const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA 
+     const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne 
+     const costStair = 20000;// Prix d'un escalier 
 // ________________________________
 // Action en fonction du terrain : je posséde ou pas le terrain
 const ground = document.getElementById('choice1');
@@ -354,7 +352,7 @@ function getAreas() {
      //     alert("vous n'avez pas indiqué la puissance de raccordement électrique de votre bâtiment");
      //     event.stopPropagation();
         // }     
-     // ___________________________________________ 
+     // 
      document.body.scrollTop = 0;
      document.documentElement.scrollTop = 0;
      // _____________________________________________________________________________
@@ -415,6 +413,7 @@ function getAreas() {
      // SURFACE BUREAUX ; SURFACE BOX ET CONSTRUITE AU SOL Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
      let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
      let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
+     let numberStair;// nombre d'escalier
 
      //Bureaux Intérieur avec locaux sociaux intérieurs
      if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="yes"){
@@ -428,7 +427,7 @@ function getAreas() {
           else if (officesDimensionsInside > 200){
           areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
           areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
-          NumberStair(s)=1;
+          numberStair=1;
           }
      }
      //Bureaux Intérieur sans locaux sociaux intérieurs
@@ -442,7 +441,7 @@ function getAreas() {
           else if (officesDimensionsInside > 200){ 
           areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
           areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
-          NumberStair(s)=1;
+          numberStair=1;
           }
      }
      //Bureaux Extérieur avec locaux sociaux extérieurs
@@ -456,7 +455,7 @@ function getAreas() {
           else if (officesDimensionsOutside > 200){ 
           areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside/2;
           areaBox = Number(document.getElementById("inputAreaStorage").value);
-          NumberStair(s)=1;
+          numberStair=1;
           }
      }
      //Bureaux Extérieurs sans locaux sociaux extérieur
@@ -470,7 +469,7 @@ function getAreas() {
           else if (officesDimensionsOutside > 200){ 
           areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside/2;
           areaBox = Number(document.getElementById("inputAreaStorage").value);
-          NumberStair(s)=1;
+          numberStair=1;
           }
      }
      //Bureaux Intérieur + Extérieurs avec locaux sociaux intérieurs
@@ -484,17 +483,17 @@ function getAreas() {
           else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               NumberStair(s)=2;
+               numberStair=2;
           }
           else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-               NumberStair(s)=1;
+               numberStair=1;
           }
           else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               NumberStair(s)=2;
+               numberStair=2;
           }
      }
      //Bureaux Intérieur + Extérieurs avec locaux sociaux extérieurs
@@ -508,17 +507,17 @@ function getAreas() {
           else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               NumberStair(s)=1;
+               numberStair=1;
           }
           else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-               NumberStair(s)=1;
+               numberStair=1;
           }
           else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               NumberStair(s)=2;
+               numberStair=2;
           }
      }
      //Bureaux Intérieur + Extérieur avec locaux sociaux intérieurs + Extérieurs
@@ -532,17 +531,17 @@ function getAreas() {
           else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               NumberStair(s)=1;
+               numberStair=1;
           }
           else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-               NumberStair(s)=1;
+               numberStair=1;
           }
           else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
                areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
                areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               NumberStair(s)=2;
+               numberStair=2;
           }
      }
      else{
@@ -550,7 +549,7 @@ function getAreas() {
           officesDimensionsOutside=0;
           areaBuilding = Number(document.getElementById("inputAreaStorage").value);
           areaBox = Number(document.getElementById("inputAreaStorage").value);
-          NumberStair(s)=0;
+          numberStair=0;
 
      };
      console.log(officesAdministrationInsideDimensions);
@@ -563,7 +562,86 @@ function getAreas() {
      console.log(officesDimensionsOutside);
      console.log(areaBuilding);
      console.log(areaBox);
-     console.log(NumberStair(s));
+     console.log(numberStair);
+          // ___________________________________________
+     // Spécificité
+          // ____________________________________________________________
+          //hauteur bâtiment
+          // récupération des données
+          const inputHeightHall = document.getElementById("inputHeightHall").value;
+          let addedValueHeight;
+
+          console.log(inputHeightHall);
+     // ____________________________________________________________
+          //Stockage extérieur
+          // récupération des données
+          let inputOutdoorStorage = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value);
+          
+          console.log(inputOutdoorStorage);
+     // ____________________________________________________
+          //renfort de sol
+          const selectStudySoil = document.getElementById('selectStudySoil');
+          
+          console.log(selectStudySoil);// vérification de la valeur de costChoiceSoil
+     // ____________________________________________________
+          // cloison intérieure
+          let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
+          
+          console.log(inputPartitionInside);
+
+     // ____________________________________________________
+          // Pont roulant
+          const choiceOverHeadCrane = document.getElementById('choiceOverHeadCrane');
+          const inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value;
+
+          console.log(choiceOverHeadCrane);
+          console.log(inputNumberOverHeadCrane);
+
+     // ____________________________________________________
+          //Quais niveleur
+          const choiceDockShelter = document.getElementById('choiceDockShelter');
+
+          console.log(choiceDockShelter);
+     // ____________________________________________________
+          //Porte Sectionnelle de Plain-Pied
+          const choiceFloorSectionalDoor = document.getElementById('choiceFloorSectionalDoor');
+
+          console.log(choiceFloorSectionalDoor);
+     // ____________________________________________________
+          // Raccordement Electricté
+
+          //const choiceBlueRate = document.getElementById('choiceBlueRate');déclarée dans le texte des erreures
+          //const choiceYellowRate = document.getElementById('choiceYellowRate');déclarée dans le texte des erreures
+          //const choiceGreenRate = document.getElementById('choiceGreenRate');déclarée dans le texte des erreures
+          let inputBlueRate = document.getElementById("inputBlueRate").value; 
+          let inputYellowRate = document.getElementById("inputYellowRate").value; 
+          
+            console.log(choiceBlueRate);
+            console.log(inputBlueRate);
+            console.log(choiceYellowRate);
+            console.log(inputYellowRate);
+            console.log(choiceGreenRate);
+
+     // ____________________________________________________
+          // Chauffage dans le Hall 
+          const selectHeatingHall = document.getElementById('selectHeatingHall');
+
+          console.log(selectHeatingHall);
+          
+               // ____________________________________________________
+                    // Ria
+                let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
+                
+                console.log(selectFireNetworkHall);
+
+     // ____________________________________________________
+          //  surface avec ICPE
+          
+          //Récupération du choix Icpe
+          const selectIcpe = document.getElementById('selectIcpe');
+         
+          console.log(selectIcpe);
+
           // ___________________________________________
           // SURFACE DU TERRAIN ET DES VRD
           //Si on connait le terrain > inputAreaGround définie au début de la fonction
@@ -845,12 +923,13 @@ function getAreas() {
                // ____________________________________________________
                     // COUT RIA Hall
                 //Calcul
-                let costFireNetworkHall=ratioFireNetworkHall*areaBox;
                 let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
+
+                let costFireNetworkHall
                 switch(selectFireNetworkHall){
-                    case'yes':
-                    costFireNetworkHall
-                    break;
+                     case'yes':
+                     costFireNetworkHall=ratioFireNetworkHall*areaBox;
+                     break;
                     case'no':
                     costFireNetworkHall = 0;
                     break;
@@ -980,7 +1059,7 @@ function getAreas() {
 
      //COUT ESCALIER BUREAUX
           let addedValueStair; // calcul de la plus value escalier
-          addedValueStair=NumberStair(s)*costStair;
+          addedValueStair=numberStair*costStair;
 
      //COUT VRD
          
@@ -1026,14 +1105,14 @@ function getAreas() {
           const costProjectWorks= Math.round ((costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul des travaux seuls
           console.log(costProjectWorks);
 
-          const costProjectWithoutCommercialMargin= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround) +addedValueIcpe+costElectricalConnection+studyFeesAndInsurance*(costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueStair))*100/100);// calcul du coût du bâtiment hors marge commerciale
-          console.log(costProjectWithoutCommercialMargin);
+          const costProjectWithFeesWithoutCommercialMargin= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround) +addedValueIcpe+costElectricalConnection+studyFeesAndInsurance*(costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueStair))*100/100);// calcul du coût du bâtiment hors marge commerciale
+          console.log(costProjectWithFeesWithoutCommercialMargin);
 
-          const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithoutCommercialMargin);// pour affichage number en euros
+          const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithFeesWithoutCommercialMargin);// pour affichage number en euros
           // console.log(number);
      
      //COUT Frais commercial
-          const CostDeveloppementAndCommercial=Math.round (0.095*costProjectWithoutCommercialMargin)//calcul du coût du bâtiement comprenant la valeur commerciale de 9,5%
+          const CostDeveloppementAndCommercial=Math.round (0.095*costProjectWithFeesWithoutCommercialMargin)//calcul du coût du bâtiement comprenant la valeur commerciale de 9,5%
           const number2 = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( CostDeveloppementAndCommercial);// pour affichage number2 en euros
 // TEXTES_______________________________________
           // TEXTE BUREAUX A L'INTERIEUR DU HALL / EXTERIEUR HALL
