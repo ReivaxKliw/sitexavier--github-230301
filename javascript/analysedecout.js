@@ -183,10 +183,11 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         //let inputAreaBox = Number(document.getElementById("inputAreaBox").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
         let inputLengthHall = Number(document.getElementById("inputLengthHall").value);
         let inputWidthHall = Number(document.getElementById("inputWidthHall").value);
+        
         inputLengthHall==0? inputLengthHall=(Math.sqrt(inputAreaBox)):inputLengthHall ; 
         inputWidthHall==0? inputWidthHall=(Math.sqrt(inputAreaBox)):inputWidthHall ; 
         inputAreaBox==0? inputAreaBox= inputLengthHall*inputWidthHall:inputAreaBox;
-
+        
         let inputAreaHall
         if (inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
             inputAreaHall = inputAreaBox-inputAreaOfficesGroundInside;
@@ -200,42 +201,58 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         if (inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside==0){
             inputAreaHall = inputAreaBox;
         };
+        
+        //Massif de fondations Hall
+        let numberFondationBlockHall;
+        if (inputWidthHall/30<1){
+            numberFondationBlockHall= (Math.ceil((inputLengthHall/6)+1)*2)+(Math.ceil(inputWidthHall/6)*2);
+        }
+        else{
+            numberFondationBlockHall= Math.ceil((inputLengthHall/6)+1)*Math.ceil(inputWidthHall/30+1)+Math.ceil((inputWidthHall/6)*2);    
+        };
 
         console.log(inputAreaHall);
         console.log(inputLengthHall);
         console.log(inputWidthHall);
+        console.log(numberFondationBlockHall);
 
     //Spécificités_________________________________________________
         //Renfort de sol :
-        let selectSoilReinforcement = document.getElementById("selectSoilReinforcement").value;
+            let selectSoilReinforcement = document.getElementById("selectSoilReinforcement").value;
 
         //Cloison intérieure
-        let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
+            let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
 
         //Pont roulant :
-        let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
-        let inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value; 
+            let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
+            let inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value; 
 
         //Niveleur de quai :
-        let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
-        let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
+            let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
+            let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
         
-        //Porte Sectionnelle de plein pied :
-        let choiceSectionalDoors = document.getElementById("choiceSectionalDoors").value; 
-        let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
+        //Porte Sectionnelle de plain pied :
+            let choiceSectionalDoors = document.getElementById("choiceSectionalDoors").value; 
+            let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
         
         //Stockage extérieur :
-        let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
-        let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
+            let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
+            let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
 
-        //Puissance électrique : voir calcul pour les choixrécupération de donnée intégrée dans le calcul _ ici récupération des quantités tarif bleus et jaune
-        //const choiceBlueRate = document.getElementById('choiceBlueRate');récupérée dans le texte des erreurs
-        //const choiceYellowRate = document.getElementById('choiceYellowRate');récupérée dans le texte des erreurs
-        //const choiceGreenRate = document.getElementById('choiceGreenRate');récupérée dans le texte des erreurs
-        let inputBlueRate = document.getElementById("inputBlueRate").value; 
-        let inputYellowRate = document.getElementById("inputYellowRate").value; 
+        //Raccordement électrique : voir calcul pour les choixrécupération de donnée intégrée dans le calcul _ ici récupération des quantités tarif bleus et jaune
+            //const choiceBlueRate = document.getElementById('choiceBlueRate');récupérée dans le texte des erreurs
+            //const choiceYellowRate = document.getElementById('choiceYellowRate');récupérée dans le texte des erreurs
+            //const choiceGreenRate = document.getElementById('choiceGreenRate');récupérée dans le texte des erreurs
+            let inputBlueRate = document.getElementById("inputBlueRate").value; 
+            let inputYellowRate = document.getElementById("inputYellowRate").value; 
 
-        //Open Space dans les bureaux_______________________________________
+        //Chauffage Hall
+            let selectHeatingHall = document.getElementById("selectHeatingHall").value;
+
+        //Ria Hall
+            let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
+
+        //Open Space dans les bureaux
             let selectOpenSpace = document.getElementById("selectOpenSpace").value;
             let ratioInteriorDesignOffices
             switch(selectOpenSpace){
@@ -247,7 +264,8 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 break;
                 };
         console.log(ratioInteriorDesignOffices);
-        //Bardage luxe pour les bureaux_______________________________________
+
+        //Bardage luxe pour les bureaux
             let selectPanelOffices = document.getElementById("selectPanelOffices").value;
             let ratioSidingPanelOffices
             switch(selectPanelOffices){
@@ -260,43 +278,37 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 };
         console.log(ratioSidingPanelOffices);
          //Ascenseur :
-         let choiceElevator = document.getElementById("choiceElevator").value; 
+            let choiceElevator = document.getElementById("choiceElevator").value; 
+
+        // ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
 
 
-    //Terrain________________________________________________________
-        let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
-        let choiceAreaGround = document.getElementById("choiceAreaGround").value;
-        //let inputAreaGround = document.getElementById("inputAreaGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
-        let choiceCostGround = document.getElementById("choiceCostGround").value;
-        //let inputCostGround = document.getElementById("inputCostGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
-    //VRD________________________________________________________
-        let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
-        let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
-    //Tout compris________________________________________________________
-        let choiceAllIn = document.getElementById("choiceAllIn").value;
-    //TAxes PC________________________________________________________
-        let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit").value;
-    //Insurance________________________________________________________
-        let choiceInsurance = document.getElementById("choiceInsurance").value;
-    //Maitrise d'Oeuvre________________________________________________________
-        let choiceManagement = document.getElementById("choiceManagement").value;
-    //Agence commerciale________________________________________________________
-        let choiceBusinessAgency = document.getElementById("choiceBusinessAgency").value;
-    //Promoteur________________________________________________________
-        let choiceDevelopper = document.getElementById("choiceDevelopper").value;
-        
-//__________________________________________________________________________________________// CALCULS DES COUTS
+        //Terrain________________________________________________________
+            let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
+            let choiceAreaGround = document.getElementById("choiceAreaGround").value;
+            //let inputAreaGround = document.getElementById("inputAreaGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
+            let choiceCostGround = document.getElementById("choiceCostGround").value;
+            //let inputCostGround = document.getElementById("inputCostGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
+        //VRD________________________________________________________
+            let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
+            let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
+        //Tout compris________________________________________________________
+            let choiceAllIn = document.getElementById("choiceAllIn").value;
+        //TAxes PC________________________________________________________
+            let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit").value;
+        //Insurance________________________________________________________
+            let choiceInsurance = document.getElementById("choiceInsurance").value;
+        //Maitrise d'Oeuvre________________________________________________________
+            let choiceManagement = document.getElementById("choiceManagement").value;
+        //Agence commerciale________________________________________________________
+            let choiceBusinessAgency = document.getElementById("choiceBusinessAgency").value;
+        //Promoteur________________________________________________________
+            let choiceDevelopper = document.getElementById("choiceDevelopper").value;
+            
+//CACULS DES COUTS__________________________________________________________________________________________// CALCULS DES COUTS
         //HALL
             //Massif de fondations Hall
-                let numberFondationBlockHall;
-                if (inputWidthHall/30<1){
-                    numberFondationBlockHall= (Math.ceil((inputLengthHall/6)+1)*2)+(Math.ceil(inputWidthHall/6)*2);
-                }
-                else{
-                    numberFondationBlockHall= Math.ceil((inputLengthHall/6)+1)*Math.ceil(inputWidthHall/30+1)+Math.ceil((inputWidthHall/6)*2);    
-                }
                 let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
-                console.log(numberFondationBlockHall);
                 console.log(costFondationBlockHall);
             //Gros Oeuvre Hall
                 let costConcreteWorkHall=ratioConcreteWorkHall*inputAreaHall;
@@ -528,7 +540,6 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 //Calcul
                 //  ATTENTION TIENT COMPTE UNIQUEMENT DU CHAUFFAGE AEROTHERME GAZ 
                 let costGasHeatingHall=ratioGasHeatingHall*inputAreaHall;
-                let selectHeatingHall = document.getElementById("selectHeatingHall").value;
                 switch(selectHeatingHall){
                     case'yes':
                     costGasHeatingHall
@@ -541,7 +552,6 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             //RIA Hall
                 //Calcul
                 let costFireNetworkHall=ratioFireNetworkHall*inputAreaHall;
-                let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
                 switch(selectFireNetworkHall){
                     case'yes':
                     costFireNetworkHall

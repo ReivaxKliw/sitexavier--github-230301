@@ -358,8 +358,11 @@ function getAreas() {
      // _____________________________________________________________________________
 // RECUPERATION DES DONNEES et CALCULS CARACTERISTIQUES BATIMENTS
      
-     //SURFACE DES BUREAUX
-     // récupération des données
+     //hauteur bâtiment__________________________________________
+          const inputHeightHall = document.getElementById("inputHeightHall").value;
+
+          console.log(inputHeightHall);
+     //Les bureaux du Bâtiment____________________________________________________
           const choiceOfficesInside = document.getElementById('choiceOfficesInside');
           const choiceOfficesOutside = document.getElementById('choiceOfficesOutside');
           // const inputWorkersOfficesInside > récupéré dans texte des erreurs
@@ -376,182 +379,181 @@ function getAreas() {
           let officesAdministrationInsideDimensions ;
           let officesAdministrationOutsideDimensions;
      
-     //CALCUL DE LA SURFACE DES BUREAUX ADMINISTRATIFS
+     //Calcul de la surface des bureaux administratifs_____________________________
           //bureaux intérieurs Openspace 
-          if (choiceOfficesInside.value==="yes"){
-          if (choiceOpenspaceOfficesInside.value==="yes"){
-               officesAdministrationInsideDimensions = ((inputClercksOfficesInside-3)*10+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 10m² par personne pour les open space mais 3 bureaux fermés de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
-          }
+               if (choiceOfficesInside.value==="yes"){
+               if (choiceOpenspaceOfficesInside.value==="yes"){
+                    officesAdministrationInsideDimensions = ((inputClercksOfficesInside-3)*10+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 10m² par personne pour les open space mais 3 bureaux fermés de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
+               }
           //bureaux intérieurs Cloisonnés
-          if (choiceOpenspaceOfficesInside.value==="no"){
-               officesAdministrationInsideDimensions = ((inputClercksOfficesInside-3)*15+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 15m² par personne pour les bureaux fermés mais 3 bureaux de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
-          }
-          }
-          if (choiceOfficesInside.value==="no"){
-               officesAdministrationInsideDimensions = 0;
-          }
+               if (choiceOpenspaceOfficesInside.value==="no"){
+                    officesAdministrationInsideDimensions = ((inputClercksOfficesInside-3)*15+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 15m² par personne pour les bureaux fermés mais 3 bureaux de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
+               }
+               }
+               if (choiceOfficesInside.value==="no"){
+                    officesAdministrationInsideDimensions = 0;
+               }
           //bureaux extérieurs Openspace 
-          if (choiceOfficesOutside.value==="yes"){
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-               officesAdministrationOutsideDimensions = ((inputClercksOfficesOutside-3)*10+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 10m² par personne pour les open space mais 3 bureaux fermés de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
-          }
+               if (choiceOfficesOutside.value==="yes"){
+               if (choiceOpenspaceOfficesOutside.value==="yes"){
+                    officesAdministrationOutsideDimensions = ((inputClercksOfficesOutside-3)*10+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 10m² par personne pour les open space mais 3 bureaux fermés de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
+               }
           //bureaux extérieurs Cloisonnés
-          if (choiceOpenspaceOfficesOutside.value==="no"){
-               officesAdministrationOutsideDimensions = ((inputClercksOfficesOutside-3)*15+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 15m² par personne pour les bureaux fermés mais 3 bureaux de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
-          }
-          }
-          if (choiceOfficesOutside.value==="no"){
-               officesAdministrationOutsideDimensions = 0;
-          };
+               if (choiceOpenspaceOfficesOutside.value==="no"){
+                    officesAdministrationOutsideDimensions = ((inputClercksOfficesOutside-3)*15+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 15m² par personne pour les bureaux fermés mais 3 bureaux de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
+               }
+               }
+               if (choiceOfficesOutside.value==="no"){
+                    officesAdministrationOutsideDimensions = 0;
+               };
 
-     //CALCUL DE LA SURFACE DES LOCAUX SOCIAUX
+     //Surface des locaux sociaux______________________________
      
           const officesSocialDimensionsInside = (inputWorkersOfficesInside)*10;//les locaux sociaux nombre de travailleurs * 10m²
           const officesSocialDimensionsOutside = (inputWorkersOfficesOutside)*10; //les locaux sociaux nombre de travailleurs * 10m²
-
     
-     // SURFACE BUREAUX ; SURFACE BOX ET CONSTRUITE AU SOL Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
-     let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
-     let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
-     let numberStair;// nombre d'escalier
+     // Calcul de SURFACE BUREAUX ; SURFACE BOX ET CONSTRUITE AU SOL Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
+          let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
+          let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
+          let numberStair;// nombre d'escalier
 
-     //Bureaux Intérieur avec locaux sociaux intérieurs
-     if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="yes"){
-          officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
-          officesDimensionsOutside=0;
-          if (officesDimensionsInside <= 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
-          areaBox= Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
-          
+          //Bureaux Intérieur avec locaux sociaux intérieurs
+               if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="yes"){
+                    officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
+                    officesDimensionsOutside=0;
+                    if (officesDimensionsInside <= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
+                    areaBox= Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
+                    
+                    }
+                    else if (officesDimensionsInside > 200){
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
+                    numberStair=1;
+                    }
+               }
+          //Bureaux Intérieur sans locaux sociaux intérieurs
+               else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="no"){
+                         officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside);
+                         officesDimensionsOutside=0;
+                         if (officesDimensionsInside <= 200){ 
+                         areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
+                         areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
+                         }
+                         else if (officesDimensionsInside > 200){ 
+                         areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
+                         areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
+                         numberStair=1;
+                         }
+                    }
+          //Bureaux Extérieur avec locaux sociaux extérieurs
+               else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesOutside.value ==="yes"){
+                    officesDimensionsInside=0;
+                    officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
+                    if (officesDimensionsOutside <= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value);
+                    }
+                    else if (officesDimensionsOutside > 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value);
+                    numberStair=1;
+                    }
+               }
+          //Bureaux Extérieurs sans locaux sociaux extérieur
+               else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesOutside.value ==="no"){
+                    officesDimensionsInside=0;
+                    officesDimensionsOutside=(officesAdministrationOutsideDimensions+inputAreaShowroomOutside);
+                    if (officesDimensionsOutside <= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value);
+                    }
+                    else if (officesDimensionsOutside > 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value);
+                    numberStair=1;
+                    }
+               }
+          //Bureaux Intérieur + Extérieurs avec locaux sociaux intérieurs
+               else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesInside.value ==="yes"&&choiceSocialRoomOfficesOutside.value ==="no"){
+               officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
+               officesDimensionsOutside=(officesAdministrationOutsideDimensions+inputAreaShowroomOutside);
+               if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
+               }
+               else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
+                    numberStair=2;
+               }
+               else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
+                    numberStair=1;
+               }
+               else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
+                    numberStair=2;
+               }
           }
-          else if (officesDimensionsInside > 200){
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
-          areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
-          numberStair=1;
+          //Bureaux Intérieur + Extérieurs avec locaux sociaux extérieurs
+               else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesInside.value ==="no"&&choiceSocialRoomOfficesOutside.value ==="yes"){
+               officesDimensionsInside=(officesAdministrationInsideDimensions+inputAreaShowroomInside);
+               officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
+               if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
+               }
+               else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
+                    numberStair=1;
+               }
+               else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
+                    numberStair=1;
+               }
+               else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
+                    numberStair=2;
+               }
           }
-     }
-     //Bureaux Intérieur sans locaux sociaux intérieurs
-    else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="no"){
-          officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside);
-          officesDimensionsOutside=0;
-          if (officesDimensionsInside <= 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
-          areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside;
-          }
-          else if (officesDimensionsInside > 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
-          areaBox = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsInside/2;
-          numberStair=1;
-          }
-     }
-     //Bureaux Extérieur avec locaux sociaux extérieurs
-     else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesOutside.value ==="yes"){
-          officesDimensionsInside=0;
-          officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
-          if (officesDimensionsOutside <= 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside;
-          areaBox = Number(document.getElementById("inputAreaStorage").value);
-          }
-          else if (officesDimensionsOutside > 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside/2;
-          areaBox = Number(document.getElementById("inputAreaStorage").value);
-          numberStair=1;
-          }
-     }
-     //Bureaux Extérieurs sans locaux sociaux extérieur
-     else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesOutside.value ==="no"){
-          officesDimensionsInside=0;
-          officesDimensionsOutside=(officesAdministrationOutsideDimensions+inputAreaShowroomOutside);
-          if (officesDimensionsOutside <= 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside;
-          areaBox = Number(document.getElementById("inputAreaStorage").value);
-          }
-          else if (officesDimensionsOutside > 200){ 
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value)+officesDimensionsOutside/2;
-          areaBox = Number(document.getElementById("inputAreaStorage").value);
-          numberStair=1;
-          }
-     }
-     //Bureaux Intérieur + Extérieurs avec locaux sociaux intérieurs
-     else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesInside.value ==="yes"&&choiceSocialRoomOfficesOutside.value ==="no"){
-          officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
-          officesDimensionsOutside=(officesAdministrationOutsideDimensions+inputAreaShowroomOutside);
-          if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-          }
-          else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               numberStair=2;
-          }
-          else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-               numberStair=1;
-          }
-          else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               numberStair=2;
-          }
-     }
-     //Bureaux Intérieur + Extérieurs avec locaux sociaux extérieurs
-     else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesInside.value ==="no"&&choiceSocialRoomOfficesOutside.value ==="yes"){
-          officesDimensionsInside=(officesAdministrationInsideDimensions+inputAreaShowroomInside);
-          officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
-          if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-          }
-          else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               numberStair=1;
-          }
-          else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-               numberStair=1;
-          }
-          else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               numberStair=2;
-          }
-     }
-     //Bureaux Intérieur + Extérieur avec locaux sociaux intérieurs + Extérieurs
-     else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&&choiceSocialRoomOfficesInside.value ==="yes"&& choiceSocialRoomOfficesOutside.value ==="yes"){
-          officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside +inputAreaShowroomInside);
-          officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
-          if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-          }
-          else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               numberStair=1;
-          }
-          else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
-               numberStair=1;
-          }
-          else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
-               areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
-               areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
-               numberStair=2;
-          }
-     }
-     else{
-          officesDimensionsInside=0;
-          officesDimensionsOutside=0;
-          areaBuilding = Number(document.getElementById("inputAreaStorage").value);
-          areaBox = Number(document.getElementById("inputAreaStorage").value);
-          numberStair=0;
+          //Bureaux Intérieur + Extérieur avec locaux sociaux intérieurs + Extérieurs
+               else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&&choiceSocialRoomOfficesInside.value ==="yes"&& choiceSocialRoomOfficesOutside.value ==="yes"){
+               officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside +inputAreaShowroomInside);
+               officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
+               if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
+               }
+               else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
+                    numberStair=1;
+               }
+               else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside;
+                    numberStair=1;
+               }
+               else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
+                    areaBuilding = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2+officesDimensionsOutside/2;
+                    areaBox = Number(document.getElementById("inputAreaStorage").value)+ officesDimensionsInside/2;
+                    numberStair=2;
+               }
+               }
+               else{
+               officesDimensionsInside=0;
+               officesDimensionsOutside=0;
+               areaBuilding = Number(document.getElementById("inputAreaStorage").value);
+               areaBox = Number(document.getElementById("inputAreaStorage").value);
+               numberStair=0;
+               };
 
-     };
      console.log(officesAdministrationInsideDimensions);
      console.log(officesAdministrationOutsideDimensions);
      console.log(officesSocialDimensionsInside);
@@ -563,51 +565,39 @@ function getAreas() {
      console.log(areaBuilding);
      console.log(areaBox);
      console.log(numberStair);
-          // ___________________________________________
-     // Spécificité
-          // ____________________________________________________________
-          //hauteur bâtiment
-          // récupération des données
-          const inputHeightHall = document.getElementById("inputHeightHall").value;
-          let addedValueHeight;
 
-          console.log(inputHeightHall);
-     // ____________________________________________________________
-          //Stockage extérieur
-          // récupération des données
-          let inputOutdoorStorage = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value);
-          
-          console.log(inputOutdoorStorage);
-     // ____________________________________________________
+     // Spécificités____________________________________________________
           //renfort de sol
           const selectStudySoil = document.getElementById('selectStudySoil');
-          
           console.log(selectStudySoil);// vérification de la valeur de costChoiceSoil
-     // ____________________________________________________
+          
           // cloison intérieure
           let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
-          
           console.log(inputPartitionInside);
-
-     // ____________________________________________________
+          
           // Pont roulant
           const choiceOverHeadCrane = document.getElementById('choiceOverHeadCrane');
           const inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value;
-
           console.log(choiceOverHeadCrane);
           console.log(inputNumberOverHeadCrane);
-
-     // ____________________________________________________
-          //Quais niveleur
+          
+          //Niveleur de quais
           const choiceDockShelter = document.getElementById('choiceDockShelter');
-
           console.log(choiceDockShelter);
-     // ____________________________________________________
+          
           //Porte Sectionnelle de Plain-Pied
           const choiceFloorSectionalDoor = document.getElementById('choiceFloorSectionalDoor');
-
           console.log(choiceFloorSectionalDoor);
-     // ____________________________________________________
+
+          //Stockage extérieur
+          let inputOutdoorStorage = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value);
+          inputOutdoorStorage === ""? inputOutdoorStorage=0:inputOutdoorStorage;
+
+          //Vérification de la taille du terrain pour le texte d'affichage
+          const inputAreaGroundWithStorage =((Number(areaBuilding)+Number(areaRoadAndUtilities))*1.2); // areaRoadAndUtilities comprend la surface de stockage
+
+          console.log(inputOutdoorStorage);
+
           // Raccordement Electricté
 
           //const choiceBlueRate = document.getElementById('choiceBlueRate');déclarée dans le texte des erreures
@@ -622,28 +612,27 @@ function getAreas() {
             console.log(inputYellowRate);
             console.log(choiceGreenRate);
 
-     // ____________________________________________________
-          // Chauffage dans le Hall 
-          const selectHeatingHall = document.getElementById('selectHeatingHall');
+            // Chauffage dans le Hall 
+            const selectHeatingHall = document.getElementById('selectHeatingHall');
+            console.log(selectHeatingHall);
+            
+            // Ria
+            let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
+            console.log(selectFireNetworkHall);
 
-          console.log(selectHeatingHall);
-          
-               // ____________________________________________________
-                    // Ria
-                let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
-                
-                console.log(selectFireNetworkHall);
+            //Open Space dans les bureaux
+            // récupéré dans les bureaux
+  
+            //Bardage luxe pour les bureaux ????????????
+            
+            //Ascenseur ????????????
 
-     // ____________________________________________________
           //  surface avec ICPE
-          
-          //Récupération du choix Icpe
           const selectIcpe = document.getElementById('selectIcpe');
          
           console.log(selectIcpe);
 
-          // ___________________________________________
-          // SURFACE DU TERRAIN ET DES VRD
+     // Terrain et VRD
           //Si on connait le terrain > inputAreaGround définie au début de la fonction
 
           // Si on ne connait pas le terrain :Calcul du terrain necessaire lorsque le choix non a été fait quand on ne connait pas son terrain , peut être fait aprés détermination des variables areaBuilding / officesDimensionsOutside et inside / areaRoadAndUtilities est calculée
@@ -698,80 +687,49 @@ function getAreas() {
           console.log(inputAreaGround);
           console.log(CalculationNeedAreaGround);
           console.log(groundValue);
-          // _________________________________________________________________
-          //___________________________________________________________________________
-          // SURFACE ESPACE VERT
+
+     // Espaces Vert
           let areaPlantations
           areaPlantations =groundValue-areaRoadAndUtilities-areaBuilding;
           console.log(areaRoadAndUtilities);
           console.log(areaPlantations);
-     // _________________________________________________________________
-//CALCULS DES COUTS
-     // ____________________________________________________________
-          //COUT SPECIFICITE HAUTEUR DU BATIMENT
-          // récupération des données
-          const inputHeightHall = document.getElementById("inputHeightHall").value;
-          let addedValueHeight;
-          if(inputHeightHall>7){
-               addedValueHeight=(inputHeightHall-7)*costHeightAbove7;
-          }
-          else {
-               addedValueHeight=0;
-          };
 
-          console.log(addedValueHeight);
-     // ____________________________________________________________
-          //COUT SPECIFICITE STOCKAGE EXTERIEUR
-          // récupération des données
-          let inputOutdoorStorage = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value);
-          inputOutdoorStorage === ""? inputOutdoorStorage=0:inputOutdoorStorage;
-          //coût du stockage extérieur  :compris dans le VRD 
-          
-          //Vérification de la taille du terrain pour le texte d'affichage
+//CALCULS DES COUTS ____________________________________________________________
+     //COUT SPECIFICITE
+          //Cout spécificité Stockage extérieur
+               //compris dans le VRD 
 
-          const inputAreaGroundWithStorage =((Number(areaBuilding)+Number(areaRoadAndUtilities))*1.2); // areaRoadAndUtilities comprend la surface de stockage
+          //Cout spécifité renfort de sol          
+               let choice = selectStudySoil.value;
+               let answer2 = [0,Number(areaBuilding)];
 
-     // ____________________________________________________
-          //COUT  SPECIFICITE RENFORT DE SOL
-          // calcul du coût du renfort de sol
+               switch(choice){
+                    case'yes':
+                    choiceStudySoil= answer2[1];
+                    break;
+                    case'no':
+                    choiceStudySoil= answer2[0];
+                    break;
+                    case'iDontKnow':
+                    choiceStudySoil= answer2[0];
+                    break; 
+               };
+               const costChoiceSoil = Number(choiceStudySoil*costSoilReinforcement);
+          console.log(costChoiceSoil);
 
-          //Récupération du choix de renfort de sol
-          const selectStudySoil = document.getElementById('selectStudySoil');
-          
-          //Vérification du choix de renfort de sol
-          let choice = selectStudySoil.value;
-          let answer2 = [0,Number(areaBuilding)];
+          // Cout spécifité cloison intérieure
+               let inputWidthHall= Math.sqrt(areaBox);
+               let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputPartitionInside;
 
-          switch(choice){
+               let selectPartitionInside = document.getElementById("selectPartitionInside").value;
+               switch(selectPartitionInside){
                case'yes':
-               choiceStudySoil= answer2[1];
+               costPartitionInsideSidingPanel
                break;
                case'no':
-               choiceStudySoil= answer2[0];
+               costPartitionInsideSidingPanel = 0;
                break;
-               case'iDontKnow':
-               choiceStudySoil= answer2[0];
-               break; 
-          };
-          const costChoiceSoil = Number(choiceStudySoil*costSoilReinforcement);//calcul de la valeur de renfort de Sol
-          // console.log(costChoiceSoil);// vérification de la valeur de costChoiceSoil
-     // ____________________________________________________
-          // COUT SPECIFITE CLOISON INTERIEURE
-          // Récupération des données
-          let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
-          //Calcul
-          let inputWidthHall= Math.sqrt(areaBox);
-          let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputPartitionInside;
-
-          let selectPartitionInside = document.getElementById("selectPartitionInside").value;
-          switch(selectPartitionInside){
-              case'yes':
-              costPartitionInsideSidingPanel
-              break;
-              case'no':
-              costPartitionInsideSidingPanel = 0;
-              break;
-          };
+               };
           console.log(ratioPartitionInsideSidingPanel);
           console.log(inputWidthHall);
           console.log(inputHeightHall);
@@ -779,152 +737,118 @@ function getAreas() {
           console.log(selectPartitionInside);
           console.log(costPartitionInsideSidingPanel);
 
-     // ____________________________________________________
-          // COUT SPECIFITE PONT ROULANT
-          //Récupération des données
-          const choiceOverHeadCrane = document.getElementById('choiceOverHeadCrane');
-          const inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value;
-          //Vérification du choix de renfort de sol
-          let valueOverHeadCrane = choiceOverHeadCrane.value;
-          let answer5 = [0,inputNumberOverHeadCrane];
+          // Cout spécifité pont roulant
+               let valueOverHeadCrane = choiceOverHeadCrane.value;
+               let answer5 = [0,inputNumberOverHeadCrane];
 
-          switch(valueOverHeadCrane){
-               case'no':
-               answer5= answer5[0];
-               break;
-               case'yes':
-               answer5= answer5[1];
-               break;
-          };
-          // calcul du nombre de poteaux renforcés 
-          const polesUnderOverHeadCrane = (Math.ceil((((Math.sqrt(areaBox))/6)+1)*2));
+               switch(valueOverHeadCrane){
+                    case'no':
+                    answer5= answer5[0];
+                    break;
+                    case'yes':
+                    answer5= answer5[1];
+                    break;
+               };
+               // calcul du nombre de poteaux renforcés 
+               const polesUnderOverHeadCrane = (Math.ceil((((Math.sqrt(areaBox))/6)+1)*2));
                //const lengthRaceway = ((Math.sqrt(areaBox))*2); considéré comme à la charge du fournisseur de pont
-          // coût de la plus value pont roulant
-          const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles*inputHeightHall+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation);
+               // coût de la plus value pont roulant
+               const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles*inputHeightHall+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation);
           console.log(polesUnderOverHeadCrane);
           console.log(inputHeightHall);
           console.log(inputNumberOverHeadCrane);
           console.log(addedValueOverHeadCrane);
 
-          //Vérification de l'option choisie pour le texte d'affichage Réalisée directement dans le texte avec la variable answer5
-     // ____________________________________________________
-          //COUT SPECIFICITE NOMBRE DE QUAIS
-          //Récupération des données
-          const choiceDockShelter = document.getElementById('choiceDockShelter');
-          //Vérification du choix
-          let valueDockShelter = choiceDockShelter.value;
-          let answer6 = [0,inputNumberDockShelter];
+          //Cout spécificité nombre de quais
+               let valueDockShelter = choiceDockShelter.value;
+               let answer6 = [0,inputNumberDockShelter];
 
-          switch(valueDockShelter){
-               case'no':
-               answer6= answer6[0];
-               break;
-               case'yes':
-               answer6= answer6[1];
-               break;
-          };
+               switch(valueDockShelter){
+                    case'no':
+                    answer6= answer6[0];
+                    break;
+                    case'yes':
+                    answer6= answer6[1];
+                    break;
+               };
 
-          // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
-          const addedValueDockShelter = (Number(answer6)*(costDockShelter+costconcreteWorkDockShelter));
+               // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
+               const addedValueDockShelter = (Number(answer6)*(costDockShelter+costconcreteWorkDockShelter));
+          console.log(addedValueDockShelter);
           
-     // ____________________________________________________
-          //COUT SPECIFICITE Porte Sectionnelle de Plain-Pied
-          //Récupération des données
-          const choiceFloorSectionalDoor = document.getElementById('choiceFloorSectionalDoor');
-          //Vérification du choix
-          let valueFloorSectionalDoor = choiceFloorSectionalDoor.value;
-          let answer7 = [0,inputNumberFloorSectionalDoor];
+          //Cout spécificité nombre de portes de plain pied
+               let valueFloorSectionalDoor = choiceFloorSectionalDoor.value;
+               let answer7 = [0,inputNumberFloorSectionalDoor];
 
-          switch(valueFloorSectionalDoor){
-               case'no':
-               answer7= answer7[0];
-               break;
-               case'yes':
-               answer7= answer7[1];
-               break;
-          };
+               switch(valueFloorSectionalDoor){
+                    case'no':
+                    answer7= answer7[0];
+                    break;
+                    case'yes':
+                    answer7= answer7[1];
+                    break;
+               };
 
-          // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
-          const addedValueFloorSectionalDoor = (Number(answer7)*(costSectionalDoors));
+               // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
+               const addedValueFloorSectionalDoor = (Number(answer7)*(costSectionalDoors));
+          console.log(addedValueFloorSectionalDoor);
           
-     // ____________________________________________________
-          // COUT SPECIFICITE TARIF ELECTRICTE
-
-          //Récupération du choix dU TARIF ELECTRICITE
-          //const choiceBlueRate = document.getElementById('choiceBlueRate');déclarée dans le texte des erreures
-          //const choiceYellowRate = document.getElementById('choiceYellowRate');déclarée dans le texte des erreures
-          //const choiceGreenRate = document.getElementById('choiceGreenRate');déclarée dans le texte des erreures
-          let inputBlueRate = document.getElementById("inputBlueRate").value; 
-          let inputYellowRate = document.getElementById("inputYellowRate").value; 
-          
-          // Calcul Puissance Electrique
-          
-          let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
+          // Cout spécificité tarif électricité
+               let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
                     
                     if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                         inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                         inputYellowRate==''?inputYellowRate=1:inputYellowRate;
                     costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate+(costElectricalConnection[2]+costGreenRateAddedValueElectricity);
-                }
+                    }
                     else if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate;
-                }
+                         inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                         inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                         costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate;
+                    }
                     else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===false ){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate;
-                }
+                         inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                         costElectricalConnection=costElectricalConnection[0]*inputBlueRate;
+                    }
                     else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection=costElectricalConnection[1]*inputYellowRate;
-                }
+                         inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                         costElectricalConnection=costElectricalConnection[1]*inputYellowRate;
+                    }
                     else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===true ){
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection= costElectricalConnection[1]*inputYellowRate+(costElectricalConnection[2]+costGreenRateAddedValueElectricity);
-                }
+                         inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                         costElectricalConnection= costElectricalConnection[1]*inputYellowRate+(costElectricalConnection[2]+costGreenRateAddedValueElectricity);
+                    }
                     else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate +(costElectricalConnection[2]+costGreenRateAddedValueElectricity);
-                }
+                         inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                         costElectricalConnection=costElectricalConnection[0]*inputBlueRate +(costElectricalConnection[2]+costGreenRateAddedValueElectricity);
+                    }
                     else if (choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
-                        costElectricalConnection= (costElectricalConnection[2]+costGreenRateAddedValueElectricity);
-                }
+                         costElectricalConnection= (costElectricalConnection[2]+costGreenRateAddedValueElectricity);
+                    }
                     else{
-                        costElectricalConnection=costElectricalConnection[3];
+                         costElectricalConnection=costElectricalConnection[3];
                     };
             console.log(inputBlueRate);
             console.log(inputYellowRate);
             console.log(costElectricalConnection);
 
-     // ____________________________________________________
-          // COUT SPECIFICIITE CHAUFFAGE DANS LE HALL PAR AEROTHERME GAZ
-          
-          //Récupération du choix de CHAUFFAGE 
-          const selectHeatingHall = document.getElementById('selectHeatingHall');
-          
-          //Vérification du choix de chauffage
-
+          // Cout spécifité chauffage du hall aérotherme gaz
           let choiceHeating = selectHeatingHall.value;
 
-          switch(choiceHeating){
-               case'no':
-               // calcul du chauffage dans le Hall
-               costHeating=0;
-               break;
-               case'yes':
-               // calcul du chauffage dans le Hall
-               costHeating=areaBox*ratioGasHeatingHall;
-               break; 
-          };
+               switch(choiceHeating){
+                    case'no':
+                    // calcul du chauffage dans le Hall
+                    costHeating=0;
+                    break;
+                    case'yes':
+                    // calcul du chauffage dans le Hall
+                    costHeating=areaBox*ratioGasHeatingHall;
+                    break; 
+               };
 
           console.log(costHeating);//vérification de costHeating
           
-               // ____________________________________________________
-                    // COUT RIA Hall
-                //Calcul
-                let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
-
+          // Cout spécifité RIA Hall
                 let costFireNetworkHall
                 switch(selectFireNetworkHall){
                      case'yes':
@@ -934,186 +858,184 @@ function getAreas() {
                     costFireNetworkHall = 0;
                     break;
                 };
-                console.log(costFireNetworkHall);
-
-     // ____________________________________________________
-          // COUT SPECIFICITE BATIMENT ICPE
-          // calcul de la compatibilté de la surface avec ICPE
-
-          // calcul de la surface nécessaire en cas d'Icpe  et comparaison avec la surface terrain pour voir si c'est suffisant
-     
-          const areaIcpe = Math.round((Math.pow(((Math.sqrt(areaBox))+40),2)));
-
-          sufficientGround = [(Number(groundValue)- areaIcpe),(Number(CalculationNeedAreaGround)- areaIcpe)];
-          groundValue === 0? sufficientGround = sufficientGround[1]:sufficientGround = sufficientGround[0];
-
-          //Récupération du choix Icpe
-          const selectIcpe = document.getElementById('selectIcpe');
-          
-          //Vérification du choix Icpe
-          let choiceIcpe = selectIcpe.value;
-          let additionalGroundAreaIcpe=[0, sufficientGround];
-
-          switch(choiceIcpe){
-               case'no':
-               additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
-               // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
-               break;
-               case'yes':
-               additionalGroundAreaIcpe= additionalGroundAreaIcpe[1];
-               // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
-               break;
-               case'iDontKnow':
-               additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
-               // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
-               break; 
-          };
-          
-          //  calcul de la plus value terrain si le bâtiment est ICPE rubrique 1510 et 2663
-          // console.log(addedValueIcpe);
-          additionalGroundAreaIcpe = Math.abs(additionalGroundAreaIcpe);
-
-          let addedValueIcpe =[((inputCostGround/groundValue)*additionalGroundAreaIcpe),(inputCostGroundByRegion*additionalGroundAreaIcpe)];
-          
-          groundValue>0?
-          addedValueIcpe =addedValueIcpe[0]:addedValueIcpe =addedValueIcpe[1];
-
-          additionalGroundAreaIcpe!== 0 ? addedValueIcpe : addedValueIcpe=0;
-
-          // console.log(CalculationNeedAreaGround);
-          // console.log(groundValue);
-          // console.log(areaIcpe);
-          // console.log(sufficientGround);
-          // console.log(additionalGroundAreaIcpe);
-          // console.log(addedValueIcpe); //vérification des valeurs de addedValueIcpe
-          // console.log(inputCostGround);
-          // console.log(costCalculationNeedAreaGround);
-
-// ___________________________________________
-//CALCUL COUTS
-     //COUT TERRAIN
-          // je connais le coût et la surface du terrain
-          let costGroundInput= Number(inputCostGround*inputAreaGround); //on connait le coût du terrain; inputCostGround c'est la valeur rentrée et la valeur du terrain
-
-          // je ne connais pas le coût et la surface du terrain
-          let costCalculationNeedAreaGround;
-          inputAreaGround===0? costCalculationNeedAreaGround= Number(CalculationNeedAreaGround)*inputCostGroundByRegion: costCalculationNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
-     //COUT HALL
-          const costBox = Number(areaBox)*(costHallCompany +addedValueHeight);
-     //COUT DES BUREAUX
-          let costOffices
-          //bureaux intérieur pas extérieur
-          if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"){
-          //bureaux intérieurs Openspace 
-          if (choiceOpenspaceOfficesInside.value==="yes"){
-          costOffices = costOfficesCompanyInsideOpenSpace*(officesDimensionsInside);
-          }
-          //bureaux intérieurs Cloisonnés
-          if (choiceOpenspaceOfficesInside.value==="no"){
-          costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace;
-          }
-          }
-          //bureaux extérieur pas intérieur
-          else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"){
-          // bureaux extérieurs OpenSPace
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-               costOffices = costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
-          }
-          // bureaux extérieurs Cloisonnés
-          if (choiceOpenspaceOfficesOutside.value==="no"){
-               costOffices = costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
-          }
-          }
-          //bureaux extérieur et intérieur
-          else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"){
-          // bureaux intérieur Openspace
-          if (choiceOpenspaceOfficesInside.value==="yes"){
-          // bureaux extérieurs Openspace
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-          costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
-          }
-          // bureaux extérieurs cloisonnés
-          else if (choiceOpenspaceOfficesOutside.value==="no"){
-          costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
-          }
-          }
-          // bureaux intérieurs Cloisonné
-          else if (choiceOpenspaceOfficesInside.value==="no"){
-          // bureaux extérieurs Openspace
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-          costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
-          }
-          // bureaux extérieurs Cloisonnés
-          else if (choiceOpenspaceOfficesOutside.value==="no"){
-          costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
-          }
-          }
-          }
-          //bureaux ni extérieur ni intérieur
-          else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="no"){
-          costOffices = 0;
-          };
-          
-          // vérification valeur bureaux
-          console.log(costOffices);//vérification du coût des bureaux
-
-     //COUT ESCALIER BUREAUX
-          let addedValueStair; // calcul de la plus value escalier
-          addedValueStair=numberStair*costStair;
-
-     //COUT VRD
-         
-          let costRoadAndUtilities;
-
-          if (((areaRoadAndUtilities+areaBuilding)/groundValue)> 0.65&& groundValue>5000){
-          costRoadAndUtilities= areaBuilding*ratioBuilding2+areaRoadAndUtilities*ratioRoadAndUtilities2+areaPlantations*ratioPlantations2+groundValue*ratioFencing2;
-          }
-          else {
-          costRoadAndUtilities= areaBuilding*ratioBuilding1+areaRoadAndUtilities*ratioRoadAndUtilities1+areaPlantations*ratioPlantations1+groundValue*ratioFencing1;
-          };
-          console.log(areaBuilding);
-          console.log(areaRoadAndUtilities);
-          console.log(areaPlantations);
-          console.log(groundValue);
-          console.log(costRoadAndUtilities);
-
-     //COUT TOTAL
-          // log des données du TOTAL
-          console.log(studyFeesAndInsurance);
-          console.log(costGroundInput);
-          console.log(costCalculationNeedAreaGround);
-          console.log(costBox);
-          console.log(costOffices);
-          console.log(costRoadAndUtilities);
-          console.log(costChoiceSoil);
-          console.log(costPartitionInsideSidingPanel);
-          console.log(addedValueOverHeadCrane);
-          console.log(addedValueDockShelter);
-          console.log(addedValueFloorSectionalDoor);
-          console.log(costElectricalConnection);
-          console.log(costHeating);
           console.log(costFireNetworkHall);
-          console.log(addedValueIcpe);
-          console.log(addedValueStair);
 
-          const costGround= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround))*100/100);// calcul du terrain seuls
-          console.log(costGround);
+          // Cout spécifité bâtiment ICPE
+               // calcul de la surface nécessaire en cas d'Icpe  et comparaison avec la surface terrain pour voir si c'est suffisant
+          
+               const areaIcpe = Math.round((Math.pow(((Math.sqrt(areaBox))+40),2)));
 
-          const costEnergyAndSanitation= Math.round ((costElectricalConnection)*100/100);// calcul des concédés
-          console.log(costEnergyAndSanitation);
+               sufficientGround = [(Number(groundValue)- areaIcpe),(Number(CalculationNeedAreaGround)- areaIcpe)];
+               groundValue === 0? sufficientGround = sufficientGround[1]:sufficientGround = sufficientGround[0];
 
-          const costProjectWorks= Math.round ((costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul des travaux seuls
-          console.log(costProjectWorks);
+               let choiceIcpe = selectIcpe.value;
+               let additionalGroundAreaIcpe=[0, sufficientGround];
 
-          const costProjectWithFeesWithoutCommercialMargin= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround) +addedValueIcpe+costElectricalConnection+studyFeesAndInsurance*(costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueStair))*100/100);// calcul du coût du bâtiment hors marge commerciale
-          console.log(costProjectWithFeesWithoutCommercialMargin);
+               switch(choiceIcpe){
+                    case'no':
+                    additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
+                    // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
+                    break;
+                    case'yes':
+                    additionalGroundAreaIcpe= additionalGroundAreaIcpe[1];
+                    // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
+                    break;
+                    case'iDontKnow':
+                    additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
+                    // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
+                    break; 
+               };
+               
+               //  calcul de la plus value terrain si le bâtiment est ICPE rubrique 1510 et 2663
+               // console.log(addedValueIcpe);
+               additionalGroundAreaIcpe = Math.abs(additionalGroundAreaIcpe);
 
-          const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithFeesWithoutCommercialMargin);// pour affichage number en euros
-          // console.log(number);
-     
-     //COUT Frais commercial
-          const CostDeveloppementAndCommercial=Math.round (0.095*costProjectWithFeesWithoutCommercialMargin)//calcul du coût du bâtiement comprenant la valeur commerciale de 9,5%
-          const number2 = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( CostDeveloppementAndCommercial);// pour affichage number2 en euros
+               let addedValueIcpe =[((inputCostGround/groundValue)*additionalGroundAreaIcpe),(inputCostGroundByRegion*additionalGroundAreaIcpe)];
+               
+               groundValue>0?
+               addedValueIcpe =addedValueIcpe[0]:addedValueIcpe =addedValueIcpe[1];
+
+               additionalGroundAreaIcpe!== 0 ? addedValueIcpe : addedValueIcpe=0;
+
+          console.log(CalculationNeedAreaGround);
+          console.log(groundValue);
+          console.log(areaIcpe);
+          console.log(sufficientGround);
+          console.log(additionalGroundAreaIcpe);
+          console.log(addedValueIcpe); //vérification des valeurs de addedValueIcpe
+          console.log(inputCostGround);
+          console.log(costCalculationNeedAreaGround);
+
+          //COUT TERRAIN
+               // je connais le coût et la surface du terrain
+               let costGroundInput= Number(inputCostGround*inputAreaGround); //on connait le coût du terrain; inputCostGround c'est la valeur rentrée et la valeur du terrain
+
+               // je ne connais pas le coût et la surface du terrain
+               let costCalculationNeedAreaGround;
+               inputAreaGround===0? costCalculationNeedAreaGround= Number(CalculationNeedAreaGround)*inputCostGroundByRegion: costCalculationNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
+          //COUT HALL
+               //Cout plus value hauteur bâtiment
+               let addedValueHeight;
+               if(inputHeightHall>7){
+                    addedValueHeight=(inputHeightHall-7)*costHeightAbove7;
+               }
+               else {
+                    addedValueHeight=0;
+               };
+               //Cout hALL
+               const costBox = Number(areaBox)*(costHallCompany +addedValueHeight);
+
+          //COUT DES BUREAUX
+               let costOffices
+               //bureaux intérieur pas extérieur
+               if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"){
+               //bureaux intérieurs Openspace 
+               if (choiceOpenspaceOfficesInside.value==="yes"){
+               costOffices = costOfficesCompanyInsideOpenSpace*(officesDimensionsInside);
+               }
+               //bureaux intérieurs Cloisonnés
+               if (choiceOpenspaceOfficesInside.value==="no"){
+               costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace;
+               }
+               }
+               //bureaux extérieur pas intérieur
+               else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"){
+               // bureaux extérieurs OpenSPace
+               if (choiceOpenspaceOfficesOutside.value==="yes"){
+                    costOffices = costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+               }
+               // bureaux extérieurs Cloisonnés
+               if (choiceOpenspaceOfficesOutside.value==="no"){
+                    costOffices = costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+               }
+               }
+               //bureaux extérieur et intérieur
+               else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"){
+               // bureaux intérieur Openspace
+               if (choiceOpenspaceOfficesInside.value==="yes"){
+               // bureaux extérieurs Openspace
+               if (choiceOpenspaceOfficesOutside.value==="yes"){
+               costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+               }
+               // bureaux extérieurs cloisonnés
+               else if (choiceOpenspaceOfficesOutside.value==="no"){
+               costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+               }
+               }
+               // bureaux intérieurs Cloisonné
+               else if (choiceOpenspaceOfficesInside.value==="no"){
+               // bureaux extérieurs Openspace
+               if (choiceOpenspaceOfficesOutside.value==="yes"){
+               costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+               }
+               // bureaux extérieurs Cloisonnés
+               else if (choiceOpenspaceOfficesOutside.value==="no"){
+               costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+               }
+               }
+               }
+               //bureaux ni extérieur ni intérieur
+               else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="no"){
+               costOffices = 0;
+               };
+
+          //COUT ESCALIER BUREAUX
+               let addedValueStair; // calcul de la plus value escalier
+               addedValueStair=numberStair*costStair;
+
+          //COUT VRD
+               let costRoadAndUtilities;
+
+               if (((areaRoadAndUtilities+areaBuilding)/groundValue)> 0.65&& groundValue>5000){
+               costRoadAndUtilities= areaBuilding*ratioBuilding2+areaRoadAndUtilities*ratioRoadAndUtilities2+areaPlantations*ratioPlantations2+groundValue*ratioFencing2;
+               }
+               else {
+               costRoadAndUtilities= areaBuilding*ratioBuilding1+areaRoadAndUtilities*ratioRoadAndUtilities1+areaPlantations*ratioPlantations1+groundValue*ratioFencing1;
+               };
+               console.log(areaBuilding);
+               console.log(areaRoadAndUtilities);
+               console.log(areaPlantations);
+               console.log(groundValue);
+               console.log(costRoadAndUtilities);
+
+          //COUT TOTAL
+               // log des données du TOTAL
+               console.log(studyFeesAndInsurance);
+               console.log(costGroundInput);
+               console.log(costCalculationNeedAreaGround);
+               console.log(costBox);
+               console.log(addedValueHeight);
+               console.log(costOffices);
+               console.log(costRoadAndUtilities);
+               console.log(costChoiceSoil);
+               console.log(costPartitionInsideSidingPanel);
+               console.log(addedValueOverHeadCrane);
+               console.log(addedValueDockShelter);
+               console.log(addedValueFloorSectionalDoor);
+               console.log(costElectricalConnection);
+               console.log(costHeating);
+               console.log(costFireNetworkHall);
+               console.log(addedValueIcpe);
+               console.log(addedValueStair);
+
+               const costGround= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround))*100/100);// calcul du terrain seuls
+               console.log(costGround);
+
+               const costEnergyAndSanitation= Math.round ((costElectricalConnection)*100/100);// calcul des concédés
+               console.log(costEnergyAndSanitation);
+
+               const costProjectWorks= Math.round ((costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul des travaux seuls
+               console.log(costProjectWorks);
+
+               const costProjectWithFeesWithoutCommercialMargin= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround) +addedValueIcpe+costElectricalConnection+studyFeesAndInsurance*(costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueStair))*100/100);// calcul du coût du bâtiment hors marge commerciale
+               console.log(costProjectWithFeesWithoutCommercialMargin);
+
+               const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithFeesWithoutCommercialMargin);// pour affichage number en euros
+               // console.log(number);
+          
+          //COUT Frais commercial
+               const CostDeveloppementAndCommercial=Math.round (0.095*costProjectWithFeesWithoutCommercialMargin)//calcul du coût du bâtiement comprenant la valeur commerciale de 9,5%
+               const number2 = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( CostDeveloppementAndCommercial);// pour affichage number2 en euros
 // TEXTES_______________________________________
           // TEXTE BUREAUX A L'INTERIEUR DU HALL / EXTERIEUR HALL
 
