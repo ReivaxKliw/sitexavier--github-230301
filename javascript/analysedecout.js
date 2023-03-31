@@ -232,7 +232,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
         
         //Porte Sectionnelle de plain pied :
-            let choiceSectionalDoors = document.getElementById("choiceSectionalDoors").value; 
+            let choiceFloorSectionalDoor = document.getElementById("choiceFloorSectionalDoor").value; 
             let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
         
         //Stockage extérieur :
@@ -306,7 +306,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let choiceDevelopper = document.getElementById("choiceDevelopper").value;
             
 //CACULS DES COUTS__________________________________________________________________________________________// CALCULS DES COUTS
-        //HALL
+        //COUT HALL
             //Massif de fondations Hall
                 let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
                 console.log(costFondationBlockHall);
@@ -335,7 +335,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     costElectricityHall=ratioElectricityHall*inputAreaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*inputAreaHall;
                     console.log(costElectricityHall);
 
-        // BUREAUX
+        // COUTBUREAUX
             //Massif de fondations
                 let numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
                 if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30<1){
@@ -394,7 +394,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 //Aménagement Bureaux
                     let costInteriorDesignOffices=ratioInteriorDesignOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
                     console.log(costInteriorDesignOffices);
-        // SPECIFICITES
+        // COUT SPECIFICITES
             //Renfort de sol
                 //Calcul
                 let costSoilReinforcement;
@@ -482,7 +482,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             //Portes Sectionnelles de plain pied
                 //Calcul
                     let addedValueSectionalDoors;
-                    switch(choiceSectionalDoors){
+                    switch(choiceFloorSectionalDoor){
                         case'yes':
                             // coût de la plus value pour porte sectionnelles
                             addedValueSectionalDoors = Number(inputNumberFloorSectionalDoor)*(costSectionalDoors);
@@ -654,7 +654,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     break;
                     };
                 console.log(costGround);
-        //VRD
+        //COUT VRD
             //calcul de la surface de VRD
                 let areaRoadAndUtilities;
                 let areaBuilding;
@@ -709,7 +709,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 console.log(areaRoadAndUtilities);
                 console.log(areaBuilding);
                 console.log(areaPlantations);
-            //calcul du poste VRD
+            //calcul du poste VRD En fonction de la surface et de l'occupation du terrain
                 let costRoadAndUtilities;
                 if (((areaRoadAndUtilities+areaBuilding)/areaGround)> 0.65&& areaGround>5000){
                     costRoadAndUtilities= areaBuilding*ratioBuilding2+areaRoadAndUtilities*ratioRoadAndUtilities2+areaPlantations*ratioPlantations2+areaGround*ratioFencing2;
