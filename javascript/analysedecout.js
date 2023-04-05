@@ -154,7 +154,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let selectSoilReinforcement = document.getElementById("selectSoilReinforcement").value;
 
         // Récupération Cloison intérieure
-            let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
+            let inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
 
         // Récupération Pont roulant :
             let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
@@ -580,10 +580,10 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(inputAreaOfficesGroundOutside);
             console.log(costSoilReinforcement);
         //Coût Cloison(s) intérieure(s)
-            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputPartitionInside;
+            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputNumberPartitionInside;
 
-            let selectPartitionInside = document.getElementById("selectPartitionInside").value;
-            switch(selectPartitionInside){
+            let choicePartitionInside = document.getElementById("choicePartitionInside").value;
+            switch(choicePartitionInside){
                 case'yes':
                 costPartitionInsideSidingPanel
                 break;

@@ -225,15 +225,17 @@ document.body.innerHTML= `
 </div>
 
 <div class="questionProject">
-<label for="partitionInside">Il y a t'il une cloison de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
-          <select id="selectPartitionInside">
+<label for="partitionInside">Il y a t'il des cloison(s) de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
+          <select id="choicePartitionInside">
                <option value="no"> non</option>
                <option value="yes"> oui</option>
           </select>
-               <label for="inputPartitionInside">si oui indiquez le Nombre: </label>
-               <input type="text" id="inputPartitionInside" name="partitionInside" placeholder="indiquez le nombre" > unité(s)
+               <label for="inputNumberPartitionInside">si oui indiquez le Nombre: </label>
+               <input type="text" id="inputNumberPartitionInside" name="partitionInside" placeholder="indiquez le nombre de cloison(s) de division" > unité(s)
           <br>
-          <br>
+</div>
+
+<div class="questionProject">
 <label for="overHeadCrane"> Avez - vous besoin d'équiper le bâtiment en pont roulant ?:</label>
           <select id="choiceOverHeadCrane">
                <option value="no"> non</option>
@@ -359,7 +361,7 @@ function getAreas() {
 // RECUPERATION DES DONNEES
      
      // Récupération hauteur bâtiment__________________________________________
-          const inputHeightHall = document.getElementById("inputHeightHall").value;
+          const inputHeightHall = Number(document.getElementById("inputHeightHall").value);
 
      // Récupération Hall du Bâtiment_____
           const inputAreaStorage= Number(document.getElementById("inputAreaStorage").value);
@@ -381,7 +383,8 @@ function getAreas() {
                const selectSoilReinforcement = document.getElementById('selectSoilReinforcement');
           
           // Récupération  cloison intérieure
-               let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
+               const choicePartitionInside = document.getElementById("choicePartitionInside").value;
+               const inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
           
           // Récupération  Pont roulant
                const choiceOverHeadCrane = document.getElementById('choiceOverHeadCrane');
@@ -389,7 +392,7 @@ function getAreas() {
           
           // Récupération Niveleur de quais
                const choiceDockShelter = document.getElementById('choiceDockShelter');
-               let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
+               const inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
           
           // Récupération Porte Sectionnelle de Plain-Pied
                const choiceFloorSectionalDoor = document.getElementById('choiceFloorSectionalDoor');
@@ -662,8 +665,13 @@ function getAreas() {
           // Calcul renfort de sol
           
           // Calcul  cloison intérieure
+          let inputWidthHall= Math.sqrt(areaBox);
           
           // Calcul  Pont roulant
+          // calcul du nombre de poteaux renforcés 
+          const polesUnderOverHeadCrane = (Math.ceil((((Math.sqrt(areaBox))/6)+1)*2));
+          //const lengthRaceway = ((Math.sqrt(areaBox))*2); considéré comme à la charge du fournisseur de pont
+
           
           // Calcul Niveleur de quais
           
@@ -747,8 +755,8 @@ function getAreas() {
           console.log(areaPlantations);
 
 //COUTS ____________________________________________________________
-     //COUT HALL
-          //Cout plus value hauteur bâtiment
+     // Coût HALL
+          //Coût plus value hauteur bâtiment
           let addedValueHeight;
           if(inputHeightHall>7){
                addedValueHeight=(inputHeightHall-7)*costHeightAbove7;
@@ -756,72 +764,72 @@ function getAreas() {
           else {
                addedValueHeight=0;
           };
-          //Cout hALL
+          //Coût hALL
           const costBox = Number(areaBox)*(costHallCompany +addedValueHeight);
 
-     //COUT DES BUREAUX
+     //Coût des bureaux
           let costOffices
           //bureaux intérieur pas extérieur
           if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"){
-          //bureaux intérieurs Openspace 
-          if (choiceOpenspaceOfficesInside.value==="yes"){
-          costOffices = costOfficesCompanyInsideOpenSpace*(officesDimensionsInside);
-          }
-          //bureaux intérieurs Cloisonnés
-          if (choiceOpenspaceOfficesInside.value==="no"){
-          costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace;
-          }
-          }
+               //bureaux intérieurs Openspace 
+               if (choiceOpenspaceOfficesInside.value==="yes"){
+               costOffices = costOfficesCompanyInsideOpenSpace*(officesDimensionsInside);
+               }
+               //bureaux intérieurs Cloisonnés
+               if (choiceOpenspaceOfficesInside.value==="no"){
+               costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace;
+               }
+               }
           //bureaux extérieur pas intérieur
           else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"){
-          // bureaux extérieurs OpenSPace
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-               costOffices = costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
-          }
-          // bureaux extérieurs Cloisonnés
-          if (choiceOpenspaceOfficesOutside.value==="no"){
-               costOffices = costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
-          }
-          }
+               // bureaux extérieurs OpenSPace
+               if (choiceOpenspaceOfficesOutside.value==="yes"){
+                    costOffices = costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+               }
+               // bureaux extérieurs Cloisonnés
+               if (choiceOpenspaceOfficesOutside.value==="no"){
+                    costOffices = costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+               }
+               }
           //bureaux extérieur et intérieur
           else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"){
-          // bureaux intérieur Openspace
-          if (choiceOpenspaceOfficesInside.value==="yes"){
-          // bureaux extérieurs Openspace
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-          costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
-          }
-          // bureaux extérieurs cloisonnés
-          else if (choiceOpenspaceOfficesOutside.value==="no"){
-          costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
-          }
-          }
-          // bureaux intérieurs Cloisonné
-          else if (choiceOpenspaceOfficesInside.value==="no"){
-          // bureaux extérieurs Openspace
-          if (choiceOpenspaceOfficesOutside.value==="yes"){
-          costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
-          }
-          // bureaux extérieurs Cloisonnés
-          else if (choiceOpenspaceOfficesOutside.value==="no"){
-          costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
-          }
-          }
+               // bureaux intérieur Openspace
+               if (choiceOpenspaceOfficesInside.value==="yes"){
+                    // bureaux extérieurs Openspace
+                    if (choiceOpenspaceOfficesOutside.value==="yes"){
+                    costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+                    }
+                    // bureaux extérieurs cloisonnés
+                    else if (choiceOpenspaceOfficesOutside.value==="no"){
+                    costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+                    }
+               }
+               // bureaux intérieurs Cloisonné
+               else if (choiceOpenspaceOfficesInside.value==="no"){
+                    // bureaux extérieurs Openspace
+                    if (choiceOpenspaceOfficesOutside.value==="yes"){
+                    costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+                    }
+                    // bureaux extérieurs Cloisonnés
+                    else if (choiceOpenspaceOfficesOutside.value==="no"){
+                    costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+                    }
+               }
           }
           //bureaux ni extérieur ni intérieur
           else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="no"){
           costOffices = 0;
           };
 
-     //COUT ESCALIER BUREAUX
+     //Coût escalier bureaux
           let addedValueStair; // calcul de la plus value escalier
           addedValueStair=numberStair*costStair;
 
-     //COUT SPECIFICITE
-          //Cout spécificité Stockage extérieur
+     //Coûts spécifités
+          //Coût spécificité Stockage extérieur
                //compris dans le VRD 
 
-          //Cout spécifité renfort de sol          
+          //Coût spécifité renfort de sol          
                let choice = selectSoilReinforcement.value;
                let answer2 = [0,Number(areaBuilding)];
 
@@ -839,27 +847,31 @@ function getAreas() {
                const costChoiceSoil = Number(choiceStudySoil*costSoilReinforcement);
           console.log(costChoiceSoil);
 
-          // Cout spécifité cloison intérieure
-               let inputWidthHall= Math.sqrt(areaBox);
-               let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputPartitionInside;
-
-               let selectPartitionInside = document.getElementById("selectPartitionInside").value;
-               switch(selectPartitionInside){
-               case'yes':
-               costPartitionInsideSidingPanel
-               break;
-               case'no':
-               costPartitionInsideSidingPanel = 0;
-               break;
+          // Coût  spécifité cloison intérieure
+               let valuePartitionInside = choicePartitionInside.value;
+               let answer8 = [0,inputNumberPartitionInside];
+               
+               switch(valuePartitionInside){
+                    case'no':
+                    answer8= answer8[0];
+                    break;
+                    case'yes':
+                    answer8= answer8[1];
+                    break;
                };
+
+               const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall));
+
+          console.log(answer8);
+          console.log(choicePartitionInside);
+          console.log(valuePartitionInside);
+          console.log(inputNumberPartitionInside);
           console.log(ratioPartitionInsideSidingPanel);
           console.log(inputWidthHall);
           console.log(inputHeightHall);
-          console.log(inputPartitionInside);
-          console.log(selectPartitionInside);
           console.log(costPartitionInsideSidingPanel);
 
-          // Cout spécifité pont roulant
+          // Coût  spécifité pont roulant
                let valueOverHeadCrane = choiceOverHeadCrane.value;
                let answer5 = [0,inputNumberOverHeadCrane];
 
@@ -871,11 +883,8 @@ function getAreas() {
                     answer5= answer5[1];
                     break;
                };
-               // calcul du nombre de poteaux renforcés 
-               const polesUnderOverHeadCrane = (Math.ceil((((Math.sqrt(areaBox))/6)+1)*2));
-               //const lengthRaceway = ((Math.sqrt(areaBox))*2); considéré comme à la charge du fournisseur de pont
-               // coût de la plus value pont roulant
                const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles*inputHeightHall+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation);
+          console.log(answer5);
           console.log(polesUnderOverHeadCrane);
           console.log(inputHeightHall);
           console.log(inputNumberOverHeadCrane);
@@ -896,6 +905,8 @@ function getAreas() {
 
                // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
                const addedValueDockShelter = (Number(answer6)*(costDockShelter+costconcreteWorkDockShelter));
+          console.log(answer6);
+          console.log(inputNumberDockShelter);
           console.log(addedValueDockShelter);
           
           //Cout spécificité nombre de portes de plain pied
@@ -911,11 +922,11 @@ function getAreas() {
                     break;
                };
 
-               // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
                const addedValueFloorSectionalDoor = (Number(answer7)*(costSectionalDoors));
+          console.log(inputNumberFloorSectionalDoor);
           console.log(addedValueFloorSectionalDoor);
           
-          // Cout spécificité tarif électricité
+          // Coût  spécificité tarif électricité
                let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
                     
                     if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
@@ -954,7 +965,7 @@ function getAreas() {
             console.log(inputYellowRate);
             console.log(costElectricalConnection);
 
-          // Cout spécifité chauffage du hall aérotherme gaz
+          // Coût  spécifité chauffage du hall aérotherme gaz
           let choiceHeating = selectHeatingHall.value;
 
                switch(choiceHeating){
@@ -970,7 +981,7 @@ function getAreas() {
 
           console.log(costHeating);//vérification de costHeating
           
-          // Cout spécifité RIA Hall
+          // Coût  spécifité RIA Hall
                 let costFireNetworkHall
                 switch(selectFireNetworkHall){
                      case'yes':
@@ -982,7 +993,7 @@ function getAreas() {
                 };
           console.log(costFireNetworkHall);
 
-          // Cout spécifité bâtiment ICPE
+          // Coût  spécifité bâtiment ICPE
                // calcul de la surface nécessaire en cas d'Icpe  et comparaison avec la surface terrain pour voir si c'est suffisant
           
                const areaIcpe = Math.round((Math.pow(((Math.sqrt(areaBox))+40),2)));
