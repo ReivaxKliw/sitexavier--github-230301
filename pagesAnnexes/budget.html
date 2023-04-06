@@ -89,7 +89,7 @@ questions HALL>
  <h2> Les bureaux</h2> 
     <!INTERIEUR__________________________________________>
 <br>
-        <h3><label for="officeInside">Il y a des bureaux réalisés dans le volume du Hall? ( insérer image)</label> 
+        <h3><label for="choiceOfficesInside">Il y a des bureaux réalisés dans le volume du Hall? ( insérer image)</label> 
             <select id="choiceOfficesInside">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -109,10 +109,10 @@ questions HALL>
         <br>
         -->
         <br>
-          <label for="clercks">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux intérieurs </b> ? </label>
+          <label for="inputClercksOfficesInside">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux intérieurs </b> ? </label>
           <input type="text" placeholder="nombre" id="inputClercksOfficesInside"> employés dans les bureaux intérieurs<br>
           </label>
-          <label for="partitionedOfficesInside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
+          <label for="choiceOpenspaceOfficesInside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
           <select id="choiceOpenspaceOfficesInside">
           <option value="no"> non</option>
           <option value="yes"> oui</option>
@@ -124,10 +124,10 @@ questions HALL>
           <option value="yes"> oui</option>
           </select>
           <br>
-          <label for="choiceShowroomInside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
+          <label for="inputAreaShowroomInside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
           <input type="text" placeholder="nombre" id="inputAreaShowroomInside"> m²<br>
           </label>
-          <label for="socialRoomOfficesInside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
+          <label for="choiceSocialRoomOfficesInside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
           <select id="choiceSocialRoomOfficesInside">
           <option value="no"> non</option>
           <option value="yes"> oui</option>
@@ -141,7 +141,7 @@ questions HALL>
           <br>
 
     <! bureaux à l'extérieur__________________________________________ >
-    <h3><label for="officeOutside">Il y a des bureaux à l'extérieur du Hall ? (insérer image)</label> 
+    <h3><label for="choiceOfficeOutside">Il y a des bureaux à l'extérieur du Hall ? (insérer image)</label> 
     <select id="choiceOfficesOutside">
     <option value="no"> non</option>
     <option value="yes"> oui</option>
@@ -354,50 +354,6 @@ Questions Spécificités du bâtiment>
         </select>
 
 <! ____________________________________________________
-Administratif, fonctionnement du chantier et taxes>
-<h2> Fonctionnement du chantier et admnistratif, taxes et assurances </h2>
-        <label for="projectAllIn"> Votre bâtiment fait-il l'objet d'une offre "clefs en main" ( c'est a dire tout compris) ? en d'autres termes, les études,le dossier PC, les controles technique, branchements (électrique, eau...) sont-ils compris dans votre offre ?</label>
-        <select id="choiceAllIn">
-            <option value="yes"> oui</option>
-            <option value="no"> non</option>
-        </select><br>
-        <br>
-        <label for="FeeBuildingPermit"> Votre offre comprend elle le dépôt du permis de construire et le paiement de ses taxes ?</label>
-        <select id="choiceFeeBuildingPermit">
-            <option value="yes"> oui</option>
-            <option value="no"> non</option>
-        </select><br>
-        <br>
-        <label for="projectInsurance"> votre offre est elle bien assurée en Dommage Ouvrage (garantie de la réparation des travaux en cas de défaut de l'entreprise)</label>
-        <select id="choiceInsurance">
-            <option value="yes"> oui</option>
-            <option value="no"> non</option>
-        </select><br>
-        <br>
-        <label for="projectManagement"> Votre bâtiment fait-il l'objet d'un suivi des travaux? c'est à dire Maitre d'Oeuvre assuré</label>
-        <select id="choiceManagement">
-            <option value="yes"> oui</option>
-            <option value="no"> non</option>
-        </select> <br>
-        <br>
-        <label for="projectBusinessAgency"> Avez-vous fait appel à une agence commerciale ?</label>
-        <select id="choiceBusinessAgency">
-            <option value="yes"> oui</option>
-            <option value="no"> non</option>
-        </select> <br>
-        <br>
-        <label for="projectDevelopper"> L'offre émane t'elle d'une entreprise "promoteur" : bâtiment clef en main ?</label>
-        <select id="choiceDevelopper">
-            <option value="yes"> oui</option>
-            <option value="no"> non</option>
-        </select><br>
-        <br>
-
-
-
-
-
-<! ____________________________________________________
 Validation et retour à l'accueil>
         <br>
         <!-- bouton retour à l'accueil  -->
@@ -407,7 +363,7 @@ Validation et retour à l'accueil>
         
         <!-- bouton valider  -->
         <div class="button2">
-            <button type="submit" onclick="costBreakdown()">valider les réponses</button>
+            <button type="submit" onclick="functionBudget()">valider les réponses</button>
             </div>
 
 
