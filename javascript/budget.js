@@ -74,7 +74,7 @@ function functionBudget() {
      // Récupération Terrain________________________________________________________
           let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
           let choiceCostGround = document.getElementById("choiceCostGround").value;
-          let inputCostGround = document.getElementById("inputCostGround").value;costBreakdown(event)
+          let inputCostGround = document.getElementById("inputCostGround").value;
           let choiceAreaGround = document.getElementById("choiceAreaGround").value;
           let inputAreaGround = document.getElementById("inputAreaGround").value;
 
@@ -86,24 +86,26 @@ function functionBudget() {
           const inputHeightHall = Number(document.getElementById("inputHeightHall").value);
      
      // Récupération bureaux du Bâtiment________________
-          const choiceOfficesInside = document.getElementById('choiceOfficesInside');
-          const inputClercksOfficesInside =  Number(document.getElementById("inputClercksOfficesInside").value);
-          const choiceOpenspaceOfficesInside = document.getElementById('choiceOpenspaceOfficesInside');
-          const choiceShowroomInside = document.getElementById('choiceShowroomInside');
-          let inputAreaShowroomInside = Number(document.getElementById("inputAreaShowroomInside").value);
-          let choiceSocialRoomOfficesInside = document.getElementById("choiceSocialRoomOfficesInside").value;
-          // const inputWorkersOfficesInside =  Number(document.getElementById("inputWorkersOfficesInside").value);déclarée dans le texte des erreurs
-
-
-          const choiceOfficesOutside = document.getElementById('choiceOfficesOutside');
-          const inputClercksOfficesOutside =  Number(document.getElementById("inputClercksOfficesOutside").value);
-          const choiceShowroomOutside = document.getElementById('choiceShowroomOutside');
-          let inputAreaShowroomOutside = Number(document.getElementById("inputAreaShowroomOutside").value);
-          // const inputWorkersOfficesOutside > récupéré dans texte des erreurs
+          // récupération bureaux intérieurs
+               const choiceOfficesInside = document.getElementById('choiceOfficesInside');
+               const inputClercksOfficesInside =  Number(document.getElementById("inputClercksOfficesInside").value);
+               const choiceOpenspaceOfficesInside = document.getElementById('choiceOpenspaceOfficesInside');
+               const choiceShowroomInside = document.getElementById('choiceShowroomInside');
+               let inputAreaShowroomInside = Number(document.getElementById("inputAreaShowroomInside").value);
+               let choiceSocialRoomOfficesInside = document.getElementById("choiceSocialRoomOfficesInside").value;
+               // const inputWorkersOfficesInside =  Number(document.getElementById("inputWorkersOfficesInside").value);déclarée dans le texte des erreurs
+          // récupération bureaux extérieurs
+               const choiceOfficesOutside = document.getElementById('choiceOfficesOutside');
+               const inputClercksOfficesOutside =  Number(document.getElementById("inputClercksOfficesOutside").value);
+               const choiceOpenspaceOfficesOutside = document.getElementById('choiceOpenspaceOfficesInside');
+               const choiceShowroomOutside = document.getElementById('choiceShowroomOutside');
+               let inputAreaShowroomOutside = Number(document.getElementById("inputAreaShowroomOutside").value);
+               let choiceSocialRoomOfficesOutside = document.getElementById("choiceSocialRoomOfficesInside").value;
+               // const inputWorkersOfficesOutside > récupéré dans texte des erreurs
 
      // Récupération  Spécificités____________________________________________________
           // Récupération renfort de sol
-               const selectSoilReinforcement = document.getElementById('selectSoilReinforcement');
+               const choiceSoilReinforcement = document.getElementById('choiceSoilReinforcement');
           
           // Récupération  cloison intérieure
                const choicePartitionInside = document.getElementById('choicePartitionInside');
@@ -132,23 +134,23 @@ function functionBudget() {
                let inputBlueRate = document.getElementById("inputBlueRate").value; 
                let inputYellowRate = document.getElementById("inputYellowRate").value; 
           
-            // Récupération  Chauffage dans le Hall 
-               const selectHeatingHall = document.getElementById('selectHeatingHall');
+          // Récupération  Chauffage dans le Hall 
+               const choiceHeatingHall = document.getElementById('choiceHeatingHall');
             
-            // Récupération  Ria
-               let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
-
-            // Récupération Open Space dans les bureaux
-               const choiceOpenspaceOfficesOutside = document.getElementById('choiceOpenspaceOfficesOutside');
-  
-  
-            // Récupération Bardage luxe pour les bureaux ????????????
-            
-            // Récupération Ascenseur ????????????
+          // Récupération  Ria
+               let choiceFireNetworkHall = document.getElementById("choiceFireNetworkHall").value;
 
           // Récupération   surface avec ICPE
-               const selectIcpe = document.getElementById('selectIcpe');
-         
+               const choiceIcpe = document.getElementById('choiceIcpe');
+               
+          // Récupération  chauffage des bureaux
+               const choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
+               
+          // Récupération Bardage luxe pour les bureaux
+               const choicePanelOffices = document.getElementById('choicePanelOffices').value;
+          
+          // Récupération Ascenseur
+               const choiceElevator = document.getElementById('choiceElevator').value;
 
 // CALCULS CARACTERISTIQUES BATIMENTS
      
@@ -415,7 +417,7 @@ function functionBudget() {
 
           // Calcul   surface avec ICPE
 
-     // Calcul  Terrain et VRD______________________
+     // Calcul VRD______________________
           //Si on connait le terrain > inputAreaGround définie au début de la fonction
 
           // Calcul  Si on ne connait pas le terrain :Calcul du terrain necessaire lorsque le choix non a été fait quand on ne connait pas son terrain , peut être fait aprés détermination des variables areaBuilding / officesDimensionsOutside et inside / areaRoadAndUtilities est calculée
@@ -444,6 +446,18 @@ function functionBudget() {
           };
 
           let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
+
+     console.log(inputClercksOfficesInside);
+     console.log(inputClercksOfficesOutside);
+     console.log(inputWorkersOfficesInside);
+     console.log(inputWorkersOfficesOutside);
+     console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
+     console.log(areaRoadAndUtilitiesDockShelter);
+     console.log(areaRoadAndUtilitiesFloorSectionelDoor);
+     console.log(areaRoadAndUtilities);
+
+     // Calcul TERRAIN______________________
+
           if (inputAreaGround===0){
                CalculationNeedAreaGround = ((areaBuilding+areaRoadAndUtilities)*1.2);
           }
@@ -453,25 +467,15 @@ function functionBudget() {
           
           (inputAreaGround===0)? groundValue= CalculationNeedAreaGround: groundValue= inputAreaGround;
           
-          console.log(inputNumberDockShelter);
-          console.log(inputNumberFloorSectionalDoor);
-          console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
-          console.log(inputClercksOfficesInside);
-          console.log(inputClercksOfficesOutside);
-          console.log(inputWorkersOfficesInside);
-          console.log(inputWorkersOfficesOutside);
-          console.log(areaRoadAndUtilitiesDockShelter);
-          console.log(areaRoadAndUtilitiesFloorSectionelDoor);
-          console.log(areaRoadAndUtilities);
-          console.log(inputAreaGround);
-          console.log(CalculationNeedAreaGround);
-          console.log(groundValue);
+     console.log(inputAreaGround);
+     console.log(CalculationNeedAreaGround);
+     console.log(groundValue);
 
      // Calcul  Espaces Vert
           let areaPlantations
           areaPlantations =groundValue-areaRoadAndUtilities-areaBuilding;
-          console.log(areaRoadAndUtilities);
-          console.log(areaPlantations);
+     console.log(areaRoadAndUtilities);
+     console.log(areaPlantations);
 
 //COUTS ____________________________________________________________
      // Coût HALL
@@ -549,7 +553,7 @@ function functionBudget() {
                //compris dans le VRD 
 
           //Coût spécifité renfort de sol          
-               let choice = selectSoilReinforcement.value;
+               let choice = choiceSoilReinforcement.value;
                let answer2 = [0,Number(areaBuilding)];
 
                switch(choice){
@@ -685,7 +689,7 @@ function functionBudget() {
             console.log(costElectricalConnection);
 
           // Coût  spécifité chauffage du hall aérotherme gaz
-          let choiceHeating = selectHeatingHall.value;
+          let choiceHeating = choiceHeatingHall.value;
 
                switch(choiceHeating){
                     case'no':
@@ -702,7 +706,7 @@ function functionBudget() {
           
           // Coût  spécifité RIA Hall
                 let costFireNetworkHall
-                switch(selectFireNetworkHall){
+                switch(choiceFireNetworkHall){
                      case'yes':
                      costFireNetworkHall=ratioFireNetworkHall*areaBox;
                      break;
@@ -720,10 +724,10 @@ function functionBudget() {
                sufficientGround = [(Number(groundValue)- areaIcpe),(Number(CalculationNeedAreaGround)- areaIcpe)];
                groundValue === 0? sufficientGround = sufficientGround[1]:sufficientGround = sufficientGround[0];
 
-               let choiceIcpe = selectIcpe.value;
+               let valueChoiceIcpe = choiceIcpe.value;
                let additionalGroundAreaIcpe=[0, sufficientGround];
 
-               switch(choiceIcpe){
+               switch(valueChoiceIcpe){
                     case'no':
                     additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
                     // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire

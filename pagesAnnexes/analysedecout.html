@@ -80,7 +80,7 @@ questions HALL>
  <h2> Les bureaux</h2> 
     <!INTERIEUR__________________________________________>
 <br>
-<h3><label for="officeInside">Il y a des bureaux réalisés dans le volume du Hall? ( insérer image)</label> 
+<h3><label for="choiceOfficesInside">Il y a des bureaux réalisés dans le volume du Hall? ( insérer image)</label> 
     <select id="choiceOfficesInside">
     <option value="no"> non</option>
     <option value="yes"> oui</option>
@@ -100,7 +100,7 @@ questions HALL>
         <br>
 
     <! bureaux à l'extérieur__________________________________________ >
-    <h3><label for="officeOutside">Il y a des bureaux à l'extérieur du Hall ? (insérer image)</label> 
+    <h3><label for="choiceOfficesOutside">Il y a des bureaux à l'extérieur du Hall ? (insérer image)</label> 
     <select id="choiceOfficesOutside">
     <option value="no"> non</option>
     <option value="yes"> oui</option>
@@ -122,8 +122,8 @@ questions HALL>
         <br>
     <! le type de chauffage__________________________________________ >
     <h3>Le type de chauffage des bureaux</h3>
-        <label for="heating">Sélectionnez le type de chauffage installé dans les bureaux ?:</label>
-        <select id="selectHeatingOffices">
+        <label for="choiceHeatingOffices">Sélectionnez le type de chauffage installé dans les bureaux ?:</label>
+        <select id="choiceHeatingOffices">
         <option value="airConditioner"> climatisation réversible</option>
         <option value="hotWaterHeating"> radiateur Eau Chaude</option>
         <option value="electricityHeating"> radiateur Electrique</option>
@@ -132,14 +132,14 @@ questions HALL>
 <! ____________________________________________________
 Questions Spécificités du bâtiment>
 <h2> les spécificités du bâtiment</h2>
-        <label for="badSoil"> Votre bâtiment fait-il l'objet de renforcement de sol ?</label>
-        <select id="selectSoilReinforcement">
+        <label for="choiceSoilReinforcement"> Votre bâtiment fait-il l'objet de renforcement de sol ?</label>
+        <select id="choiceSoilReinforcement">
         <option value="no"> non</option>
         <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        <label for="partitionInside">Il y a t'il une cloison de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
+        <label for="choicePartitionInside">Il y a t'il une cloison de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
         <select id="choicePartitionInside">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -148,7 +148,7 @@ Questions Spécificités du bâtiment>
             <input type="text" id="inputNumberPartitionInside" name="partitionInside" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="overHeadCrane"> Etes-vous équipés en pont roulant ?</label>
+        <label for="choiceOverHeadCrane"> Etes-vous équipés en pont roulant ?</label>
         <select id="choiceOverHeadCrane">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -157,7 +157,7 @@ Questions Spécificités du bâtiment>
             <input type="text" id="inputNumberOverHeadCrane" name="overHeadCrane" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="dockShelter"> Etes-vous équipés en quais de déchargement ?:</label>
+        <label for="choiceDockShelter"> Etes-vous équipés en quais de déchargement ?:</label>
         <select id="choiceDockShelter">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -167,7 +167,7 @@ Questions Spécificités du bâtiment>
         <input type="text" id="inputNumberDockShelter" name="dockShelter" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="sectionalDoors"> Etes-vous équipés en porte d'accés de plein pied ?( porte sectionnelle grande dimension pour entrée véhicule):</label>
+        <label for="choiceFloorSectionalDoor"> Etes-vous équipés en porte d'accés de plein pied ?( porte sectionnelle grande dimension pour entrée véhicule):</label>
         <select id="choiceFloorSectionalDoor">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -177,7 +177,7 @@ Questions Spécificités du bâtiment>
         <input type="text" id="inputNumberFloorSectionalDoor" name="sectionalDoors" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="storageOutdoor"> Avez-vous une cour de stockage ? :</label>
+        <label for="choiceStorageOutdoor"> Avez-vous une cour de stockage ? :</label>
         <select id="choiceStorageOutdoor">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -210,28 +210,28 @@ Questions Spécificités du bâtiment>
         </select>
         <br>
         <br>
-        <label for="fireNetwork">Le hall est équipé d'un RIA (Réseau Incendie Armé) ?:</label>
-        <select id="selectFireNetworkHall">
+        <label for="choiceFireNetworkHall">Le hall est équipé d'un RIA (Réseau Incendie Armé) ?:</label>
+        <select id="choiceFireNetworkHall">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        <label for="openSpace">Les bureaux possédent des Espaces ouverts ? (type Open Space des salariés, Show room, atelier….):</label>
-        <select id="selectOpenSpace">
+        <label for="choiceOpenSpace">Les bureaux possédent des Espaces ouverts ? (type Open Space des salariés, Show room, atelier….):</label>
+        <select id="choiceOpenSpace">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        <label for="panel">Les bureaux sont équipés d'un bardage haut de gamme (révetement bois, cassettes, véture) ?:</label>
-        <select id="selectPanelOffices">
+        <label for="choicePanelOffices">Les bureaux sont équipés d'un bardage haut de gamme (révetement bois, cassettes, véture) ?:</label>
+        <select id="choicePanelOffices">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        <label for="elevator">Les bureaux sont équipés d'un ascenseur ?:</label>
+        <label for="choiceElevator">Les bureaux sont équipés d'un ascenseur ?:</label>
         <select id="choiceElevator">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -239,37 +239,37 @@ Questions Spécificités du bâtiment>
 <! ____________________________________________________
 Administratif, fonctionnement du chantier et taxes>
 <h2> Fonctionnement du chantier et admnistratif, taxes et assurances </h2>
-        <label for="projectAllIn"> Votre bâtiment fait-il l'objet d'une offre "clefs en main" ( c'est a dire tout compris) ? en d'autres termes, les études,le dossier PC, les controles technique, branchements (électrique, eau...) sont-ils compris dans votre offre ?</label>
+        <label for="choiceAllIn"> Votre bâtiment fait-il l'objet d'une offre "clefs en main" ( c'est a dire tout compris) ? en d'autres termes, les études,le dossier PC, les controles technique, branchements (électrique, eau...) sont-ils compris dans votre offre ?</label>
         <select id="choiceAllIn">
             <option value="yes"> oui</option>
             <option value="no"> non</option>
         </select><br>
         <br>
-        <label for="FeeBuildingPermit"> Votre offre comprend elle le dépôt du permis de construire et le paiement de ses taxes ?</label>
+        <label for="choiceFeeBuildingPermit"> Votre offre comprend elle le dépôt du permis de construire et le paiement de ses taxes ?</label>
         <select id="choiceFeeBuildingPermit">
             <option value="yes"> oui</option>
             <option value="no"> non</option>
         </select><br>
         <br>
-        <label for="projectInsurance"> votre offre est elle bien assurée en Dommage Ouvrage (garantie de la réparation des travaux en cas de défaut de l'entreprise)</label>
+        <label for="choiceInsurance"> votre offre est elle bien assurée en Dommage Ouvrage (garantie de la réparation des travaux en cas de défaut de l'entreprise)</label>
         <select id="choiceInsurance">
             <option value="yes"> oui</option>
             <option value="no"> non</option>
         </select><br>
         <br>
-        <label for="projectManagement"> Votre bâtiment fait-il l'objet d'un suivi des travaux? c'est à dire Maitre d'Oeuvre assuré</label>
+        <label for="choiceManagement"> Votre bâtiment fait-il l'objet d'un suivi des travaux? c'est à dire Maitre d'Oeuvre assuré</label>
         <select id="choiceManagement">
             <option value="yes"> oui</option>
             <option value="no"> non</option>
         </select> <br>
         <br>
-        <label for="projectBusinessAgency"> Avez-vous fait appel à une agence commerciale ?</label>
+        <label for="choiceBusinessAgency"> Avez-vous fait appel à une agence commerciale ?</label>
         <select id="choiceBusinessAgency">
             <option value="yes"> oui</option>
             <option value="no"> non</option>
         </select> <br>
         <br>
-        <label for="projectDevelopper"> L'offre émane t'elle d'une entreprise "promoteur" : bâtiment clef en main ?</label>
+        <label for="choiceDevelopper"> L'offre émane t'elle d'une entreprise "promoteur" : bâtiment clef en main ?</label>
         <select id="choiceDevelopper">
             <option value="yes"> oui</option>
             <option value="no"> non</option>

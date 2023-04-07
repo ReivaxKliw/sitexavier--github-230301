@@ -151,7 +151,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
     // Récupération Spécificités_________________________________________________
         // Récupération Renfort de sol :
-            let selectSoilReinforcement = document.getElementById("selectSoilReinforcement").value;
+            let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement").value;
 
         // Récupération Cloison intérieure
             let inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
@@ -180,16 +180,16 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let inputYellowRate = document.getElementById("inputYellowRate").value; 
 
         // Récupération Chauffage Hall
-            let selectHeatingHall = document.getElementById("selectHeatingHall").value;
+            let choiceHeatingHall = document.getElementById("choiceHeatingHall").value;
 
         // Récupération Ria Hall
-            let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
+            let choiceFireNetworkHall = document.getElementById("choiceFireNetworkHall").value;
 
         // Récupération Open Space dans les bureaux
-            let selectOpenSpace = document.getElementById("selectOpenSpace").value;
+            let choiceOpenSpace = document.getElementById("choiceOpenSpace").value;
 
         // Récupération Bardage luxe pour les bureaux
-            let selectPanelOffices = document.getElementById("selectPanelOffices").value;
+            let choicePanelOffices = document.getElementById("choicePanelOffices").value;
             
          // Récupération Ascenseur :
             let choiceElevator = document.getElementById("choiceElevator").value; 
@@ -498,7 +498,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         
         //Coût bardage Bureaux
             let ratioSidingPanelOffices
-            switch(selectPanelOffices){
+            switch(choicePanelOffices){
                 case'yes':
                 ratioSidingPanelOffices= ratioSidingPanelHighOffices
                 break;
@@ -523,8 +523,8 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(costPlumbingOffices);
         //Coût  Chauffage des bureaux
             let costHeatingOffices
-            let selectHeatingOffices = document.getElementById('selectHeatingOffices').value;
-            switch(selectHeatingOffices){
+            let choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
+            switch(choiceHeatingOffices){
                 case'airConditioner':
                 costHeatingOffices =ratioAirConditionningOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
                 break;
@@ -541,7 +541,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 console.log(costElectricityOffices);
         //Coût Aménagement Bureaux
             let ratioInteriorDesignOffices
-            switch(selectOpenSpace){
+            switch(choiceOpenSpace){
                 case'yes':
                 ratioInteriorDesignOffices= ratioInteriorDesignOfficesWithOpenSPace
                 break;
@@ -557,7 +557,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     // COUT SPECIFICITES
         //Coût Renfort de sol
             let costSoilReinforcement;
-            switch(selectSoilReinforcement){
+            switch(choiceSoilReinforcement){
                 case'yes':
                 if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no' ||inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
                     costSoilReinforcement= ratioSoilReinforcement*(inputAreaBox);
@@ -693,7 +693,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         //Coût Chauffage Hall
             //  ATTENTION TIENT COMPTE UNIQUEMENT DU CHAUFFAGE AEROTHERME GAZ 
             let costGasHeatingHall=ratioGasHeatingHall*inputAreaHall;
-            switch(selectHeatingHall){
+            switch(choiceHeatingHall){
                 case'yes':
                 costGasHeatingHall
                 break;
@@ -704,7 +704,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(costGasHeatingHall);
         //Coût RIA Hall
             let costFireNetworkHall=ratioFireNetworkHall*inputAreaHall;
-            switch(selectFireNetworkHall){
+            switch(choiceFireNetworkHall){
                 case'yes':
                 costFireNetworkHall
                 break;

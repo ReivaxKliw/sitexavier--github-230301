@@ -87,148 +87,85 @@ questions HALL>
 <! ____________________________________________________
  Questions BUREAUX>
  <h2> Les bureaux</h2> 
-    <!INTERIEUR__________________________________________>
-<br>
-        <h3><label for="choiceOfficesInside">Il y a des bureaux réalisés dans le volume du Hall? ( insérer image)</label> 
-            <select id="choiceOfficesInside">
-            <option value="no"> non</option>
-            <option value="yes"> oui</option>
-            </select></h3>
-            <br>
-        <!--<label for="inputAreaOfficesGroundInside">Quelle est la <b>surface Rez de chaussée des bureaux</b> de votre projet ?</label>
-        <input type="text" placeholder="surface en m²" id="inputAreaOfficesGroundInside"> m²
+ <! bureaux à l'intérieur_____________________________ >
+        <h3><label for="choiceOfficesInside">Souhaitez-vous la réalisation de vos bureaux dans le volume du Hall <b>(à l'intérieur)</b> ?</label> 
+        <select id="choiceOfficesInside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select></h3>
         <br>
-        <label for="inputAreaOfficesFloorInside">Les bureaux possédent-ils un étage ? <br> Si oui, indiquez la surface:</label>
-        <input type="text" id="inputAreaOfficesFloorInside" name="storage" placeholder="indiquez la surface" > m <br>
-        <p>Quelles-sont les dimensions de vos bureaux ? si vous ne les connaissez pas passez cette question</p>
-        <label for="inputLengthOfficesInside">Quelle est la <b>longeur au rez de chaussée des Bureaux</b> ?</label>
-        <input type="text" placeholder="longueur en m" id="inputLengthOfficesInside"> m
-        <label for="inputWidthOfficesInside">Quelle est la <b>largeur au rez de chaussée des bureaux</b> ?</label>
-        <input type="text" placeholder="longueur en m" id="inputWidthOfficesInside"> m 
+        <label for="inputClercksOfficesInside">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux intérieurs </b> ? </label>
+        <input type="text" placeholder="nombre" id="inputClercksOfficesInside"> employés dans les bureaux intérieurs<br>
+        </label>
+        <label for="choiceOpenspaceOfficesInside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
+        <select id="choiceOpenspaceOfficesInside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select>
+        <br>
+        <label for="choiceShowroomInside"> Dans ces bureaux, souhaitez-vous la réalisation d'un showroom, d'un studio, atelier...  ?</label>
+        <select id="choiceShowroomInside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select>
+        <br>
+        <label for="inputAreaShowroomInside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
+        <input type="text" placeholder="nombre" id="inputAreaShowroomInside"> m²<br>
+        </label>
+        <label for="choiceSocialRoomOfficesInside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
+        <select id="choiceSocialRoomOfficesInside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select>
+        <br>
+        <label for="inputWorkersOfficesInside">Pour combien de personnes ? </label>
+        <input type="text" placeholder="nombre" id="inputWorkersOfficesInside"> personne(s)<br>
+        </label>
+        </div>
         <br>
         <br>
-        -->
-        <br>
-          <label for="inputClercksOfficesInside">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux intérieurs </b> ? </label>
-          <input type="text" placeholder="nombre" id="inputClercksOfficesInside"> employés dans les bureaux intérieurs<br>
-          </label>
-          <label for="choiceOpenspaceOfficesInside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
-          <select id="choiceOpenspaceOfficesInside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="choiceShowroomInside"> Dans ces bureaux, souhaitez-vous la réalisation d'un showroom, d'un studio, atelier...  ?</label>
-          <select id="choiceShowroomInside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="inputAreaShowroomInside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
-          <input type="text" placeholder="nombre" id="inputAreaShowroomInside"> m²<br>
-          </label>
-          <label for="choiceSocialRoomOfficesInside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
-          <select id="choiceSocialRoomOfficesInside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="inputWorkersOfficesInside">Pour combien de personnes ? </label>
-          <input type="text" placeholder="nombre" id="inputWorkersOfficesInside"> personne(s)<br>
-          </label>
-          </div>
-          <br>
-          <br>
 
-    <! bureaux à l'extérieur__________________________________________ >
-    <h3><label for="choiceOfficeOutside">Il y a des bureaux à l'extérieur du Hall ? (insérer image)</label> 
-    <select id="choiceOfficesOutside">
-    <option value="no"> non</option>
-    <option value="yes"> oui</option>
-    </select></h3>
-    <br>
-        <!--
-        <label for="inputAreaOfficesGroundOutside">Quelle est la <b>surface Rez de chaussée des bureaux</b> de votre projet ?</label>
-        <input type="text" placeholder="surface en m²" id="inputAreaOfficesGroundOutside"> m²
+    <! bureaux à l'extérieur_____________________________ >
+        <h3><label for="choiceOfficeOutside">Souhaitez-vous la réalisation de vos bureaux en dehors du volume du Hall <b>(à l'extérieur)</b> ?</label> 
+        <select id="choiceOfficesOutside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select></h3>
         <br>
-        <label for="inputAreaOfficesFloorOutside">Les bureaux possédent-ils un étage ? <br> Si oui, indiquez la surface:</label>
-        <input type="text" id="inputAreaOfficesFloorOutside" name="storage" placeholder="indiquez la surface" > m <br>
-        <p>Quelles-sont les dimensions de vos bureaux ? si vous ne les connaissez pas passez cette question</p>
-        <label for="inputLengthOfficesOutside">Quelle est la <b>longeur au rez de chaussée des Bureaux</b> ?</label>
-        <input type="text" placeholder="longueur en m" id="inputLengthOfficesOutside"> m
-        <label for="inputWidthOfficesOutside">Quelle est la <b>largeur au rez de chaussée des bureaux</b> ?</label>
-        <input type="text" placeholder="longueur en m" id="inputWidthOfficesOutside"> m
+        <label for="inputClercksOfficesOutside">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux extérieurs </b> ? </label>
+        <input type="text" placeholder="nombre" id="inputClercksOfficesOutside"> employés dans les bureaux intérieurs<br>
+        </label>
+        <label for="choiceOpenspaceOfficesOutside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
+        <select id="choiceOpenspaceOfficesOutside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select>
         <br>
-        -->
+        <label for="choiceShowroomOutside"> Dans ces bureaux, souhaitez-vous la réalisation d'un showroom, d'un studio, atelier...  ?</label>
+        <select id="choiceShowroomOutside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select>
         <br>
-          <label for="clercks">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux intérieurs </b> ? </label>
-          <input type="text" placeholder="nombre" id="inputClercksOfficesInside"> employés dans les bureaux intérieurs<br>
-          </label>
-          <label for="partitionedOfficesInside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
-          <select id="choiceOpenspaceOfficesInside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="choiceShowroomInside"> Dans ces bureaux, souhaitez-vous la réalisation d'un showroom, d'un studio, atelier...  ?</label>
-          <select id="choiceShowroomInside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="choiceShowroomInside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
-          <input type="text" placeholder="nombre" id="inputAreaShowroomInside"> m²<br>
-          </label>
-          <label for="socialRoomOfficesInside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
-          <select id="choiceSocialRoomOfficesInside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="inputWorkersOfficesInside">Pour combien de personnes ? </label>
-          <input type="text" placeholder="nombre" id="inputWorkersOfficesInside"> personne(s)<br>
-          </label>
-          </div>
-          <br>
-          <br>
-<label for="positionOfficesOutside"> Souhaitez-vous la réalisation de vos bureaux en dehors du volume du Hall <b>(à l'extérieur)</b> ?</label>
-          <select id="choiceOfficesOutside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="clercks">Calcul du nombre de poste de travail : Combien de <b>personnes travaillent dans les bureaux extérieurs</b> ? </label>
-          <input type="text" placeholder="nombre" id="inputClercksOfficesOutside"> employés dans les bureaux extérieurs<br>
-          </label>
-          <label for="partitionedOfficesOutside"> Envisagez-vous la réalisation de bureaux type Open Space pour les employés?  :</label>
-          <select id="choiceOpenspaceOfficesOutside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="choiceShowroomOutside"> Dans ces bureaux, souhaitez-vous la réalisation d'un showroom, d'un studio, atelier...  ?</label>
-          <select id="choiceShowroomOutside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="choiceShowroomOutside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
-          <input type="text" placeholder="nombre" id="inputAreaShowroomOutside"> m²<br>
-          </label>
-          <label for="socialRoomOfficesOutside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
-          <select id="choiceSocialRoomOfficesOutside">
-          <option value="no"> non</option>
-          <option value="yes"> oui</option>
-          </select>
-          <br>
-          <label for="inputWorkersOfficesOutside">Pour combien de personnes ? </label>
-          <input type="text" placeholder="nombre" id="inputWorkersOfficesOutside"> personne(s)<br>
-          </label>
+        <label for="inputAreaShowroomOutside">Le cas échéant, quelle est la surface de showroom nécessaire ? </label>
+        <input type="text" placeholder="nombre" id="inputAreaShowroomOutside"> m²<br>
+        </label>
+        <label for="choiceSocialRoomOfficesOutside">Souhaitez-vous la réalisation de locaux sociaux (vestiaires, refectoire) dans ces bureaux ?</label>
+        <select id="choiceSocialRoomOfficesOutside">
+        <option value="no"> non</option>
+        <option value="yes"> oui</option>
+        </select>
+        <br>
+        <label for="inputWorkersOfficesOutside">Pour combien de personnes ? </label>
+        <input type="text" placeholder="nombre" id="inputWorkersOfficesOutside"> personne(s)<br>
+        </label>
+        </div>
+        <br>
     <! ____________________________________________________
 Questions Spécificités du bâtiment>
 <h2> les spécificités du bâtiment</h2>
-    <label for="badSoil"> Votre bâtiment fait-il l'objet de renforcement de sol ?</label>
-    <select id="selectSoilReinforcement">
+    <label for="choiceSoilReinforcement"> Votre bâtiment fait-il l'objet de renforcement de sol ?</label>
+    <select id="choiceSoilReinforcement">
         <option value="no"> non</option>
         <option value="yes"> oui</option>
         <option value="iDontKnow"> Je ne sais pas</option>
@@ -236,8 +173,8 @@ Questions Spécificités du bâtiment>
         <br>
         <br>
         
-        <label for="partitionInside">Il y a t'il une cloison de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
-        <select id="selectPartitionInside">
+        <label for="choicePartitionInside">Il y a t'il une cloison de recoupement dans le hall ? (cloison toute hauteur qui sépare le volume):</label>
+        <select id="choicePartitionInside">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
@@ -245,7 +182,7 @@ Questions Spécificités du bâtiment>
             <input type="text" id="inputPartitionInside" name="partitionInside" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="overHeadCrane"> Avez - vous besoin d'équiper le bâtiment en pont roulant ?:</label>
+        <label for="choiceOverHeadCrane"> Avez - vous besoin d'équiper le bâtiment en pont roulant ?:</label>
         <select id="choiceOverHeadCrane">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -254,7 +191,7 @@ Questions Spécificités du bâtiment>
             <input type="text" id="inputNumberOverHeadCrane" name="overHeadCrane" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="dockShelter"> Avez-vous besoin de quais de déchargement ?:</label>
+        <label for="choiceDockShelter"> Avez-vous besoin de quais de déchargement ?:</label>
         <select id="choiceDockShelter">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -264,7 +201,7 @@ Questions Spécificités du bâtiment>
         <input type="text" id="inputNumberDockShelter" name="dockShelter" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="sectionalDoors"> Avez-vous besoin de porte de plein pied (accés camion à niveau) ?:</label>
+        <label for="choiceFloorSectionalDoor"> Avez-vous besoin de porte de plein pied (accés camion à niveau) ?:</label>
         <select id="choiceFloorSectionalDoor">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -274,7 +211,7 @@ Questions Spécificités du bâtiment>
         <input type="text" id="inputNumberFloorSectionalDoor" name="sectionalDoors" placeholder="indiquez le nombre" > unité(s)
         <br>
         <br>
-        <label for="storageOutdoor"> Avez-vous besoin d'une cour de stockage ? :</label>
+        <label for="choiceStorageOutdoor"> Avez-vous besoin d'une cour de stockage ? :</label>
         <select id="choiceStorageOutdoor">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
@@ -300,22 +237,22 @@ Questions Spécificités du bâtiment>
         <label for="choiceGreenRate"> tarif Vert > à 250 kVA (~250kW) </label>
         <br>
         <br>
-        <label for="heating">chauffer-vous le Hall (solution aérothermes gaz) ?:</label>
-        <select id="selectHeatingHall">
+        <label for="choiceHeatingHall">chauffer-vous le Hall (solution aérothermes gaz) ?:</label>
+        <select id="choiceHeatingHall">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        <label for="fireNetwork">Le hall est équipé d'un RIA (Réseau Incendie Armé), si vous ne le souhaitez pas vous pouvez indiquer "non":</label>
-        <select id="selectFireNetworkHall">
+        <label for="choiceFireNetworkHall">Le hall est équipé d'un RIA (Réseau Incendie Armé), si vous ne le souhaitez pas vous pouvez indiquer "non":</label>
+        <select id="choiceFireNetworkHall">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        <label for="icpe">  Votre bâtiment est il classé ICPE (installation classée pour l'environnement) pour les rubriques 1510 et 2663 ( à vérifier) et au seuil supérieur de non classé ? :</label>
-        <select id="selectIcpe">
+        <label for="choiceIcpe">  Votre bâtiment est il classé ICPE (installation classée pour l'environnement) pour les rubriques 1510 et 2663 ( à vérifier) et au seuil supérieur de non classé ? :</label>
+        <select id="choiceIcpe">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
             <option value="iDontKnow"> Je ne sais pas</option>
@@ -323,31 +260,22 @@ Questions Spécificités du bâtiment>
         <br>
         <br>
 
-        <label for="heating">Sélectionnez le type de chauffage installé dans les bureaux ?:</label>
-        <select id="selectHeatingOffices">
+        <label for="choiceHeatingOffices">Sélectionnez le type de chauffage installé dans les bureaux ?:</label>
+        <select id="choiceHeatingOffices">
         <option value="airConditioner"> climatisation réversible</option>
         <option value="hotWaterHeating"> radiateur Eau Chaude</option>
         <option value="electricityHeating"> radiateur Electrique</option>
         </select>
         <br>
         <br>
-        <!-- Questions posées dans les questions des bureaux
-        <label for="openSpace">Les bureaux possédent des Espaces ouverts ? (type Open Space des salariés, Show room, atelier….):</label>
-        <select id="selectOpenSpace">
+        <label for="choicePanelOffices">Les bureaux sont équipés d'un bardage haut de gamme (révetement bois, cassettes, véture) ?:</label>
+        <select id="choicePanelOffices">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
         <br>
         <br>
-        -->
-        <label for="panel">Les bureaux sont équipés d'un bardage haut de gamme (révetement bois, cassettes, véture) ?:</label>
-        <select id="selectPanelOffices">
-            <option value="no"> non</option>
-            <option value="yes"> oui</option>
-        </select>
-        <br>
-        <br>
-        <label for="elevator">Les bureaux sont équipés d'un ascenseur ?:</label>
+        <label for="choiceElevator">Les bureaux sont équipés d'un ascenseur ?:</label>
         <select id="choiceElevator">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
