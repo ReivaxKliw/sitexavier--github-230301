@@ -83,7 +83,7 @@ function functionBudget() {
           const inputAreaStorage= Number(document.getElementById("inputAreaStorage").value);
 
      // Récupération hauteur bâtiment__________________________________________     
-          const inputHeightHall = Number(document.getElementById("inputHeightHall").value);
+          const inputHeightHallUseful = Number(document.getElementById("inputHeightHallUseful").value);
      
      // Récupération bureaux du Bâtiment________________
           // récupération bureaux intérieurs
@@ -154,10 +154,12 @@ function functionBudget() {
 
 // CALCULS CARACTERISTIQUES BATIMENTS
      
-     // Calcul hauteur bâtiment__________________________________________
-
-     // Calcul Hall du Bâtiment____________________________________________________
-
+     // Calcul hauteur bâtiment
+          let inputHeightHallTotal = inputHeightHallUseful+1.80; //Pannes 0.3+bac acier 0.2+laine de roche 0.2+ acrotére 0.5 + pente 3% pour distance 20m (pris arbitrairement)
+          console.log(inputHeightHallUseful);
+          console.log(inputHeightHallTotal);
+     // Calcul surface Hall du Bâtiment
+          // calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
      // Calcul bureaux du Bâtiment____________________________________________________
           let officesDimensionsInside;
           let officesDimensionsOutside;
@@ -481,8 +483,8 @@ function functionBudget() {
      // Coût HALL
           //Coût plus value hauteur bâtiment
           let addedValueHeight;
-          if(inputHeightHall>7){
-               addedValueHeight=(inputHeightHall-7)*costHeightAbove7;
+          if(inputHeightHallUseful>7){
+               addedValueHeight=(inputHeightHallUseful-7)*costHeightAbove7;
           }
           else {
                addedValueHeight=0;
@@ -583,7 +585,7 @@ function functionBudget() {
                     break;
                };
 
-               const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall));
+               const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHallUseful));
 
           console.log(answer8);
           console.log(choicePartitionInside);
@@ -591,7 +593,7 @@ function functionBudget() {
           console.log(inputNumberPartitionInside);
           console.log(ratioPartitionInsideSidingPanel);
           console.log(inputWidthHall);
-          console.log(inputHeightHall);
+          console.log(inputHeightHallUseful);
           console.log(costPartitionInsideSidingPanel);
 
           // Coût  spécifité pont roulant
@@ -606,10 +608,10 @@ function functionBudget() {
                     answer5= answer5[1];
                     break;
                };
-               const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles*inputHeightHall+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation);
+               const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles*inputHeightHallUseful+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation);
           console.log(answer5);
           console.log(polesUnderOverHeadCrane);
-          console.log(inputHeightHall);
+          console.log(inputHeightHallUseful);
           console.log(inputNumberOverHeadCrane);
           console.log(addedValueOverHeadCrane);
 

@@ -113,8 +113,8 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         console.log(inputSellingPrice);
             
     //récupération Hauteur hall
-    let inputHeightHall = Number(document.getElementById("inputHeightHall").value);
-    console.log(inputHeightHall);
+    let inputHeightHallTotal = Number(document.getElementById("inputHeightHallTotal").value);
+    console.log(inputHeightHallTotal);
         
     // RécupérationLes bureaux du Bâtiment____________________________________________________
         // RécupérationBureaux Intérieurs
@@ -141,7 +141,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             
         // Récupération Hall du Bâtiment_________________________
             // Récupération Surface hall
-                //inputHeightHall récupérée au début car nécessaire dans les bureaux
+                //inputHeightHallTotal récupérée au début car nécessaire dans les bureaux
                 //let inputAreaBox = Number(document.getElementById("inputAreaBox").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
                 let inputLengthHall = Number(document.getElementById("inputLengthHall").value);
                 let inputWidthHall = Number(document.getElementById("inputWidthHall").value);
@@ -243,7 +243,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 inputHeightOfficesInside = 4.5;
             }
             if (inputAreaOfficesGroundInside>0 &&inputAreaOfficesFloorInside>0){
-                inputHeightOfficesInside = inputHeightHall-1.20;
+                inputHeightOfficesInside = inputHeightHallTotal-1.20;
             }
             console.log(inputHeightOfficesInside);
         
@@ -455,7 +455,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(costRoofHall);
         //Coût Bardage Hall
         //  ATTENTION NE TIENT PAS COMPTE DE BARDAGE HAUT DE GAMME POUR LE HALL
-            let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((inputLengthHall+inputWidthHall)*2*inputHeightHall-inputLengthOfficesOutside*inputHeightOfficesOutside-inputLengthOfficesInside*inputHeightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
+            let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((inputLengthHall+inputWidthHall)*2*inputHeightHallTotal-inputLengthOfficesOutside*inputHeightOfficesOutside-inputLengthOfficesInside*inputHeightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
             console.log(costSidingPanelSimpleHall);
         //Coût Dallage Hall
             let costConcreteSlabHall=ratioConcreteSlabHall*inputAreaHall;
@@ -580,7 +580,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(inputAreaOfficesGroundOutside);
             console.log(costSoilReinforcement);
         //Coût Cloison(s) intérieure(s)
-            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputNumberPartitionInside;
+            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHallTotal)*inputNumberPartitionInside;
 
             let choicePartitionInside = document.getElementById("choicePartitionInside").value;
             switch(choicePartitionInside){
@@ -601,7 +601,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 case'yes':
                     polesUnderOverHeadCrane = (Math.ceil((inputLengthHall/6)+1)*2);
                     //lengthRaceway = ((inputLengthHall)*2); Neutralisé travail du poseur de pont
-                    addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputHeightHall*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
+                    addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputHeightHallTotal*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
                     addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole*inputNumberOverHeadCrane;
                     break;
                 case'no':
@@ -612,7 +612,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     break;
                 };
         console.log(polesUnderOverHeadCrane);
-        console.log(inputHeightHall);
+        console.log(inputHeightHallTotal);
         console.log(inputNumberOverHeadCrane);
         console.log(addedValueOverHeadCrane);
         console.log(addedValueOverHeadCraneFondations);

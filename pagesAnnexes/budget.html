@@ -52,15 +52,6 @@ Questions du TERRAIN>
     <label for="inputAreaGround">Si oui, quelle est la <b>surface de votre terrain</b>?</label>
     <input type="text" placeholder="surface en m²" id="inputAreaGround"> m² <br>
     <br>
-    <!--Supprimé car il va falloir le calculer dans le js
-        <label for="choiceAreaRoadAndUtilities">Connaissez-vous la <b>surface de voirie</b> de votre bâtiment ? (cas de bâtiment situé dans une zone commune)</label>
-    <select id="choiceAreaRoadAndUtilities">
-        <option value="yes"> oui</option>
-        <option value="no"> non</option>
-    </select>
-    <label for="inputAreaRoadAndUtilities">Quelle est la <b>surface de voirie (bitume)</b>?</label>
-    <input type="text" placeholder="surface en m²" id="inputAreaRoadAndUtilities"> m² <br>
-    <br>-->
 <!____________________________________________________
 questions HALL>
 <h2> Le hall </h2>
@@ -69,20 +60,9 @@ questions HALL>
     <input type="text" placeholder="surface en m²" id="inputAreaStorage"> m² <br>
     </div>
     
-    <!--
-        <label for="inputAreaBox">Quelle est la <b>surface de la boîte/hall de stockage/production</b> ? (c'est à dire le plus grand bâtiment même si les bureaux sont à l'intérieur)</label>
-        <input type="text" placeholder="surface en m²" id="inputAreaBox"> m² <br>
-        <p>Dans un monde idéal, votre bâtiment est rectangulaire si ce n'est pas le cas, ne remplissez pas les questions concernant les longueur et largeur</p>
-        <label for="inputLengthHall">Quelle est la <b>longeur du hall de stockage/production</b> ?</label>
-        <input type="text" placeholder="longueur en m" id="inputLengthHall"> m <br>
-        <br>
-        <label for="inputWidthHall">Quelle est la <b>largeur du hall de stockage/production</b> ?</label>
-        <input type="text" placeholder="longueur en m" id="inputWidthHall"> m <br>
-    -->
-    
     <br>
-    <label for="inputHeightHall">Quelle est la <b>hauteur totale extérieure du hall de stockage/production</b> ?</label>
-    <input type="text" placeholder="hauteur totale en m" id="inputHeightHall"> m <br>
+    <label for="inputHeightHallUseful">Quelle est la <b>hauteur utile intérieure du bâtiment projeté</b> ?:</label>
+    <input type="text" placeholder="hauteur totale en m" id="inputHeightHallUseful"> m <br>
     <br>
 <! ____________________________________________________
  Questions BUREAUX>
@@ -225,7 +205,7 @@ Questions Spécificités du bâtiment>
         <br>
         <input type="checkbox" id="choiceBlueRate" name="blueRate">
         <label for="choiceBlueRate"> tarif Bleu < à 36 kVA (~36kW)</label>
-        <label for="inputBlueRate"> / indiquez le Nombre(si vous divisez votre bâtiment par exemple): </label>
+        <label for="inputBlueRate"> / indiquez le Nombre(si vous divisez votre  bâtiment par exemple): </label>
         <input type="text" id="inputBlueRate" name="BlueRate" placeholder="indiquez le nombre" > unité(s)
         <br>
         <input type="checkbox" id="choiceYellowRate" name="yellowRate">
