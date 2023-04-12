@@ -227,7 +227,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let inputAreaOfficesInside=inputAreaOfficesGroundInside +inputAreaOfficesFloorInside;
             inputLengthOfficesInside==0? inputLengthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputLengthOfficesInside ; 
             inputWidthOfficesInside==0? inputWidthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputWidthOfficesInside ; 
-            inputAreaOfficesGroundInside==0? inputAreaOfficesGroundInside= inputLengthOfficesInside*inputWidthOfficesInside:inputAreaOfficesGroundInside;
+            inputWidthOfficesInside==0? inputAreaOfficesGroundInside= inputLengthOfficesInside*inputWidthOfficesInside:inputAreaOfficesGroundInside;
             console.log(inputAreaOfficesGroundInside);
             console.log(inputAreaOfficesFloorInside);
             console.log(inputLengthOfficesInside);

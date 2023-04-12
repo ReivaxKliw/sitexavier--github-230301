@@ -438,12 +438,8 @@ function getAreas() {
      // Calcul Hall du Bâtiment____________________________________________________
 
      // Calcul bureaux du Bâtiment____________________________________________________
-          let officesDimensionsInside;
-          let officesDimensionsOutside;
-          let officesAdministrationInsideDimensions ;
-          let officesAdministrationOutsideDimensions;
 
-          // Calcul vérification Show room intérieur ou extérieur_____________________________
+          // Calcul vérification Show room intérieur ou extérieur
                // Calcul Vérification du choix de showroom Intérieur
                     let valueShowroomInside = choiceShowroomInside.value;
                     let answer41 = [0,inputAreaShowroomInside];
@@ -457,24 +453,27 @@ function getAreas() {
                     };
                     inputAreaShowroomInside = Number(answer41);
 
-               console.log(inputAreaShowroomInside);
-          
-               // Calcul Vérification du choix de showroom Extérieur
+                    
+                    // Calcul Vérification du choix de showroom Extérieur
                     let valueShowroomOutside = choiceShowroomOutside.value;
                     let answer42 = [0,inputAreaShowroomOutside];
                     switch(valueShowroomOutside){
-                    case'no':
-                    answer42= answer42[0];
-                    break;
-                    case'yes':
-                    answer42= answer42[1];
-                    break;
+                         case'no':
+                         answer42= answer42[0];
+                         break;
+                         case'yes':
+                         answer42= answer42[1];
+                         break;
                     };
                     inputAreaShowroomOutside = Number(answer42);
-
+                    
+               console.log(inputAreaShowroomInside);
                console.log(inputAreaShowroomOutside);
      
-          //Calcul de la surface des bureaux administratifs_____________________________
+          //Calcul de la surface des bureaux administratifs
+          let officesAdministrationInsideDimensions ;
+          let officesAdministrationOutsideDimensions;
+
                // Calcul bureaux intérieurs Openspace 
                     if (choiceOfficesInside.value==="yes"){
                     if (choiceOpenspaceOfficesInside.value==="yes"){
@@ -501,13 +500,40 @@ function getAreas() {
                     if (choiceOfficesOutside.value==="no"){
                          officesAdministrationOutsideDimensions = 0;
                     };
+               console.log(officesAdministrationInsideDimensions);
+               console.log(officesAdministrationOutsideDimensions);
 
-          // Calcul Surface des locaux sociaux______________________________
-          
-               const officesSocialDimensionsInside = (inputWorkersOfficesInside)*10;//les locaux sociaux nombre de travailleurs * 10m²
-               const officesSocialDimensionsOutside = (inputWorkersOfficesOutside)*10; //les locaux sociaux nombre de travailleurs * 10m²
-     
-          // Calcul de SURFACE BUREAUX ; SURFACE BOX ET CONSTRUITE AU SOL Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
+               // Calcul Surface des locaux sociaux
+                    let officesSocialDimensionsInside;
+                    let officesSocialDimensionsOutside;
+
+                         if (choiceSocialRoomOfficesInside.value ==="yes"){
+                         officesSocialDimensionsInside = (inputWorkersOfficesInside)*10;//les locaux sociaux nombre de travailleurs * 10m²;
+                         }else{
+                         officesSocialDimensionsInside =0;     
+                         };
+                         if (choiceSocialRoomOfficesOutside.value ==="yes"){
+                         officesSocialDimensionsOutside = (inputWorkersOfficesOutside)*10;//les locaux sociaux nombre de travailleurs * 10m²;
+                         }else{
+                         officesSocialDimensionsOutside =0;     
+                         };
+               console.log(officesSocialDimensionsInside);
+               console.log(officesSocialDimensionsOutside);
+
+               //Calcul de la surface TOTALE des bureaux
+                    let officesDimensionsInside;
+                    let officesDimensionsOutside;
+
+                    officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
+                    officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
+
+               console.log(officesDimensionsInside);
+               console.log(officesDimensionsOutside);
+
+          // Calcul de Sol bureaux ; de la surface sol, surface construite et escalier;
+          // Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
+               let areaOfficesGroundInside;// surface au sol des bureaux intérieurs
+               let areaOfficesGroundOutside;// surface au sol des bureaux extérieurs
                let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
                let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
                let numberStair;// nombre d'escalier
@@ -529,7 +555,7 @@ function getAreas() {
                     }
                // Calcul Bureaux Intérieur sans locaux sociaux intérieurs
                     else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="no"){
-                              officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside);
+                              officesDimensionsInside=(officesAdministrationInsideDimensions+inputAreaShowroomInside);
                               officesDimensionsOutside=0;
                               if (officesDimensionsInside <= 200){ 
                               areaBuilding = inputAreaStorage+officesDimensionsInside;
