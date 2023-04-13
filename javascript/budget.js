@@ -91,16 +91,16 @@ function functionBudget() {
                const inputClercksOfficesInside =  Number(document.getElementById("inputClercksOfficesInside").value);
                const choiceOpenspaceOfficesInside = document.getElementById('choiceOpenspaceOfficesInside');
                const choiceShowroomInside = document.getElementById('choiceShowroomInside');
-               let inputAreaShowroomInside = Number(document.getElementById("inputAreaShowroomInside").value);
-               let choiceSocialRoomOfficesInside = document.getElementById("choiceSocialRoomOfficesInside").value;
+               let inputAreaShowroomInside = Number(document.getElementById('inputAreaShowroomInside').value);
+               let choiceSocialRoomOfficesInside = document.getElementById('choiceSocialRoomOfficesInside');
                // const inputWorkersOfficesInside =  Number(document.getElementById("inputWorkersOfficesInside").value);déclarée dans le texte des erreurs
           // récupération bureaux extérieurs
                const choiceOfficesOutside = document.getElementById('choiceOfficesOutside');
                const inputClercksOfficesOutside =  Number(document.getElementById("inputClercksOfficesOutside").value);
-               const choiceOpenspaceOfficesOutside = document.getElementById('choiceOpenspaceOfficesInside');
+               const choiceOpenspaceOfficesOutside = document.getElementById('choiceOpenspaceOfficesOutside');
                const choiceShowroomOutside = document.getElementById('choiceShowroomOutside');
-               let inputAreaShowroomOutside = Number(document.getElementById("inputAreaShowroomOutside").value);
-               let choiceSocialRoomOfficesOutside = document.getElementById("choiceSocialRoomOfficesInside").value;
+               let inputAreaShowroomOutside = Number(document.getElementById('inputAreaShowroomOutside').value);
+               let choiceSocialRoomOfficesOutside = document.getElementById('choiceSocialRoomOfficesOutside');
                // const inputWorkersOfficesOutside > récupéré dans texte des erreurs
 
      // Récupération  Spécificités____________________________________________________
