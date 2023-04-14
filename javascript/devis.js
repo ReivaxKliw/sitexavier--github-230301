@@ -502,8 +502,8 @@ function getAreas() {
                     else{
                          officesAdministrationOutsideDimensions = 0;
                     };
-               console.log(officesAdministrationInsideDimensions);
-               console.log(officesAdministrationOutsideDimensions);
+          console.log(officesAdministrationInsideDimensions);
+          console.log(officesAdministrationOutsideDimensions);
 
           // Calcul Surface des locaux sociaux
                let officesSocialDimensionsInside;
@@ -573,8 +573,11 @@ function getAreas() {
                areaBox= inputAreaStorage+areaOfficesGroundInside;
                areaBuilding = areaBox+areaOfficesGroundOutside;
                          
-          console.log(areaBuilding);
+          console.log(inputAreaStorage);
+          console.log(areaOfficesGroundInside);
           console.log(areaBox);
+          console.log(areaOfficesGroundOutside);
+          console.log(areaBuilding);
  
      // Calcul  Spécificités____________________________________________________
           // Calcul renfort de sol
@@ -778,7 +781,6 @@ function getAreas() {
                const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall));
 
           console.log(answer8);
-          console.log(choicePartitionInside);
           console.log(valuePartitionInside);
           console.log(inputNumberPartitionInside);
           console.log(ratioPartitionInsideSidingPanel);

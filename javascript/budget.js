@@ -158,9 +158,9 @@ function functionBudget() {
           // calcul au m²
                //pas de calcul récupéré
           //calcul détaillé
-               let inputHeightHallTotal = inputHeightHallUseful+1.80; //Pannes 0.3+bac acier 0.2+laine de roche 0.2+ acrotére 0.5 + pente 3% pour distance 20m (pris arbitrairement)
+               let heightHallTotal = inputHeightHallUseful+1.80; //Pannes 0.3+bac acier 0.2+laine de roche 0.2+ acrotére 0.5 + pente 3% pour distance 20m (pris arbitrairement)
                console.log(inputHeightHallUseful);
-               console.log(inputHeightHallTotal);
+               console.log(heightHallTotal);
      // Calcul surface Hall du Bâtiment
           // calcul au m²
                // calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
@@ -168,43 +168,39 @@ function functionBudget() {
                // calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
      // Calcul bureaux du Bâtiment
           // calcul au m²
-               let officesDimensionsInside;
-               let officesDimensionsOutside;
-               let officesAdministrationInsideDimensions ;
-               let officesAdministrationOutsideDimensions;
-
-               // Calcul vérification Show room intérieur ou extérieur_____________________________
+               // Calcul vérification Show room intérieur ou extérieur
                     // Calcul Vérification du choix de showroom Intérieur
-                         let valueShowroomInside = choiceShowroomInside.value;
-                         let answer41 = [0,inputAreaShowroomInside];
-                         switch(valueShowroomInside){
-                         case'no':
-                         answer41= answer41[0];
-                         break;
-                         case'yes':
-                         answer41= answer41[1];
-                         break;
-                         };
-                         inputAreaShowroomInside = Number(answer41);
-
-                    console.log(inputAreaShowroomInside);
-               
+                    let valueShowroomInside = choiceShowroomInside.value;
+                    let answer41 = [0,inputAreaShowroomInside];
+                    switch(valueShowroomInside){
+                    case'no':
+                    answer41= answer41[0];
+                    break;
+                    case'yes':
+                    answer41= answer41[1];
+                    break;
+                    };
+                    inputAreaShowroomInside = Number(answer41);
                     // Calcul Vérification du choix de showroom Extérieur
-                         let valueShowroomOutside = choiceShowroomOutside.value;
-                         let answer42 = [0,inputAreaShowroomOutside];
-                         switch(valueShowroomOutside){
+                    let valueShowroomOutside = choiceShowroomOutside.value;
+                    let answer42 = [0,inputAreaShowroomOutside];
+                    switch(valueShowroomOutside){
                          case'no':
                          answer42= answer42[0];
                          break;
                          case'yes':
                          answer42= answer42[1];
                          break;
-                         };
-                         inputAreaShowroomOutside = Number(answer42);
+                    };
+                    inputAreaShowroomOutside = Number(answer42);
+               
+               console.log(inputAreaShowroomInside);
+               console.log(inputAreaShowroomOutside);
 
-                    console.log(inputAreaShowroomOutside);
-          
                //Calcul de la surface des bureaux administratifs
+               let officesAdministrationInsideDimensions ;
+               let officesAdministrationOutsideDimensions;
+
                     // Calcul bureaux intérieurs Openspace 
                          if (choiceOfficesInside.value==="yes"){
                          if (choiceOpenspaceOfficesInside.value==="yes"){
@@ -215,7 +211,7 @@ function functionBudget() {
                               officesAdministrationInsideDimensions = ((inputClercksOfficesInside-3)*15+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 15m² par personne pour les bureaux fermés mais 3 bureaux de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
                          }
                          }
-                         if (choiceOfficesInside.value==="no"){
+                         else{
                               officesAdministrationInsideDimensions = 0;
                          }
                     // Calcul bureaux extérieurs Openspace 
@@ -224,203 +220,117 @@ function functionBudget() {
                               officesAdministrationOutsideDimensions = ((inputClercksOfficesOutside-3)*10+(3)*20)*1.5;// Calcul calcul de dimensionnement des bureaux basé sur 10m² par personne pour les open space mais 3 bureaux fermés de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
                          }
                     // Calcul bureaux extérieurs Cloisonnés
-                         if (choiceOpenspaceOfficesOutside.value==="no"){
+                         else if (choiceOpenspaceOfficesOutside.value==="no"){
                               officesAdministrationOutsideDimensions = ((inputClercksOfficesOutside-3)*15+(3)*20)*1.5;//calcul de dimensionnement des bureaux basé sur 15m² par personne pour les bureaux fermés mais 3 bureaux de 20m² pour le comptable et la direction + les circulations+sanitaires (*1,5);
                          }
                          }
-                         if (choiceOfficesOutside.value==="no"){
+                         else{
                               officesAdministrationOutsideDimensions = 0;
                          };
-
-               // Calcul Surface des locaux sociaux______________________________
-                    const officesSocialDimensionsInside = (inputWorkersOfficesInside)*10;//les locaux sociaux nombre de travailleurs * 10m²
-                    const officesSocialDimensionsOutside = (inputWorkersOfficesOutside)*10; //les locaux sociaux nombre de travailleurs * 10m²
-          
-               // Calcul de SURFACE BUREAUX ; SURFACE BOX ET CONSTRUITE AU SOL Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
-                    let areaOfficesGroundInside;// surface au sol des bureaux intérieurs
-                    let areaOfficesGroundOutside;// surface au sol des bureaux extérieurs
-                    let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
-                    let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
-                    let numberStair;// nombre d'escalier
-
-                    // Calcul Bureaux Intérieur avec locaux sociaux intérieurs
-                         if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="yes"){
-                         officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
-                         officesDimensionsOutside=0;
-                              if (officesDimensionsInside <= 200){ 
-                              areaOfficesGroundInside = officesDimensionsInside;
-                              areaBuilding = inputAreaStorage+areaOfficesGroundInside;
-                              areaBox= inputAreaStorage+areaOfficesGroundInside;
-                              numberStair=0;
-                              }
-                              else if (officesDimensionsInside > 200){
-                              areaOfficesGroundInside = officesDimensionsInside/2;
-                              areaBuilding = inputAreaStorage+areaOfficesGroundInside;
-                              areaBox = inputAreaStorage+areaOfficesGroundInside;
-                              numberStair=1;
-                              }
-                         }
-                    // Calcul Bureaux Intérieur sans locaux sociaux intérieurs
-                         else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="no"&& choiceSocialRoomOfficesInside.value ==="no"){
-                              officesDimensionsInside=(officesAdministrationInsideDimensions+inputAreaShowroomInside);
-                              officesDimensionsOutside=0;
-                              
-                              if (officesDimensionsInside <= 200){ 
-                              areaBuilding = inputAreaStorage+officesDimensionsInside;
-                              areaBox = inputAreaStorage+officesDimensionsInside;
-                              }
-                              else if (officesDimensionsInside > 200){ 
-                              areaBuilding = inputAreaStorage+officesDimensionsInside/2;
-                              areaBox = inputAreaStorage+officesDimensionsInside/2;
-                              numberStair=1;
-                              }
-                         }
-                    // Calcul Bureaux Extérieur avec locaux sociaux extérieurs
-                         else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesOutside.value ==="yes"){
-                              officesDimensionsInside=0;
-                              officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
-                              if (officesDimensionsOutside <= 200){ 
-                              areaBuilding = inputAreaStorage+officesDimensionsOutside;
-                              areaBox = inputAreaStorage;
-                              }
-                              else if (officesDimensionsOutside > 200){ 
-                              areaBuilding = inputAreaStorage+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage;
-                              numberStair=1;
-                              }
-                         }
-                    // Calcul Bureaux Extérieurs sans locaux sociaux extérieur
-                         else if (choiceOfficesInside.value==="no" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesOutside.value ==="no"){
-                              officesDimensionsInside=0;
-                              officesDimensionsOutside=(officesAdministrationOutsideDimensions+inputAreaShowroomOutside);
-                              if (officesDimensionsOutside <= 200){ 
-                              areaBuilding = inputAreaStorage+officesDimensionsOutside;
-                              areaBox = inputAreaStorage;
-                              }
-                              else if (officesDimensionsOutside > 200){ 
-                              areaBuilding = inputAreaStorage+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage;
-                              numberStair=1;
-                              }
-                         }
-                    // Calcul Bureaux Intérieur + Extérieurs avec locaux sociaux intérieurs
-                         else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesInside.value ==="yes"&&choiceSocialRoomOfficesOutside.value ==="no"){
-                         officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
-                         officesDimensionsOutside=(officesAdministrationOutsideDimensions+inputAreaShowroomOutside);
-                         if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside+officesDimensionsOutside;
-                              areaBox = inputAreaStorage+ officesDimensionsInside;
-                         }
-                         else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside/2+officesDimensionsOutside;
-                              areaBox = inputAreaStorage+ officesDimensionsInside/2;
-                              numberStair=2;
-                         }
-                         else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage+ officesDimensionsInside;
-                              numberStair=1;
-                         }
-                         else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside/2+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage+ officesDimensionsInside/2;
-                              numberStair=2;
-                         }
-                    }
-                    // Calcul Bureaux Intérieur + Extérieurs avec locaux sociaux extérieurs
-                         else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&& choiceSocialRoomOfficesInside.value ==="no"&&choiceSocialRoomOfficesOutside.value ==="yes"){
-                         officesDimensionsInside=(officesAdministrationInsideDimensions+inputAreaShowroomInside);
-                         officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
-                         if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside+officesDimensionsOutside;
-                              areaBox = inputAreaStorage+ officesDimensionsInside;
-                         }
-                         else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside/2+officesDimensionsOutside;
-                              areaBox = inputAreaStorage+ officesDimensionsInside/2;
-                              numberStair=1;
-                         }
-                         else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage+ officesDimensionsInside;
-                              numberStair=1;
-                         }
-                         else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside/2+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage+ officesDimensionsInside/2;
-                              numberStair=2;
-                         }
-                    }
-                    // Calcul Bureaux Intérieur + Extérieur avec locaux sociaux intérieurs + Extérieurs
-                         else if (choiceOfficesInside.value==="yes" && choiceOfficesOutside.value==="yes"&&choiceSocialRoomOfficesInside.value ==="yes"&& choiceSocialRoomOfficesOutside.value ==="yes"){
-                         officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside +inputAreaShowroomInside);
-                         officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
-                         if (officesDimensionsInside <= 200 && officesDimensionsOutside<= 200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside+officesDimensionsOutside;
-                              areaBox = inputAreaStorage+ officesDimensionsInside;
-                         }
-                         else if (officesDimensionsInside > 200 && officesDimensionsOutside<= 200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside/2+officesDimensionsOutside;
-                              areaBox = inputAreaStorage+ officesDimensionsInside/2;
-                              numberStair=1;
-                         }
-                         else if (officesDimensionsInside <= 200 && officesDimensionsOutside>200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage+ officesDimensionsInside;
-                              numberStair=1;
-                         }
-                         else if (officesDimensionsInside > 200 && officesDimensionsOutside>200){ 
-                              areaBuilding = inputAreaStorage+ officesDimensionsInside/2+officesDimensionsOutside/2;
-                              areaBox = inputAreaStorage+ officesDimensionsInside/2;
-                              numberStair=2;
-                         }
-                         }
-                         else{
-                         officesDimensionsInside=0;
-                         officesDimensionsOutside=0;
-                         areaBuilding = inputAreaStorage;
-                         areaBox = inputAreaStorage;
-                         numberStair=0;
-                         };
-
                console.log(officesAdministrationInsideDimensions);
                console.log(officesAdministrationOutsideDimensions);
+
+               // Calcul Surface des locaux sociaux
+               let officesSocialDimensionsInside;
+               let officesSocialDimensionsOutside;
+
+                    if (choiceSocialRoomOfficesInside.value ==="yes"){
+                    officesSocialDimensionsInside = (inputWorkersOfficesInside)*10;//les locaux sociaux nombre de travailleurs * 10m²;
+                    }else{
+                    officesSocialDimensionsInside =0;     
+                    };
+                    if (choiceSocialRoomOfficesOutside.value ==="yes"){
+                    officesSocialDimensionsOutside = (inputWorkersOfficesOutside)*10;//les locaux sociaux nombre de travailleurs * 10m²;
+                    }else{
+                    officesSocialDimensionsOutside =0;     
+                    };
                console.log(officesSocialDimensionsInside);
                console.log(officesSocialDimensionsOutside);
-               console.log(inputAreaShowroomInside);
-               console.log(inputAreaShowroomOutside);
+
+               //Calcul de la surface TOTALE des bureaux
+               let officesDimensionsInside;
+               let officesDimensionsOutside;
+
+                    officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
+                    officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
+
                console.log(officesDimensionsInside);
                console.log(officesDimensionsOutside);
+               //Calcul bureau étage ou pas
+               // Prise en compte de bureaux réalisé en étage si leur surface est supérieure à 200 m² et qu'ils sont positionnés à l'intérieur et augmentation de la variable areaBuilding
+               let areaOfficesGroundInside;// surface au sol des bureaux intérieurs
+               let numberStairInside;
+               let areaOfficesGroundOutside;// surface au sol des bureaux extérieurs
+               let numberStairOutside;
+               let numberStair;// nombre d'escalier
+                    
+                    if (officesDimensionsInside <= 200){ 
+                         areaOfficesGroundInside = officesDimensionsInside;
+                         numberStairInside=0;
+                    }
+                    else if (officesDimensionsInside > 200){
+                         areaOfficesGroundInside = officesDimensionsInside/2;
+                         numberStairInside=1;
+                    }
+                    if (officesDimensionsOutside <= 200){ 
+                         areaOfficesGroundOutside = officesDimensionsOutside;
+                         numberStairOutside=0;
+                    }
+                    else if (officesDimensionsOutside > 200){
+                         areaOfficesGroundOutside = officesDimensionsOutside/2;
+                         numberStairOutside=1;
+                    }
+
+                    numberStair = numberStairInside+numberStairOutside
+
                console.log(areaOfficesGroundInside);
+               console.log(numberStairInside);
                console.log(areaOfficesGroundOutside);
-               console.log(areaBuilding);
-               console.log(areaBox);
+               console.log(numberStairOutside);
                console.log(numberStair);
 
-          // calcul détaillé
-          // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux.
+               // Calcul de la surface sol totale et surface box;
+               let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
+               let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
+
+                    areaBox= inputAreaStorage+areaOfficesGroundInside;
+                    areaBuilding = areaBox+areaOfficesGroundOutside;
+                              
+               console.log(inputAreaStorage);
+               console.log(areaOfficesGroundInside);
+               console.log(areaBox);
+               console.log(areaOfficesGroundOutside);
+               console.log(areaBuilding);
+
+          // calcul détaillé des bureaux
+          // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux. Les constantes ne sont alors plus des inputconstante puisqu'elles sont issues de calcul
                // Calcul Bureaux Intérieurs
-                    lengthOfficesInside==0? lengthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):lengthOfficesInside ; 
-                    widthOfficesInside==0? widthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):widthOfficesInside ; 
-                    inputAreaOfficesGroundInside==0? inputAreaOfficesGroundInside= lengthOfficesInside*widthOfficesInside:inputAreaOfficesGroundInside;
-               console.log(inputAreaOfficesGroundInside);
-               console.log(inputAreaOfficesFloorInside);
+               let lengthOfficesInside;
+               let widthOfficesInside;
+               let areaOfficesFloorInside;
+
+                    lengthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside)); 
+                    widthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside));
+                    areaOfficesFloorInside=officesDimensionsInside-areaOfficesGroundInside;
+
+               console.log(areaOfficesGroundInside);
                console.log(lengthOfficesInside);
                console.log(widthOfficesInside);
-               console.log(inputAreaOfficesInside);
+               console.log(officesDimensionsInside);
+               console.log(areaOfficesFloorInside);
 
                // Calcul  hauteur des bureaux intérieurs
-                    let inputHeightOfficesInside;
-                    if (inputAreaOfficesGroundInside==0 && inputAreaOfficesFloorInside==0) {
-                         inputHeightOfficesInside = 0;
+               let heightOfficesInside;
+                    if (areaOfficesGroundInside==0 && areaOfficesFloorInside==0) {
+                         heightOfficesInside = 0;
                     }
-                    if (inputAreaOfficesGroundInside>0 && inputAreaOfficesFloorInside==0){
-                         inputHeightOfficesInside = 4.5;
+                    if (areaOfficesGroundInside>0 && areaOfficesFloorInside==0){
+                         heightOfficesInside = 4.5;
                     }
-                    if (inputAreaOfficesGroundInside>0 &&inputAreaOfficesFloorInside>0){
-                         inputHeightOfficesInside = inputHeightHallTotal-1.20;
+                    if (areaOfficesGroundInside>0 &&areaOfficesFloorInside>0){
+                         heightOfficesInside = inputHeightHallUseful;
                     }
-               console.log(inputHeightOfficesInside);
+               console.log(heightOfficesInside);
           
                // Calcul Bureaux Extérieurs
                     let inputAreaOfficesOutside=inputAreaOfficesGroundOutside +inputAreaOfficesFloorOutside;
