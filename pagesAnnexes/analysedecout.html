@@ -120,15 +120,6 @@ questions HALL>
         <label for="inputWidthOfficesOutside">Quelle est la <b>largeur au rez de chaussée des bureaux</b> ?</label>
         <input type="text" placeholder="longueur en m" id="inputWidthOfficesOutside"> m
         <br>
-    <! le type de chauffage__________________________________________ >
-    <h3>Le type de chauffage des bureaux</h3>
-        <label for="choiceHeatingOffices">Sélectionnez le type de chauffage installé dans les bureaux ?:</label>
-        <select id="choiceHeatingOffices">
-        <option value="airConditioner"> climatisation réversible</option>
-        <option value="hotWaterHeating"> radiateur Eau Chaude</option>
-        <option value="electricityHeating"> radiateur Electrique</option>
-        </select>
-        <br>
 <! ____________________________________________________
 Questions Spécificités du bâtiment>
 <h2> les spécificités du bâtiment</h2>
@@ -203,8 +194,8 @@ Questions Spécificités du bâtiment>
         <label for="choiceGreenRate"> tarif Vert > à 250 kVA (~250kW) </label>
         <br>
         <br>
-        <label for="heating">chauffer-vous le Hall (solution aérothermes gaz) ?:</label>
-        <select id="selectHeatingHall">
+        <label for="choiceHeatingHall">chauffer-vous le Hall (solution aérothermes gaz) ?:</label>
+        <select id="choiceHeatingHall">
             <option value="no"> non</option>
             <option value="yes"> oui</option>
         </select>
@@ -217,6 +208,7 @@ Questions Spécificités du bâtiment>
         </select>
         <br>
         <br>
+        //choiceIcpe non réalisé car dans le cadre de l'analyse de coût le maitre d'ouvrage doit savoir si son bâtiment est ICPE ou pas
         <label for="choiceOpenSpace">Les bureaux possédent des Espaces ouverts ? (type Open Space des salariés, Show room, atelier….):</label>
         <select id="choiceOpenSpace">
             <option value="no"> non</option>
@@ -224,6 +216,15 @@ Questions Spécificités du bâtiment>
         </select>
         <br>
         <br>
+        <label for="choiceHeatingOffices">Sélectionnez le type de chauffage installé dans les bureaux ?:</label>
+        <select id="choiceHeatingOffices">
+        <option value="airConditioner"> climatisation réversible</option>
+        <option value="hotWaterHeating"> radiateur Eau Chaude</option>
+        <option value="electricityHeating"> radiateur Electrique</option>
+        </select>
+        <br>
+        <br>
+
         <label for="choicePanelOffices">Les bureaux sont équipés d'un bardage haut de gamme (révetement bois, cassettes, véture) ?:</label>
         <select id="choicePanelOffices">
             <option value="no"> non</option>

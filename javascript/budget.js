@@ -72,10 +72,10 @@ function functionBudget() {
      // _____________________________________________________________________________
 // RECUPERATION DES DONNEES
      // Récupération Terrain________________________________________________________
-          let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
-          let choiceCostGround = document.getElementById("choiceCostGround").value;
+          let choiceGroundOwner = document.getElementById("choiceGroundOwner");
+          let choiceCostGround = document.getElementById("choiceCostGround");
           let inputCostGround = document.getElementById("inputCostGround").value;
-          let choiceAreaGround = document.getElementById("choiceAreaGround").value;
+          let choiceAreaGround = document.getElementById("choiceAreaGround");
           let inputAreaGround = document.getElementById("inputAreaGround").value;
 
      
@@ -124,7 +124,7 @@ function functionBudget() {
                let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
 
           // Récupération Stockage extérieur
-               let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
+               let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor"); 
                let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value);
 
           // Récupération  Raccordement Electricté
@@ -138,19 +138,19 @@ function functionBudget() {
                const choiceHeatingHall = document.getElementById('choiceHeatingHall');
             
           // Récupération  Ria
-               let choiceFireNetworkHall = document.getElementById("choiceFireNetworkHall").value;
+               const choiceFireNetworkHall = document.getElementById('choiceFireNetworkHall');
 
           // Récupération   surface avec ICPE
                const choiceIcpe = document.getElementById('choiceIcpe');
                
           // Récupération  chauffage des bureaux
-               const choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
+               const choiceHeatingOffices = document.getElementById('choiceHeatingOffices');
                
           // Récupération Bardage luxe pour les bureaux
-               const choicePanelOffices = document.getElementById('choicePanelOffices').value;
+               const choicePanelOffices = document.getElementById('choicePanelOffices');
           
           // Récupération Ascenseur
-               const choiceElevator = document.getElementById('choiceElevator').value;
+               const choiceElevator = document.getElementById('choiceElevator');
 
 // CALCULS CARACTERISTIQUES BATIMENTS
      
@@ -333,28 +333,32 @@ function functionBudget() {
                console.log(heightOfficesInside);
           
                // Calcul Bureaux Extérieurs
-                    let inputAreaOfficesOutside=inputAreaOfficesGroundOutside +inputAreaOfficesFloorOutside;
-                    lengthOfficesOutside==0? lengthOfficesOutside=Math.round(Math.sqrt(inputAreaOfficesGroundOutside)):lengthOfficesOutside ; 
-                    widthOfficesOutside==0? widthOfficesOutside=Math.round(Math.sqrt(inputAreaOfficesGroundOutside)):widthOfficesOutside ; 
-                    inputAreaOfficesGroundOutside==0? inputAreaOfficesGroundOutside= lengthOfficesOutside*widthOfficesOutside:inputAreaOfficesGroundOutside;
-               console.log(inputAreaOfficesGroundOutside);
-               console.log(inputAreaOfficesFloorOutside);
+               let lengthOfficesOutside;
+               let widthOfficesOutside;
+               let areaOfficesFloorOutside;
+
+                    lengthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside)); 
+                    widthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside));
+                    areaOfficesFloorOutside=officesDimensionsOutside-areaOfficesGroundOutside;
+
+               console.log(areaOfficesGroundOutside);
                console.log(lengthOfficesOutside);
                console.log(widthOfficesOutside);
-               console.log(inputAreaOfficesOutside);
-               
-               // Calcul  hauteur des bureaux
-                    let inputHeightOfficesOutside
-                    if (inputAreaOfficesGroundOutside==0 && inputAreaOfficesFloorOutside==0) {
-                         inputHeightOfficesOutside = 0;
+               console.log(officesDimensionsOutside);
+               console.log(areaOfficesFloorOutside);
+
+               // Calcul  hauteur des bureaux intérieurs
+               let heightOfficesOutside;
+                    if (areaOfficesGroundOutside==0 && areaOfficesFloorOutside==0) {
+                         heightOfficesOutside = 0;
                     }
-                    if (inputAreaOfficesGroundOutside>0 && inputAreaOfficesFloorOutside==0){
-                         inputHeightOfficesOutside = 4.5;
+                    if (areaOfficesGroundOutside>0 && areaOfficesFloorOutside==0){
+                         heightOfficesOutside = 4.5;
                     }
-                    if (inputAreaOfficesGroundOutside>0 &&inputAreaOfficesFloorOutside>0){
-                         inputHeightOfficesOutside = 2*4.5;
+                    if (areaOfficesGroundOutside>0 &&areaOfficesFloorOutside>0){
+                         heightOfficesOutside = 2*4.5;
                     }
-               console.log(inputHeightOfficesOutside);
+               console.log(heightOfficesOutside);
 
 
      // Calcul  Spécificités____________________________________________________
@@ -680,7 +684,7 @@ function functionBudget() {
           console.log(costHeating);//vérification de costHeating
           
           // Coût  spécifité RIA Hall
-                let costFireNetworkHall
+                let costFireNetworkHall= choiceFireNetworkHall.value;
                 switch(choiceFireNetworkHall){
                      case'yes':
                      costFireNetworkHall=ratioFireNetworkHall*areaBox;
@@ -842,11 +846,10 @@ function functionBudget() {
           x1 = answerOutDoorStorage.sufficient;
           y1 = answerOutDoorStorage.insufficient;
           w1 = "prises en compte dans le chiffrage"
-
-          if ((ground.checked===true) && (Number(groundValue)>=(inputAreaGroundWithStorage))) {
+          if ((choiceGroundOwner.value==="yes") && (Number(groundValue)>=(inputAreaGroundWithStorage))) {
                x1=x1;
           }
-          else if (noGround.checked===true) {
+          else if (choiceGroundOwner.value==="no") {
                x1=w1;
           }else {
                x1=y1;
