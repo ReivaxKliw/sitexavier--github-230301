@@ -80,7 +80,7 @@ function functionBudget() {
 
      
      // Récupération Hall du Bâtiment_____
-          const inputAreaStorage= Number(document.getElementById("inputAreaStorage").value);
+          const inputAreaHall= Number(document.getElementById("inputAreaHall").value);
 
      // Récupération hauteur bâtiment__________________________________________     
           const inputHeightHallUseful = Number(document.getElementById("inputHeightHallUseful").value);
@@ -290,13 +290,14 @@ function functionBudget() {
                console.log(numberStair);
 
                // Calcul de la surface sol totale et surface box;
-               let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface
-               let areaBox;// surface de la boite si bur ext = surf Hall, si ils sont intérieurs = ils sont compris dans la surface de la boite
-
-                    areaBox= inputAreaStorage+areaOfficesGroundInside;
+               let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface // nécessaire pour VRD
+               let areaBox;// surface de la boite si bur intérieurs = ils sont compris dans la surface de la boite // necessaire pour structure bâtiment
+               let areaHall;// surface de la zone de travail //necessaire pour l'équipement
+                    areaHall =inputAreaHall;
+                    areaBox= areaHall+areaOfficesGroundInside;
                     areaBuilding = areaBox+areaOfficesGroundOutside;
                               
-               console.log(inputAreaStorage);
+               console.log(areaHall);
                console.log(areaOfficesGroundInside);
                console.log(areaBox);
                console.log(areaOfficesGroundOutside);

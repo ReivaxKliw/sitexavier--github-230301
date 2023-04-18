@@ -151,25 +151,25 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
     // Récupération Spécificités_________________________________________________
         // Récupération Renfort de sol :
-            let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement").value;
+            let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement");
 
         // Récupération Cloison intérieure
             let inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
 
         // Récupération Pont roulant :
-            let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
+            let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane"); 
             let inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value; 
 
         // Récupération Niveleur de quai :
-            let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
+            let choiceDockShelter = document.getElementById("choiceDockShelter"); 
             let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
         
         // Récupération Porte Sectionnelle de plain pied :
-            let choiceFloorSectionalDoor = document.getElementById("choiceFloorSectionalDoor").value; 
+            let choiceFloorSectionalDoor = document.getElementById("choiceFloorSectionalDoor"); 
             let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
         
         // Récupération Stockage extérieur :
-            let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
+            let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor"); 
             let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
 
         // Récupération Raccordement électrique
@@ -180,51 +180,51 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let inputYellowRate = document.getElementById("inputYellowRate").value; 
 
         // Récupération Chauffage Hall
-            let choiceHeatingHall = document.getElementById("choiceHeatingHall").value;
+            let choiceHeatingHall = document.getElementById("choiceHeatingHall");
 
         // Récupération Ria Hall
             let choiceFireNetworkHall = document.getElementById("choiceFireNetworkHall").value;
 
         // Récupération Open Space dans les bureaux
-            let choiceOpenSpace = document.getElementById("choiceOpenSpace").value;
+            let choiceOpenSpace = document.getElementById("choiceOpenSpace");
 
         // Récupération Bardage luxe pour les bureaux
-            let choicePanelOffices = document.getElementById("choicePanelOffices").value;
+            let choicePanelOffices = document.getElementById("choicePanelOffices");
             
          // Récupération Ascenseur :
-            let choiceElevator = document.getElementById("choiceElevator").value; 
+            let choiceElevator = document.getElementById("choiceElevator"); 
 
         // Récupération  ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
 
         // Récupération Terrain________________________________________________________
-            let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
-            let choiceAreaGround = document.getElementById("choiceAreaGround").value;
+            let choiceGroundOwner = document.getElementById("choiceGroundOwner");
+            let choiceAreaGround = document.getElementById("choiceAreaGround");
             //let inputAreaGround = document.getElementById("inputAreaGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
-            let choiceCostGround = document.getElementById("choiceCostGround").value;
+            let choiceCostGround = document.getElementById("choiceCostGround");
             //let inputCostGround = document.getElementById("inputCostGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
 
         // Récupération VRD________________________________________________________
-            let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
+            let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities");
             let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
 
         // Récupération Tout compris_________________________________
-            let choiceAllIn = document.getElementById("choiceAllIn").value;
+            let choiceAllIn = document.getElementById("choiceAllIn");
         // Récupération TAxes PC___________________________
-            let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit").value;
+            let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit");
         // Récupération Insurance________________________________________
-            let choiceInsurance = document.getElementById("choiceInsurance").value;
+            let choiceInsurance = document.getElementById("choiceInsurance");
         // Récupération Maitrise d'Oeuvre_____________________
-            let choiceManagement = document.getElementById("choiceManagement").value;
+            let choiceManagement = document.getElementById("choiceManagement");
         // Récupération Agence commerciale____________________
-            let choiceBusinessAgency = document.getElementById("choiceBusinessAgency").value;
+            let choiceBusinessAgency = document.getElementById("choiceBusinessAgency");
         // Récupération Promoteur____________________________
-            let choiceDevelopper = document.getElementById("choiceDevelopper").value;
+            let choiceDevelopper = document.getElementById("choiceDevelopper");
             
 // _____________________________________________________________________________
 //CALCULS CARACTERISTIQUES BATIMENTS
     // Calcul bureaux du Bâtiment____________________________________________________
         // Calcul Bureaux Intérieurs
-            let inputAreaOfficesInside=inputAreaOfficesGroundInside +inputAreaOfficesFloorInside;
+            let areaOfficesInside=inputAreaOfficesGroundInside +inputAreaOfficesFloorInside;
             inputLengthOfficesInside==0? inputLengthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputLengthOfficesInside ; 
             inputWidthOfficesInside==0? inputWidthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputWidthOfficesInside ; 
             inputWidthOfficesInside==0? inputAreaOfficesGroundInside= inputLengthOfficesInside*inputWidthOfficesInside:inputAreaOfficesGroundInside;
@@ -232,23 +232,23 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(inputAreaOfficesFloorInside);
             console.log(inputLengthOfficesInside);
             console.log(inputWidthOfficesInside);
-            console.log(inputAreaOfficesInside);
+            console.log(areaOfficesInside);
 
         // Calcul  hauteur des bureaux intérieurs
-            let inputHeightOfficesInside;
+            let heightOfficesInside;
             if (inputAreaOfficesGroundInside==0 && inputAreaOfficesFloorInside==0) {
-                inputHeightOfficesInside = 0;
+                heightOfficesInside = 0;
             }
             if (inputAreaOfficesGroundInside>0 && inputAreaOfficesFloorInside==0){
-                inputHeightOfficesInside = 4.5;
+                heightOfficesInside = 4.5;
             }
             if (inputAreaOfficesGroundInside>0 &&inputAreaOfficesFloorInside>0){
-                inputHeightOfficesInside = inputHeightHallTotal-1.20;
+                heightOfficesInside = inputHeightHallTotal-1.20;
             }
-            console.log(inputHeightOfficesInside);
+            console.log(heightOfficesInside);
         
         // Calcul Bureaux Extérieurs
-            let inputAreaOfficesOutside=inputAreaOfficesGroundOutside +inputAreaOfficesFloorOutside;
+            let areaOfficesOutside=inputAreaOfficesGroundOutside +inputAreaOfficesFloorOutside;
             inputLengthOfficesOutside==0? inputLengthOfficesOutside=Math.round(Math.sqrt(inputAreaOfficesGroundOutside)):inputLengthOfficesOutside ; 
             inputWidthOfficesOutside==0? inputWidthOfficesOutside=Math.round(Math.sqrt(inputAreaOfficesGroundOutside)):inputWidthOfficesOutside ; 
             inputAreaOfficesGroundOutside==0? inputAreaOfficesGroundOutside= inputLengthOfficesOutside*inputWidthOfficesOutside:inputAreaOfficesGroundOutside;
@@ -256,53 +256,57 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(inputAreaOfficesFloorOutside);
             console.log(inputLengthOfficesOutside);
             console.log(inputWidthOfficesOutside);
-            console.log(inputAreaOfficesOutside);
+            console.log(areaOfficesOutside);
             
         // Calcul  hauteur des bureaux
-            let inputHeightOfficesOutside
+            let heightOfficesOutside
             if (inputAreaOfficesGroundOutside==0 && inputAreaOfficesFloorOutside==0) {
-                inputHeightOfficesOutside = 0;
+                heightOfficesOutside = 0;
             }
             if (inputAreaOfficesGroundOutside>0 && inputAreaOfficesFloorOutside==0){
-                inputHeightOfficesOutside = 4.5;
+                heightOfficesOutside = 4.5;
             }
             if (inputAreaOfficesGroundOutside>0 &&inputAreaOfficesFloorOutside>0){
-                inputHeightOfficesOutside = 2*4.5;
+                heightOfficesOutside = 2*4.5;
             }
-            console.log(inputHeightOfficesOutside);
+            console.log(heightOfficesOutside);
 
-    // Calcul Hall du Bâtiment____________________________________________________
+    // Calcul Hall du Bâtiment
+        // Calcul de la surface sol totale et surface box;
+        let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface // nécessaire pour VRD
+        let areaBox;// surface de la boite si bur intérieurs = ils sont compris dans la surface de la boite // necessaire pour structure bâtiment
+        let areaHall;// surface de la zone de travail //necessaire pour l'équipement
+            areaHall =inputAreaHall;
+            areaBox= inputAreaBox;
+            areaBuilding = areaBox+areaOfficesGroundOutside;
+                        
+        console.log(areaHall);
+        console.log(areaOfficesGroundInside);
+        console.log(areaBox);
+        console.log(areaOfficesGroundOutside);
+        console.log(areaBuilding);
+    
         // Calcul Surface hall
-        inputLengthHall==0? inputLengthHall=(Math.sqrt(inputAreaBox)):inputLengthHall ; 
-        inputWidthHall==0? inputWidthHall=(Math.sqrt(inputAreaBox)):inputWidthHall ; 
-        inputAreaBox==0? inputAreaBox= inputLengthHall*inputWidthHall:inputAreaBox;
+        let lengthHall;
+        let widthHall;
+        inputLengthHall==0? lengthHall=(Math.sqrt(inputAreaBox)):lengthHall=inputLengthHall ; 
+        inputWidthHall==0? widthHall=(Math.sqrt(inputAreaBox)):widthHall=inputWidthHall ; 
         
-        let inputAreaHall
-        if (inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-            inputAreaHall = inputAreaBox-inputAreaOfficesGroundInside;
-        }
-        if (inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-            inputAreaHall = inputAreaBox-inputAreaOfficesGroundInside;
-        }
-        if (inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-            inputAreaHall = inputAreaBox;
-        };
-        if (inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside==0){
-            inputAreaHall = inputAreaBox;
-        };
+        let areaHall
+            inputAreaOfficesGroundInside>0?areaHall = inputAreaBox-inputAreaOfficesGroundInside:areaHall = inputAreaBox;
+        console.log(lengthHall);
+        console.log(widthHall);
+        console.log(areaHall);
         
         // Calcul Massif de fondations Hall
         let numberFondationBlockHall;
-        if (inputWidthHall/30<1){
-            numberFondationBlockHall= (Math.ceil((inputLengthHall/6)+1)*2)+(Math.ceil(inputWidthHall/6)*2);
+        if (widthHall/30<1){
+            numberFondationBlockHall= (Math.ceil((lengthHall/6)+1)*2)+(Math.ceil(widthHall/6)*2);
         }
         else{
-            numberFondationBlockHall= Math.ceil((inputLengthHall/6)+1)*Math.ceil(inputWidthHall/30+1)+Math.ceil((inputWidthHall/6)*2);    
+            numberFondationBlockHall= Math.ceil((lengthHall/6)+1)*Math.ceil(widthHall/30+1)+Math.ceil((widthHall/6)*2);    
         };
 
-        console.log(inputAreaHall);
-        console.log(inputLengthHall);
-        console.log(inputWidthHall);
         console.log(numberFondationBlockHall);
 
     // Calcul Spécificités_________________________________________________
@@ -313,8 +317,14 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         // Calcul Pont roulant :
 
         // Calcul Niveleur de quai :
+            let areaRoadAndUtilitiesDockShelter;
+                inputNumberDockShelter>0?                    areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*(5*35+20*5)) :areaRoadAndUtilitiesDockShelter=0;// 5*35+20*5 c'est la surface de VRD nécessaire en cas de quai soit 5 m de large par 30 m de long devant le quai + 20 x5 nécessaire pour la mise à quai
+            console.log(areaRoadAndUtilitiesDockShelter);
         
         // Calcul Porte Sectionnelle de plain pied :
+            let areaRoadAndUtilitiesFloorSectionelDoor;
+                inputNumberFloorSectionalDoor>0?areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)):areaRoadAndUtilitiesFloorSectionelDoor=0;// 5*20 c'est la surface de VRD nécessaire en cas de porte de plain pied soit 5 m de large par 20 m de long devant la porte / pas de surface supplémentaire comptée pour la mise à la porte car souvent couplée avec les quais et donc utilisation de cette surface
+            console.log(areaRoadAndUtilitiesFloorSectionelDoor);
         
         // Calcul Stockage extérieur :
 
@@ -333,39 +343,14 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         // Calcul  ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
 
         // Calcul Terrain________________________________________________________
-
             //Calcul pour le cas où on ne connait pas la surface de VRD
-                let areaRoadAndUtilitiesDockShelter;
-                let areaRoadAndUtilitiesFloorSectionelDoor;
-
-                if (inputNumberDockShelter>0 && inputNumberFloorSectionalDoor>0) {
-                    areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*5*35+20*5);
-                    areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20));
-                }
-                if (inputNumberDockShelter>0 && inputNumberFloorSectionalDoor<=0) {
-                    areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*5*20+20*20);
-                    areaRoadAndUtilitiesFloorSectionelDoor =0;
-                }
-                if (inputNumberDockShelter<=0 && inputNumberFloorSectionalDoor>0) {
-                    areaRoadAndUtilitiesDockShelter=0;
-                    areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)+20*5);
-                }
-                if (inputNumberDockShelter<=0 && inputNumberFloorSectionalDoor<=0) {
-                    areaRoadAndUtilitiesDockShelter=0;
-                    areaRoadAndUtilitiesFloorSectionelDoor=0;
-                };
-            console.log(areaRoadAndUtilitiesDockShelter);
-            console.log(areaRoadAndUtilitiesFloorSectionelDoor);
-            console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
-
-            //calcul de la surface du terrain quand elle n'est pas connue
                 let areaGround;
                 switch(choiceAreaGround){
                     case'yes':
                     areaGround = (inputAreaGround);
                     break;
                     case'no':
-                    areaGround =(inputAreaBox+inputAreaOfficesGroundOutside+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2)))*1.2;
+                    areaGround =(inputAreaBox+inputAreaOfficesGroundOutside+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2)))*1.2;
                     break;
                     };
                 console.log(areaGround);
@@ -375,6 +360,8 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let areaRoadAndUtilities;
             let areaBuilding;
             let areaPlantations;
+
+            areaBuilding= inputAreaBox+inputAreaOfficesGroundOutside;
 
             switch(choiceAreaRoadAndUtilities){
                 case'yes':
@@ -401,22 +388,22 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 break;
                 case'no':
                     if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                    areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));// quand on ne connait pas la surface de voiries, elle est calculé en fonction des quais, portes sectionneLles, stockage ext et besoin de parking des bureaux
+                    areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));// quand on ne connait pas la surface de voiries, elle est calculé en fonction des quais, portes sectionneLles, stockage ext et besoin de parking des bureaux
                     areaBuilding = inputAreaBox;
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                 }
                 if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
                     areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                     }
                 if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
                     areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                     }
                 if (choiceOfficesInside==='no' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
                     areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                     }
@@ -445,7 +432,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
             console.log(costFondationBlockHall);
         //Coût Gros Oeuvre Hall
-            let costConcreteWorkHall=ratioConcreteWorkHall*inputAreaHall;
+            let costConcreteWorkHall=ratioConcreteWorkHall*areaHall;
             console.log(costConcreteWorkHall);
         //Coût Structure métallique Hall
             let costMetalFrameHall=ratioMetalFrameHall*inputAreaBox;
@@ -455,18 +442,17 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(costRoofHall);
         //Coût Bardage Hall
         //  ATTENTION NE TIENT PAS COMPTE DE BARDAGE HAUT DE GAMME POUR LE HALL
-            let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((inputLengthHall+inputWidthHall)*2*inputHeightHallTotal-inputLengthOfficesOutside*inputHeightOfficesOutside-inputLengthOfficesInside*inputHeightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
+            let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((lengthHall+widthHall)*2*inputHeightHallTotal-inputLengthOfficesOutside*heightOfficesOutside-inputLengthOfficesInside*heightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
             console.log(costSidingPanelSimpleHall);
         //Coût Dallage Hall
-            let costConcreteSlabHall=ratioConcreteSlabHall*inputAreaHall;
+            let costConcreteSlabHall=ratioConcreteSlabHall*areaHall;
             console.log(costConcreteSlabHall);
         //Coût portes et quais Hall
-            let costRescueDoors=ratioRescueDoors*(Math.ceil(((inputLengthHall+inputWidthHall)*2)/45));
+            let costRescueDoors=ratioRescueDoors*(Math.ceil(((lengthHall+widthHall)*2)/45));
             console.log(costRescueDoors);
         //Coût Electricité Hall
-                let costElectricityHall=ratioElectricityHall*inputAreaHall;
-                choiceGreenRate.checked===true?
-                costElectricityHall=ratioElectricityHall*inputAreaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*inputAreaHall;
+                let costElectricityHall;
+                choiceGreenRate.checked===true?                costElectricityHall=ratioElectricityHall*areaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*areaHall;
                 console.log(costElectricityHall);
 
     // COUTBUREAUX
@@ -487,10 +473,10 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let costFondationBlockOffices =ratioFondationBlockOffices*numberFondationBlockOffices
             console.log(costFondationBlockOffices);
         //Coût Gros Oeuvre Offices
-            let costConcreteWorkOffices=ratioConcreteWorkOffices*inputAreaOfficesInside+ratioConcreteWorkOffices*inputAreaOfficesOutside;
+            let costConcreteWorkOffices=ratioConcreteWorkOffices*areaOfficesInside+ratioConcreteWorkOffices*areaOfficesOutside;
             console.log(costConcreteWorkOffices);
         //Coût Structure métallique Offices
-            let costMetalFrameOffices=ratioMetalFrameOffices*(inputAreaOfficesInside)+ratioMetalFrameOffices*(inputAreaOfficesOutside);
+            let costMetalFrameOffices=ratioMetalFrameOffices*(areaOfficesInside)+ratioMetalFrameOffices*(areaOfficesOutside);
             console.log(costMetalFrameOffices);
         //Coût Couverture
             let costRoofOffices=ratioRoofOffices*(inputLengthOfficesOutside*inputWidthOfficesOutside); // ne pas prendre en compte inputAreaOffices car il tient compte de la surface totale des bureaux
@@ -507,37 +493,37 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 break;
                 };
                 
-                let costSidingPanelOffices=ratioSidingPanelOffices*((inputLengthOfficesOutside+inputWidthOfficesOutside*2)*inputHeightOfficesOutside)+ratioSidingPanelOffices*((inputLengthOfficesInside)*inputHeightOfficesInside);
+                let costSidingPanelOffices=ratioSidingPanelOffices*((inputLengthOfficesOutside+inputWidthOfficesOutside*2)*heightOfficesOutside)+ratioSidingPanelOffices*((inputLengthOfficesInside)*heightOfficesInside);
 
         console.log(ratioSidingPanelOffices);
         console.log(costSidingPanelOffices);
 
         //Coût Dallage Bureaux
-            let costConcreteSlabOffices=ratioConcreteSlabOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
+            let costConcreteSlabOffices=ratioConcreteSlabOffices*(areaOfficesInside+areaOfficesOutside);
             console.log(costConcreteSlabOffices);
         //Coût Menuiserie Aluminium Bureaux
-            let costDoorsAndWindowsOffices=ratioDoorsAndWindowsOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
+            let costDoorsAndWindowsOffices=ratioDoorsAndWindowsOffices*(areaOfficesInside+areaOfficesOutside);
             console.log(costDoorsAndWindowsOffices);
         //Coût Plomberie Bureaux
-            let costPlumbingOffices=ratioPlumbingOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
+            let costPlumbingOffices=ratioPlumbingOffices*(areaOfficesInside+areaOfficesOutside);
             console.log(costPlumbingOffices);
         //Coût  Chauffage des bureaux
             let costHeatingOffices
             let choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
             switch(choiceHeatingOffices){
                 case'airConditioner':
-                costHeatingOffices =ratioAirConditionningOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
+                costHeatingOffices =ratioAirConditionningOffices*(areaOfficesInside+areaOfficesOutside)
                 break;
                 case'hotWaterHeating':
-                costHeatingOffices =ratioHotWaterHeatingOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
+                costHeatingOffices =ratioHotWaterHeatingOffices*(areaOfficesInside+areaOfficesOutside)
                 break;
                 case'electricityHeating':
-                costHeatingOffices =ratioElectrityHeatingOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
+                costHeatingOffices =ratioElectrityHeatingOffices*(areaOfficesInside+areaOfficesOutside)
                 break;                
             };
             console.log(costHeatingOffices);
         //Coût Electricité Bureaux
-                let costElectricityOffices=ratioElectricityOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
+                let costElectricityOffices=ratioElectricityOffices*(areaOfficesInside+areaOfficesOutside);
                 console.log(costElectricityOffices);
         //Coût Aménagement Bureaux
             let ratioInteriorDesignOffices
@@ -550,7 +536,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 break;
                 };
                 
-                let costInteriorDesignOffices=ratioInteriorDesignOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
+                let costInteriorDesignOffices=ratioInteriorDesignOffices*(areaOfficesInside+areaOfficesOutside);
                 
             console.log(ratioInteriorDesignOffices);
             console.log(costInteriorDesignOffices);
@@ -580,7 +566,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(inputAreaOfficesGroundOutside);
             console.log(costSoilReinforcement);
         //Coût Cloison(s) intérieure(s)
-            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHallTotal)*inputNumberPartitionInside;
+            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(widthHall*inputHeightHallTotal)*inputNumberPartitionInside;
 
             let choicePartitionInside = document.getElementById("choicePartitionInside").value;
             switch(choicePartitionInside){
@@ -599,8 +585,8 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let addedValueOverHeadCraneFondations;
             switch(choiceOverHeadCrane){
                 case'yes':
-                    polesUnderOverHeadCrane = (Math.ceil((inputLengthHall/6)+1)*2);
-                    //lengthRaceway = ((inputLengthHall)*2); Neutralisé travail du poseur de pont
+                    polesUnderOverHeadCrane = (Math.ceil((lengthHall/6)+1)*2);
+                    //lengthRaceway = ((lengthHall)*2); Neutralisé travail du poseur de pont
                     addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputHeightHallTotal*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
                     addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole*inputNumberOverHeadCrane;
                     break;
@@ -692,7 +678,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         
         //Coût Chauffage Hall
             //  ATTENTION TIENT COMPTE UNIQUEMENT DU CHAUFFAGE AEROTHERME GAZ 
-            let costGasHeatingHall=ratioGasHeatingHall*inputAreaHall;
+            let costGasHeatingHall=ratioGasHeatingHall*areaHall;
             switch(choiceHeatingHall){
                 case'yes':
                 costGasHeatingHall
@@ -703,7 +689,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             };
             console.log(costGasHeatingHall);
         //Coût RIA Hall
-            let costFireNetworkHall=ratioFireNetworkHall*inputAreaHall;
+            let costFireNetworkHall=ratioFireNetworkHall*areaHall;
             switch(choiceFireNetworkHall){
                 case'yes':
                 costFireNetworkHall
