@@ -151,74 +151,74 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
     // Récupération Spécificités_________________________________________________
         // Récupération Renfort de sol :
-            let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement");
+            let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement").value;
 
         // Récupération Cloison intérieure
             let inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
 
         // Récupération Pont roulant :
-            let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane"); 
+            let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
             let inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value; 
 
         // Récupération Niveleur de quai :
-            let choiceDockShelter = document.getElementById("choiceDockShelter"); 
+            let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
             let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
         
         // Récupération Porte Sectionnelle de plain pied :
-            let choiceFloorSectionalDoor = document.getElementById("choiceFloorSectionalDoor"); 
+            let choiceFloorSectionalDoor = document.getElementById("choiceFloorSectionalDoor").value; 
             let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
         
         // Récupération Stockage extérieur :
-            let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor"); 
+            let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
             let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
 
         // Récupération Raccordement électrique
-            //const choiceBlueRate = document.getElementById('choiceBlueRate');récupérée dans le texte des erreurs
-            //const choiceYellowRate = document.getElementById('choiceYellowRate');récupérée dans le texte des erreurs
-            //const choiceGreenRate = document.getElementById('choiceGreenRate');récupérée dans le texte des erreurs
+            //const choiceBlueRate = document.getElementById('choiceBlueRate').value;récupérée dans le texte des erreurs
+            //const choiceYellowRate = document.getElementById('choiceYellowRate').value;récupérée dans le texte des erreurs
+            //const choiceGreenRate = document.getElementById('choiceGreenRate').value;récupérée dans le texte des erreurs
             let inputBlueRate = document.getElementById("inputBlueRate").value; 
             let inputYellowRate = document.getElementById("inputYellowRate").value; 
 
         // Récupération Chauffage Hall
-            let choiceHeatingHall = document.getElementById("choiceHeatingHall");
+            let choiceHeatingHall = document.getElementById("choiceHeatingHall").value;
 
         // Récupération Ria Hall
             let choiceFireNetworkHall = document.getElementById("choiceFireNetworkHall").value;
 
         // Récupération Open Space dans les bureaux
-            let choiceOpenSpace = document.getElementById("choiceOpenSpace");
+            let choiceOpenSpace = document.getElementById("choiceOpenSpace").value;
 
         // Récupération Bardage luxe pour les bureaux
-            let choicePanelOffices = document.getElementById("choicePanelOffices");
+            let choicePanelOffices = document.getElementById("choicePanelOffices").value;
             
          // Récupération Ascenseur :
-            let choiceElevator = document.getElementById("choiceElevator"); 
+            let choiceElevator = document.getElementById("choiceElevator").value; 
 
         // Récupération  ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
 
         // Récupération Terrain________________________________________________________
-            let choiceGroundOwner = document.getElementById("choiceGroundOwner");
+            let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
             let choiceAreaGround = document.getElementById("choiceAreaGround").value;
             //let inputAreaGround = document.getElementById("inputAreaGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
-            let choiceCostGround = document.getElementById("choiceCostGround");
+            let choiceCostGround = document.getElementById("choiceCostGround").value;
             //let inputCostGround = document.getElementById("inputCostGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
 
         // Récupération VRD________________________________________________________
-            let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities");
+            let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
             let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
 
         // Récupération Tout compris_________________________________
-            let choiceAllIn = document.getElementById("choiceAllIn");
+            let choiceAllIn = document.getElementById("choiceAllIn").value;
         // Récupération TAxes PC___________________________
-            let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit");
+            let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit").value;
         // Récupération Insurance________________________________________
-            let choiceInsurance = document.getElementById("choiceInsurance");
+            let choiceInsurance = document.getElementById("choiceInsurance").value;
         // Récupération Maitrise d'Oeuvre_____________________
-            let choiceManagement = document.getElementById("choiceManagement");
+            let choiceManagement = document.getElementById("choiceManagement").value;
         // Récupération Agence commerciale____________________
-            let choiceBusinessAgency = document.getElementById("choiceBusinessAgency");
+            let choiceBusinessAgency = document.getElementById("choiceBusinessAgency").value;
         // Récupération Promoteur____________________________
-            let choiceDevelopper = document.getElementById("choiceDevelopper");
+            let choiceDevelopper = document.getElementById("choiceDevelopper").value;
             
 // _____________________________________________________________________________
 //CALCULS CARACTERISTIQUES BATIMENTS
@@ -352,14 +352,6 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     areaGround =(areaBuilding+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesGroundInside+inputAreaOfficesGroundOutside)/15)*(2.5*8*1.2)))*1.2;
                     break;
                     };
-                    console.log(choiceAreaGround);
-                    console.log(inputAreaGround);
-                    console.log(areaBuilding);
-                    console.log(areaRoadAndUtilitiesDockShelter);
-                    console.log(areaRoadAndUtilitiesFloorSectionelDoor);
-                    console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
-                    console.log(inputAreaOfficesGroundInside);
-                    console.log(inputAreaOfficesGroundOutside);
                 console.log(areaGround);
 
         // Calcul VRD________________________________________________________
