@@ -156,7 +156,7 @@ function functionBudget() {
      
      // Calcul hauteur bâtiment
           // calcul au m²
-               //pas de calcul récupéré
+               //pas de calcul>récupéré
           //calcul détaillé
                let heightHallTotal = inputHeightHallUseful+1.80; //Pannes 0.3+bac acier 0.2+laine de roche 0.2+ acrotére 0.5 + pente 3% pour distance 20m (pris arbitrairement)
                console.log(inputHeightHallUseful);
@@ -170,32 +170,29 @@ function functionBudget() {
           // calcul au m²
                // Calcul vérification Show room intérieur ou extérieur
                     // Calcul Vérification du choix de showroom Intérieur
-                    let valueShowroomInside = choiceShowroomInside.value;
                     let answer41 = [0,inputAreaShowroomInside];
-                    switch(valueShowroomInside){
+                    let areaShowroomInside;
+                    switch(choiceShowroomInside){
                     case'no':
-                    answer41= answer41[0];
+                    areaShowroomInside= answer41[0];
                     break;
                     case'yes':
-                    answer41= answer41[1];
+                    areaShowroomInside= answer41[1];
                     break;
                     };
-                    inputAreaShowroomInside = Number(answer41);
                     // Calcul Vérification du choix de showroom Extérieur
-                    let valueShowroomOutside = choiceShowroomOutside.value;
                     let answer42 = [0,inputAreaShowroomOutside];
-                    switch(valueShowroomOutside){
+                    let areaShowroomOutside;
+                    switch(choiceShowroomOutside){
                          case'no':
-                         answer42= answer42[0];
+                         areaShowroomOutside= answer42[0];
                          break;
                          case'yes':
-                         answer42= answer42[1];
+                         areaShowroomOutside= answer42[1];
                          break;
                     };
-                    inputAreaShowroomOutside = Number(answer42);
-               
-               console.log(inputAreaShowroomInside);
-               console.log(inputAreaShowroomOutside);
+               console.log(areaShowroomInside);
+               console.log(areaShowroomOutside);
 
                //Calcul de la surface des bureaux administratifs
                let officesAdministrationInsideDimensions ;
@@ -251,8 +248,8 @@ function functionBudget() {
                let officesDimensionsInside;
                let officesDimensionsOutside;
 
-                    officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+inputAreaShowroomInside);
-                    officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+inputAreaShowroomOutside);
+                    officesDimensionsInside=(officesAdministrationInsideDimensions+officesSocialDimensionsInside+areaShowroomInside);
+                    officesDimensionsOutside=(officesAdministrationOutsideDimensions+officesSocialDimensionsOutside+areaShowroomOutside);
 
                console.log(officesDimensionsInside);
                console.log(officesDimensionsOutside);
@@ -348,7 +345,7 @@ function functionBudget() {
                console.log(officesDimensionsOutside);
                console.log(areaOfficesFloorOutside);
 
-               // Calcul  hauteur des bureaux intérieurs
+               // Calcul  hauteur des bureaux Extérieurs
                let heightOfficesOutside;
                     if (areaOfficesGroundOutside==0 && areaOfficesFloorOutside==0) {
                          heightOfficesOutside = 0;
@@ -375,11 +372,18 @@ function functionBudget() {
 
           
           // Calcul Niveleur de quais
-          
+               let areaRoadAndUtilitiesDockShelter;
+               inputNumberDockShelter>0?areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*(5*35+20*5)) :areaRoadAndUtilitiesDockShelter=0;// 5*35+20*5 c'est la surface de VRD nécessaire en cas de quai soit 5 m de large par 30 m de long devant le quai + 20 x5 nécessaire pour la mise à quai
+          console.log(areaRoadAndUtilitiesDockShelter);
+
           // Calcul Porte Sectionnelle de Plain-Pied
+               let areaRoadAndUtilitiesFloorSectionelDoor;
+               inputNumberFloorSectionalDoor>0?areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)):areaRoadAndUtilitiesFloorSectionelDoor=0;// 5*20 c'est la surface de VRD nécessaire en cas de porte de plain pied soit 5 m de large par 20 m de long devant la porte / pas de surface supplémentaire comptée pour la mise à la porte car souvent couplée avec les quais et donc utilisation de cette surface
+          console.log(areaRoadAndUtilitiesFloorSectionelDoor);
 
           // Calcul Stockage extérieur
-          inputAreaRoadAndUtilitiesStorageOutdoor === ""? inputAreaRoadAndUtilitiesStorageOutdoor=0:inputAreaRoadAndUtilitiesStorageOutdoor;
+          // déclarée dans la récupération des données
+          inputAreaRoadAndUtilitiesStorageOutdoor === ""?inputAreaRoadAndUtilitiesStorageOutdoor=0:inputAreaRoadAndUtilitiesStorageOutdoor;
 
           console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
 
@@ -397,33 +401,11 @@ function functionBudget() {
 
           // Calcul   surface avec ICPE
 
+
      // Calcul VRD______________________
           //Si on connait le terrain > inputAreaGround définie au début de la fonction
 
           // Calcul  Si on ne connait pas le terrain :Calcul du terrain necessaire lorsque le choix non a été fait quand on ne connait pas son terrain , peut être fait aprés détermination des variables areaBuilding / officesDimensionsOutside et inside / areaRoadAndUtilities est calculée
-
-          let CalculationNeedAreaGround;
-          let groundValue
-          
-          let areaRoadAndUtilitiesDockShelter;
-          let areaRoadAndUtilitiesFloorSectionelDoor;
-
-          if (inputNumberDockShelter>0 && inputNumberFloorSectionalDoor>0) {
-               areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*5*35+20*5);
-               areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20));
-          }
-          if (inputNumberDockShelter>0 && inputNumberFloorSectionalDoor<=0) {
-               areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*5*20+20*20);
-               areaRoadAndUtilitiesFloorSectionelDoor =0;
-          }
-          if (inputNumberDockShelter<=0 && inputNumberFloorSectionalDoor>0) {
-               areaRoadAndUtilitiesDockShelter=0;
-               areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)+20*5);
-          }
-          if (inputNumberDockShelter<=0 && inputNumberFloorSectionalDoor<=0) {
-               areaRoadAndUtilitiesDockShelter=0;
-               areaRoadAndUtilitiesFloorSectionelDoor=0;
-          };
 
           let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
 
@@ -436,20 +418,42 @@ function functionBudget() {
      console.log(areaRoadAndUtilitiesFloorSectionelDoor);
      console.log(areaRoadAndUtilities);
 
-     // Calcul TERRAIN______________________
+     // Calcul TERRAIN
+          let groundValue;
 
-          if (inputAreaGround===0){
-               CalculationNeedAreaGround = ((areaBuilding+areaRoadAndUtilities)*1.2);
-          }
-          else {
-               CalculationNeedAreaGround = 0;
+          switch(choiceGroundOwner){
+               case'no':
+               groundValue = ((areaBuilding+areaRoadAndUtilities)*1.2);
+               break;
+               case'yes':
+               groundValue =inputAreaGround;
+               break;
           };
           
-          (inputAreaGround===0)? groundValue= CalculationNeedAreaGround: groundValue= inputAreaGround;
-          
      console.log(inputAreaGround);
-     console.log(CalculationNeedAreaGround);
      console.log(groundValue);
+
+     //Calcul TERRAIN dans le cas ICPE
+
+     const areaIcpe = Math.round((Math.pow(((Math.sqrt(areaBox))+40),2)));
+     let additionalGroundAreaIcpe;
+
+     switch(choiceIcpe){
+          case'no':
+          additionalGroundAreaIcpe= 0;
+          // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
+          break;
+          case'yes':
+          groundValue>areaIcpe?additionalGroundAreaIcpe=0:additionalGroundAreaIcpe=areaIcpe-groundValue;
+          // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
+          break;
+          case'iDontKnow':
+          additionalGroundAreaIcpe= 0;
+          // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
+          break; 
+     };
+     console.log(additionalGroundAreaIcpe);
+
 
      // Calcul  Espaces Vert
           let areaPlantations
@@ -480,7 +484,7 @@ function functionBudget() {
                }
                // coût bureaux intérieurs Cloisonnés
                if (choiceOpenspaceOfficesInside==="no"){
-               costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace;
+               costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-areaShowroomInside)+areaShowroomInside*costOfficesCompanyInsideOpenSpace;
                }
                }
           // coût bureaux extérieur pas intérieur
@@ -491,7 +495,7 @@ function functionBudget() {
                }
                // coût  bureaux extérieurs Cloisonnés
                if (choiceOpenspaceOfficesOutside==="no"){
-                    costOffices = costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+                    costOffices = costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-areaShowroomOutside)+areaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
                }
                }
           // coût bureaux extérieur et intérieur
@@ -504,18 +508,18 @@ function functionBudget() {
                     }
                     // coût  bureaux extérieurs cloisonnés
                     else if (choiceOpenspaceOfficesOutside==="no"){
-                    costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+                    costOffices = officesDimensionsInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-areaShowroomOutside)+areaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
                     }
                }
                // coût  bureaux intérieurs Cloisonné
                else if (choiceOpenspaceOfficesInside==="no"){
                     // coût  bureaux extérieurs Openspace
                     if (choiceOpenspaceOfficesOutside==="yes"){
-                    costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
+                    costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-areaShowroomInside)+areaShowroomInside*costOfficesCompanyInsideOpenSpace+ costOfficesCompanyOutsideOpenSpace*(officesDimensionsOutside);
                     }
                     // coût  bureaux extérieurs Cloisonnés
                     else if (choiceOpenspaceOfficesOutside==="no"){
-                    costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-inputAreaShowroomInside)+inputAreaShowroomInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-inputAreaShowroomOutside)+inputAreaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
+                    costOffices = costOfficesCompanyInsidePartitioned*(officesDimensionsInside-areaShowroomInside)+areaShowroomInside*costOfficesCompanyInsideOpenSpace+costOfficesCompanyOutsidePartitioned*(officesDimensionsOutside-areaShowroomOutside)+areaShowroomOutside*costOfficesCompanyOutsideOpenSpace;
                     }
                }
           }
@@ -565,7 +569,6 @@ function functionBudget() {
 
           console.log(answer8);
           console.log(choicePartitionInside);
-          console.log(valuePartitionInside);
           console.log(inputNumberPartitionInside);
           console.log(ratioPartitionInsideSidingPanel);
           console.log(inputWidthHall);
@@ -692,33 +695,6 @@ function functionBudget() {
           console.log(costFireNetworkHall);
 
           // Coût  spécifité bâtiment ICPE
-               // calcul de la surface nécessaire en cas d'Icpe  et comparaison avec la surface terrain pour voir si c'est suffisant
-          
-               const areaIcpe = Math.round((Math.pow(((Math.sqrt(areaBox))+40),2)));
-
-               sufficientGround = [(Number(groundValue)- areaIcpe),(Number(CalculationNeedAreaGround)- areaIcpe)];
-               groundValue === 0? sufficientGround = sufficientGround[1]:sufficientGround = sufficientGround[0];
-
-               let additionalGroundAreaIcpe=[0, sufficientGround];
-
-               switch(choiceIcpe){
-                    case'no':
-                    additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
-                    // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
-                    break;
-                    case'yes':
-                    additionalGroundAreaIcpe= additionalGroundAreaIcpe[1];
-                    // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
-                    break;
-                    case'iDontKnow':
-                    additionalGroundAreaIcpe= additionalGroundAreaIcpe[0];
-                    // console.log(additionalGroundAreaIcpe);// vérification de la valeur de terrain supplémentaire nécessaire
-                    break; 
-               };
-               
-               //  calcul de la plus value terrain si le bâtiment est ICPE rubrique 1510 et 2663
-               // console.log(addedValueIcpe);
-               additionalGroundAreaIcpe = Math.abs(additionalGroundAreaIcpe);
 
                let addedValueIcpe =[((inputCostGround/groundValue)*additionalGroundAreaIcpe),(inputCostGroundByRegion*additionalGroundAreaIcpe)];
                
@@ -727,10 +703,8 @@ function functionBudget() {
 
                additionalGroundAreaIcpe!== 0 ? addedValueIcpe : addedValueIcpe=0;
 
-          console.log(CalculationNeedAreaGround);
           console.log(groundValue);
           console.log(areaIcpe);
-          console.log(sufficientGround);
           console.log(additionalGroundAreaIcpe);
           console.log(addedValueIcpe); //vérification des valeurs de addedValueIcpe
           console.log(inputCostGround);
@@ -741,7 +715,7 @@ function functionBudget() {
 
                // je ne connais pas le coût et la surface du terrain
                let costCalculationNeedAreaGround;
-               inputAreaGround===0? costCalculationNeedAreaGround= Number(CalculationNeedAreaGround)*inputCostGroundByRegion: costCalculationNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
+               inputAreaGround===0? costCalculationNeedAreaGround= Number(groundValue)*inputCostGroundByRegion: costCalculationNeedAreaGround=0;//on ne connait pas le coût du terrain soit inputAreaGround===0 alors on calcul la valeur 
 
           //Coût VRD
                let costRoadAndUtilities;
@@ -920,7 +894,7 @@ function functionBudget() {
           z10 = answerChoiceIcpe.no;
 
 
-          const answerAreaGround=[areaIcpe,CalculationNeedAreaGround];
+          const answerAreaGround=[areaIcpe,groundValue];
           let u10= answerAreaGround[0];
           let v10= answerAreaGround[1];
           
@@ -967,7 +941,7 @@ function functionBudget() {
                
      <ul>
      <h2>Avec les conditions suivantes :</h2>
-     <li><h4> vous avez besoin de ${CalculationNeedAreaGround} m² minimum de terrain sans classement ICPE. les dimensions de votre terrain sont ${x1} avec un stockage extérieur de ${inputAreaRoadAndUtilitiesStorageOutdoor}m2</h4></li>
+     <li><h4> vous avez besoin de ${groundValue} m² minimum de terrain sans classement ICPE. les dimensions de votre terrain sont ${x1} avec un stockage extérieur de ${inputAreaRoadAndUtilitiesStorageOutdoor}m2</h4></li>
      <li><h4>${x2}</h4></li>
      <li><h4>${y31}</h4></li>
      <li><h4>${y32}</h4></li>

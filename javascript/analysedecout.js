@@ -316,11 +316,14 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         // Calcul Pont roulant :
 
         // Calcul Niveleur de quai :
+        //utilisé si on ne connait pas la surface de VRD
             let areaRoadAndUtilitiesDockShelter;
-                inputNumberDockShelter>0?                    areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*(5*35+20*5)) :areaRoadAndUtilitiesDockShelter=0;// 5*35+20*5 c'est la surface de VRD nécessaire en cas de quai soit 5 m de large par 30 m de long devant le quai + 20 x5 nécessaire pour la mise à quai
+                inputNumberDockShelter>0?areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*(5*35+20*5)) :areaRoadAndUtilitiesDockShelter=0;// 5*35+20*5 c'est la surface de VRD nécessaire en cas de quai soit 5 m de large par 30 m de long devant le quai + 20 x5 nécessaire pour la mise à quai
             console.log(areaRoadAndUtilitiesDockShelter);
         
         // Calcul Porte Sectionnelle de plain pied :
+        //utilisé si on ne connait pas la surface de VRD
+
             let areaRoadAndUtilitiesFloorSectionelDoor;
                 inputNumberFloorSectionalDoor>0?areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)):areaRoadAndUtilitiesFloorSectionelDoor=0;// 5*20 c'est la surface de VRD nécessaire en cas de porte de plain pied soit 5 m de large par 20 m de long devant la porte / pas de surface supplémentaire comptée pour la mise à la porte car souvent couplée avec les quais et donc utilisation de cette surface
             console.log(areaRoadAndUtilitiesFloorSectionelDoor);
