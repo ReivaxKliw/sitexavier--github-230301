@@ -154,7 +154,9 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement").value;
 
         // Récupération Cloison intérieure
+            let choicePartitionInside = document.getElementById("choicePartitionInside").value;
             let inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
+
 
         // Récupération Pont roulant :
             let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
@@ -190,6 +192,10 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
         // Récupération Bardage luxe pour les bureaux
             let choicePanelOffices = document.getElementById("choicePanelOffices").value;
+
+        // Récupération  chauffage des bureaux
+            let choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
+
             
          // Récupération Ascenseur :
             let choiceElevator = document.getElementById("choiceElevator").value; 
@@ -270,7 +276,41 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 heightOfficesOutside = 2*4.5;
             }
             console.log(heightOfficesOutside);
+        // Calcul  escaliers des bureaux
+            let numberStair;
+            if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside==0){
+                numberStair=1;
+            }
+            else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside>0){
+                numberStair=1;
+            }
+            else if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside>0){
+                numberStair=2;
+            }
+            else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside==0){
+                numberStair=0;
+            }
+        console.log(numberStair);
 
+        //Calcul Massif de fondations des bureaux
+
+            let numberFondationBlockOffices;
+
+            if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30<1){
+                numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
+            } 
+            if (inputWidthOfficesInside/30>1 && inputWidthOfficesOutside/30<1){
+                numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) +(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
+            } 
+            if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30>1){
+                numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);
+            } 
+            else{
+                numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) + Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);    
+            }
+        console.log(numberFondationBlockOffices);
+
+        
     // Calcul Hall du Bâtiment
         // Calcul de la surface sol totale et surface box;
         let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface // nécessaire pour VRD
@@ -362,52 +402,14 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let areaRoadAndUtilities;
             let areaPlantations;
 
-            areaBuilding= areaBox+inputAreaOfficesGroundOutside;
-
             switch(choiceAreaRoadAndUtilities){
                 case'yes':
-                if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no' || inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
                     areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                    areaBuilding = areaBox;
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                }
-                if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                    areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                    areaBuilding = areaBox+inputAreaOfficesGroundOutside;
-                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
-                if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                    areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                    areaBuilding = areaBox+inputAreaOfficesGroundOutside;
-                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
-                if (choiceOfficesInside==='no' && choiceOfficesOutside==='no' || inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                    areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                    areaBuilding = areaBox+inputAreaOfficesGroundOutside;
-                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
                 break;
                 case'no':
-                    if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                    areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));// quand on ne connait pas la surface de voiries, elle est calculé en fonction des quais, portes sectionneLles, stockage ext et besoin de parking des bureaux
-                    areaBuilding = areaBox;
-                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                }
-                if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
                     areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
-                    areaBuilding = (areaBox+inputAreaOfficesGroundOutside);
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
-                if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
-                    areaBuilding = (areaBox+inputAreaOfficesGroundOutside);
-                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
-                if (choiceOfficesInside==='no' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
-                    areaBuilding = (areaBox+inputAreaOfficesGroundOutside);
-                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
                 break;
                 };
         console.log(areaRoadAndUtilities);
@@ -458,19 +460,6 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
     // COUTBUREAUX
         //Massif de fondations
-            let numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
-            if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30<1){
-                numberFondationBlockOffices;
-            } 
-            if (inputWidthOfficesInside/30>1 && inputWidthOfficesOutside/30<1){
-                numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) +(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
-            } 
-            if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30>1){
-                numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);
-            } 
-            else{
-                numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) + Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);    
-            }
             let costFondationBlockOffices =ratioFondationBlockOffices*numberFondationBlockOffices
             console.log(costFondationBlockOffices);
         //Coût Gros Oeuvre Offices
@@ -510,7 +499,6 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             console.log(costPlumbingOffices);
         //Coût  Chauffage des bureaux
             let costHeatingOffices
-            let choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
             switch(choiceHeatingOffices){
                 case'airConditioner':
                 costHeatingOffices =ratioAirConditionningOffices*(areaOfficesInside+areaOfficesOutside)
@@ -546,30 +534,17 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             let costSoilReinforcement;
             switch(choiceSoilReinforcement){
                 case'yes':
-                if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no' ||inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                    costSoilReinforcement= ratioSoilReinforcement*(areaBox);
-                }
-                if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                    costSoilReinforcement= ratioSoilReinforcement*(areaBox+inputAreaOfficesGroundOutside);
-                }
-                if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                    costSoilReinforcement= ratioSoilReinforcement*(areaBox+inputAreaOfficesGroundOutside);
-                }
-                else if (choiceOfficesInside==='no' && choiceOfficesOutside==='no' || inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                    costSoilReinforcement= ratioSoilReinforcement*(areaBox+inputAreaOfficesGroundOutside);
-                };
+                    costSoilReinforcement= ratioSoilReinforcement*(areaBuilding);
                 break;
                 case'no':
                     costSoilReinforcement= 0;
                 break;
                 };
-            console.log(areaBox);
-            console.log(inputAreaOfficesGroundOutside);
+            console.log(areaBuilding);
             console.log(costSoilReinforcement);
         //Coût Cloison(s) intérieure(s)
             let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(widthHall*inputHeightHallTotal)*inputNumberPartitionInside;
 
-            let choicePartitionInside = document.getElementById("choicePartitionInside").value;
             switch(choicePartitionInside){
                 case'yes':
                 costPartitionInsideSidingPanel
@@ -714,27 +689,11 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 addedValueElevator = 0;
                     break;
                 };
-    console.log(addedValueElevator);
+        console.log(addedValueElevator);
         //Coût Escalier bureaux 
-            let numberStairs;
             let addedValueStair;
-            if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside==0){
-                numberStairs=1;
-                addedValueStair=costStair*numberStairs;
-        }
-            else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside>0){
-                numberStairs=1;
-                addedValueStair=costStair*numberStairs;
-        }
-            else if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside>0){
-                numberStairs=2;
-                addedValueStair=costStair*numberStairs;
-        }
-            else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside==0){
-                numberStairs=0;
-                addedValueStair=costStair*numberStairs;
-        }
-    console.log(addedValueStair);
+                addedValueStair=costStair*numberStair;
+        console.log(addedValueStair);
 
     //Coût  TERRAIN
         //coût du terrain quand il n'est pas connu
