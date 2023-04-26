@@ -348,7 +348,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
         console.log(numberFondationBlockHall);
 
-    // Calcul Spécificités_________________________________________________
+    // Calcul Spécificités
         // Calcul Renfort de sol :
 
         // Calcul Cloison intérieure
@@ -384,7 +384,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
 
         // Calcul  ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
 
-        // Calcul Terrain________________________________________________________
+        // Calcul Terrain
             //Calcul pour le cas où on ne connait pas la surface de VRD
                 let areaGround;
                 switch(choiceAreaGround){
@@ -408,7 +408,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                 break;
                 case'no':
-                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2));//idem
+                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
                     areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                 break;
                 };

@@ -159,13 +159,27 @@ function functionBudget() {
                //pas de calcul>récupéré
           //calcul HALL méthode analysedecout.js pour comparaison
                let heightHallTotal = inputHeightHallUseful+1.80; //Pannes 0.3+bac acier 0.2+laine de roche 0.2+ acrotére 0.5 + pente 3% pour distance 20m (pris arbitrairement)
-               console.log(inputHeightHallUseful);
-               console.log(heightHallTotal);
+          //comparaison des deux méthodes
+          console.log(inputHeightHallUseful);//c'est la hauteur intérieure
+          console.log(heightHallTotal);//c'est la hauteur totale utile pour m² bardage
+
+
      // Calcul SURFACE HALL
           // calcul SURFACE HALL au m²
                // calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
-          //calcul SURFACE HALL méthode analysedecout.js pour comparaison
-               // calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
+          //calculs HALL méthode analysedecout.js pour comparaison
+               // la surface sera calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
+          // Calcul Massif de fondations Hall
+          let numberFondationBlockHall;
+          if (widthHall/30<1){
+               numberFondationBlockHall= (Math.ceil((lengthHall/6)+1)*2)+(Math.ceil(widthHall/6)*2);
+          }
+          else{
+               numberFondationBlockHall= Math.ceil((lengthHall/6)+1)*Math.ceil(widthHall/30+1)+Math.ceil((widthHall/6)*2);
+          };
+
+          console.log(numberFondationBlockHall);
+
      // Calcul BUREAUX
           // calcul BUREAUX au m²
                // Calcul vérification Show room intérieur ou extérieur
@@ -301,7 +315,7 @@ function functionBudget() {
                console.log(areaBuilding);
 
           // calcul BUREAUX méthode analysedecout.js pour comparaison
-          // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux. Les constantes ne sont alors plus des inputconstante puisqu'elles sont issues de calcul
+          // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans.Ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux. Les constantes ne sont alors plus des inputconstante puisqu'elles sont issues de calcul
                // Calcul Bureaux Intérieurs
                let lengthOfficesInside;
                let widthOfficesInside;
@@ -358,8 +372,12 @@ function functionBudget() {
                     }
                console.log(heightOfficesOutside);
 
+          //comparaison des deux méthodes 
+          // je déduis des données différentes donc je ne peux pas les comparer
+     
 
-     // Calcul  Spécificités____________________________________________________
+
+     // Calcul Spécificités
           // Calcul renfort de sol
           
           // Calcul  cloison intérieure
@@ -403,35 +421,23 @@ function functionBudget() {
           // fait dans le terrain car j'ai besoin de connaître areaGround
 
 
-     // Calcul VRD______________________
+     // Calcul VRD
           //Si on connait le terrain > inputAreaGround définie au début de la fonction
 
-          // Calcul  Si on ne connait pas le terrain :Calcul du terrain necessaire lorsque le choix non a été fait quand on ne connait pas son terrain , peut être fait aprés détermination des variables areaBuilding / officesDimensionsOutside et inside / areaRoadAndUtilities est calculée
+          // Calcul  Si on ne connait pas le terrain :Calcul du terrain necessaire lorsque le choix non a été fait quand on ne connait pas son terrain , peut  être fait aprés détermination des variables areaBuilding / officesDimensionsOutside et inside / areaRoadAndUtilities est calculée
           // calcul VRD m²
                let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
 
-          console.log(inputClercksOfficesInside);
-          console.log(inputClercksOfficesOutside);
-          console.log(inputWorkersOfficesInside);
-          console.log(inputWorkersOfficesOutside);
-          console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
-          console.log(areaRoadAndUtilitiesDockShelter);
-          console.log(areaRoadAndUtilitiesFloorSectionelDoor);
-          console.log(areaRoadAndUtilities);
-
           //calcul VRD méthode analysedecout.js pour comparaison
+ // ne sert à rien peut être supprimé méthode de calcul identique > la seule différenciation se fait sur la surface de bureaux mais la surface des bureaux dans les deux cas est déduite du nombre de personnes 
 
                let areaOfficesInside= officesDimensionsInside;
                let areaOfficesOutside= officesDimensionsOutside;
 
-               let areaRoadAndUtilities2 = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*1.2))*1.2;//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
-
-          console.log(areaOfficesInside);
-          console.log(areaOfficesOutside);
-          console.log(inputAreaRoadAndUtilitiesStorageOutdoor);
-          console.log(areaRoadAndUtilitiesDockShelter);
-          console.log(areaRoadAndUtilitiesFloorSectionelDoor);
+               let areaRoadAndUtilities2 = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
+          //comparaison des deux méthodes
           console.log(areaRoadAndUtilities);
+          console.log(areaRoadAndUtilities2);
 
      // Calcul TERRAIN
           //Calcul TERRAIN au m²
@@ -445,20 +451,21 @@ function functionBudget() {
                     areaGround = ((areaBuilding+areaRoadAndUtilities)*1.2);
                     break;
                };
-               
-          console.log(inputAreaGround);
-          console.log(areaGround);
-
           // calcul TERRAIN méthode analysedecout.js pour comparaison
+ // ne sert à rien méthode de calcul identique > la seule différenciation se fait sur la surface de bureaux mais la surface des bureaux dans les deux cas est déduite du nombre de personnes 
+          let areaGround2;
                switch(choiceAreaGround){
                     case'yes':
-                    areaGround = inputAreaGround;
+                    areaGround2 = inputAreaGround;
                     break;
                     case'no':
-                    areaGround =(areaBuilding+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesGroundInside+areaOfficesGroundOutside)/15)*(2.5*8*1.2)))*1.2;
+                    areaGround2 =((areaBuilding+areaRoadAndUtilities)*1.2);
                     break;
                };
+          //comparaison des deux méthodes
           console.log(areaGround);
+          console.log(areaGround2);
+          
 
      //Calcul TERRAIN dans le cas ICPE
 
@@ -488,18 +495,50 @@ function functionBudget() {
      console.log(areaRoadAndUtilities);
      console.log(areaPlantations);
 
-//COUTS ____________________________________________________________
-     // Coût HALL
+//COUTS
+     // Coût HALL au m²
           //Coût plus value hauteur bâtiment
-          let addedValueHeight;
-          if(inputHeightHallUseful>7){
-               addedValueHeight=(inputHeightHallUseful-7)*costHeightAbove7;
-          }
-          else {
-               addedValueHeight=0;
-          };
+               let addedValueHeight;
+               if(inputHeightHallUseful>7){
+                    addedValueHeight=(inputHeightHallUseful-7)*costHeightAbove7;
+               }
+               else {
+                    addedValueHeight=0;
+               };
           //Coût hALL
-          const costBox = Number(areaBox)*(costHallCompany +addedValueHeight);
+               const costBox = Number(areaBox)*(costHallCompany +addedValueHeight);
+     // Coût HALL méthode analysedecoût
+          //constante de coût Hall
+          const ratioFondationBlockHall = 1200 // 1200e/u de fondation hors taxes hors marge
+               //Cout Massif de fondations Hall
+                    let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
+          const ratioConcreteWorkHall = 9 // 9e/m² de plancher construit pour le gros oeuvre hors taxes hors marge
+               //Coût Gros Oeuvre Hall
+                    let costConcreteWorkHall=ratioConcreteWorkHall*areaHall;
+          const ratioMetalFrameHall = 76 // 76e/m² de plancher construit pour la structure métallique hors taxes hors marge
+               //Coût Structure métallique Hall
+                    let costMetalFrameHall=ratioMetalFrameHall*areaBox;
+          const ratioRoofHall = 52 // 52e/m² de plancher construit pour la couverture hors taxes hors marge
+               //Coût Couverture Hall
+                    let costRoofHall=ratioRoofHall*areaBox;
+          const ratioSidingPanelSimpleHall = 60  // 60e/m² de façade construite pour le bardage standard hors taxes hors marge        
+               //Coût Bardage Hall
+                    let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((lengthHall+widthHall)*2*heightHallTotal-lengthOfficesOutside*heightOfficesOutside-lengthOfficesInside*heightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
+          const ratioSidingPanelHighHall = 120  // 120e/m² de façade construite pour le bardage luxe hors taxes hors marge
+          const ratioConcreteSlabHall = 30  // 30e/m² de dalle construit hors taxes hors marge        
+               //Coût Dallage Hall
+                    let costConcreteSlabHall=ratioConcreteSlabHall*areaHall;
+          const ratioRescueDoors = 2500  // 2500 e/u par porte de secours hors taxes hors marge
+               //Coût portes et quais Hall
+                    let costRescueDoors=ratioRescueDoors*(Math.ceil(((lengthHall+widthHall)*2)/45));
+          const ratioElectricityHall = 22  // 22e/m² de plancher construit pour l'électricité hors taxes hors marge
+               //Coût Electricité Hall
+                    let costElectricityHall;
+                    choiceGreenRate.checked===true?                costElectricityHall=ratioElectricityHall*areaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*areaHall;
+          let costBox2 = costFondationBlockHall+costConcreteWorkHall+costMetalFrameHall+costRoofHall+costSidingPanelSimpleHall+costConcreteSlabHall+costRescueDoors+costElectricityHall;
+          //Comparaison des deux méthodes
+          console.log(costBox);
+          console.log(costBox2);
 
      //Coût des bureaux
           let costOffices
@@ -942,7 +981,6 @@ function functionBudget() {
                u10=v10;
           };
 
-     // _______________________________________
      // affichage du coût du bâtiment avec spécificités et les textes de choix
 
      document.body.innerHTML=
