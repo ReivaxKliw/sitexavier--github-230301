@@ -17,16 +17,44 @@ const inputCostGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudr
 
 // ratio du calcul du devis bâtiment HORS TERRAIN
 // constante de coût Hall
-     const costHallCompany = 255.89;//ratio coût du hall entreprise de construction  hors marge constructeur
-     const costHeightAbove7 = 14;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompany
+     // constante pour méthode m²
+          const costHallCompany = 255.89;//ratio coût du hall entreprise de construction  hors marge constructeur
+          const costHeightAbove7 = 14;//ratio coût par métre supplémentaire au dessus de 7 m à ajouter à costHallCompany
+     // constante pour méthode annalysedecout
+          const ratioFondationBlockHall = 1200 // 550e/u de fondation hors taxes hors marge
+          const ratioConcreteWorkHall = 9 // 9e/m² de plancher construit pour le gros oeuvre hors taxes hors marge
+          const ratioMetalFrameHall = 76 // 76e/m² de plancher construit pour la structure métallique hors taxes hors marge
+          const ratioRoofHall = 52 // 52e/m² de plancher construit pour la couverture hors taxes hors marge
+          const ratioSidingPanelSimpleHall = 60  // 60e/m² de façade construite pour le bardage standard hors taxes hors marge
+          const ratioSidingPanelHighHall = 120  // 120e/m² de façade construite pour le bardage luxe hors taxes hors marge
+          const ratioConcreteSlabHall = 30  // 30e/m² de dalle construit hors taxes hors marge
+          const ratioRescueDoors = 2500  // 2500 e/u par porte de secours hors taxes hors marge
+          const ratioElectricityHall = 22  // 22e/m² de plancher construit pour l'électricité hors taxes hors marge
 
 // constante de coût Bureaux
-     const costOfficesCompanyInsideOpenSpace = 710; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
-     const costOfficesCompanyOutsideOpenSpace = 749.01; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
-     const costOfficesCompanyInsidePartitioned = 830.07; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
-     const costOfficesCompanyOutsidePartitioned = 867.79; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
-
-
+     // constante pour méthode m²
+          const costOfficesCompanyInsideOpenSpace = 710; //ratio coût des bureaux entreprise de construction intérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
+          const costOfficesCompanyOutsideOpenSpace = 749.01; //ratio coût des bureaux entreprise de construction extérieur et OpenSpace et Maitrise d'Oeuvre à 12% hors marge constructeur
+          const costOfficesCompanyInsidePartitioned = 830.07; //ratio coût des bureaux entreprise de construction intérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
+          const costOfficesCompanyOutsidePartitioned = 867.79; //ratio coût des bureaux entreprise de construction extérieur et Cloisonnée et Maitrise d'Oeuvre à 12% hors marge constructeur
+     // constante pour méthode annalysedecout
+          const ratioFondationBlockOffices = 1200 // 550e/u de fondation hors taxes hors marge
+          const ratioConcreteWorkOffices = 55 // 55e/m² de plancher construit pour le gros oeuvre hors taxes hors marge
+          const ratioMetalFrameOffices = 30 // 30e/m² de plancher construit pour la structure métalliquen hors taxes hors marge
+          const ratioRoofOffices = 52 // 52e/m² de plancher construit oour la couverture hors taxes hors marge
+          const ratioSidingPanelSimpleOffices = 60  // 60e/m² de façade construite pour le bardage standard hors taxes hors marge
+          const ratioSidingPanelHighOffices = 150  // 150e/m² de façade construite pour le bardage luxe hors taxes hors marge
+          const ratioConcreteSlabOffices = 36  // 36e/m² de plancher construit pour la dalle béton hors taxes hors marge
+          const ratioDoorsAndWindowsOffices = 105  // 105e/m² de plancher construit pour les portes et  les fenâtre hors taxes hors marge
+          const ratioElectricityOffices = 50  // 50e/m² de plancher construit pour l'électricité hors taxes hors marge
+          const ratioPlumbingOffices = 45  // 45e/m² de plancher construit pour la plomberie hors taxes hors marge
+          const ratioHotWaterHeatingOffices = 50  // 50e/m² de plancher construit pour le chauffage hors taxes hors marge
+          const ratioAirConditionningOffices = 90  // 90e/m² de plancher construit pour l'air conditionnée hors taxes hors marge
+          const ratioElectrityHeatingOffices = 40  // 40e/m² de plancher construit pour le chauffage par convecteur électrique hors taxes hors marge
+          const ratioInteriorDesignOfficesWithOpenSPace = 300  // 300e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge avec Open Space, Show room, atelier….
+          const ratioInteriorDesignOfficesWithoutOpenSPace = 450  // 450e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge sans Open Space, Show room, atelier….
+      
+ 
 // constante de coût SPECIFICITES
      const costSoilReinforcement = 19.87 ; // 20 e/m²  pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
      const addedValueOverHeadCraneOnPoles = 120; // 126 euros/ml  sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
@@ -155,7 +183,7 @@ function functionBudget() {
 // CALCULS CARACTERISTIQUES BATIMENTS
      
      // Calcul HAUTEUR HALL
-          // calcul HALL au m²
+          // calcul HALL méthode 1 budget.js au m²
                //pas de calcul>récupéré
           //calcul HALL méthode analysedecout.js pour comparaison
                let heightHallTotal = inputHeightHallUseful+1.80; //Pannes 0.3+bac acier 0.2+laine de roche 0.2+ acrotére 0.5 + pente 3% pour distance 20m (pris arbitrairement)
@@ -165,23 +193,14 @@ function functionBudget() {
 
 
      // Calcul SURFACE HALL
-          // calcul SURFACE HALL au m²
+          // calcul SURFACE HALL méthode 1 budget.js au m²
                // calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
           //calculs HALL méthode analysedecout.js pour comparaison
                // la surface sera calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
           // Calcul Massif de fondations Hall
-          let numberFondationBlockHall;
-          if (widthHall/30<1){
-               numberFondationBlockHall= (Math.ceil((lengthHall/6)+1)*2)+(Math.ceil(widthHall/6)*2);
-          }
-          else{
-               numberFondationBlockHall= Math.ceil((lengthHall/6)+1)*Math.ceil(widthHall/30+1)+Math.ceil((widthHall/6)*2);
-          };
-
-          console.log(numberFondationBlockHall);
-
+               // la surface sera calculer aprés surface bureaux car pour l'instant nous n'avons que la surface de stockage souhaitée et il faut savoir si les bureaux sont inside ou outside pour calculer la surface de la box (areaBox ou areaBuilding)
      // Calcul BUREAUX
-          // calcul BUREAUX au m²
+          // calcul BUREAUX méthode 1 budget.js au m²
                // Calcul vérification Show room intérieur ou extérieur
                     // Calcul Vérification du choix de showroom Intérieur
                     let answer41 = [0,inputAreaShowroomInside];
@@ -313,75 +332,104 @@ function functionBudget() {
                console.log(areaBox);
                console.log(areaOfficesGroundOutside);
                console.log(areaBuilding);
-
-          // calcul BUREAUX méthode analysedecout.js pour comparaison
-          // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans.Ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux. Les constantes ne sont alors plus des inputconstante puisqu'elles sont issues de calcul
+               
+               
+               // calcul BUREAUX méthode analysedecout.js pour comparaison
+               // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans.Ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux. Les constantes ne sont alors plus des inputconstante puisqu'elles sont issues de calcul
                // Calcul Bureaux Intérieurs
                let lengthOfficesInside;
                let widthOfficesInside;
                let areaOfficesFloorInside;
-
-                    lengthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside)); 
-                    widthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside));
-                    areaOfficesFloorInside=officesDimensionsInside-areaOfficesGroundInside;
-
+               
+               lengthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside)); 
+               widthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside));
+               areaOfficesFloorInside=officesDimensionsInside-areaOfficesGroundInside;
+               
                console.log(areaOfficesGroundInside);
                console.log(lengthOfficesInside);
                console.log(widthOfficesInside);
                console.log(officesDimensionsInside);
                console.log(areaOfficesFloorInside);
-
+               
                // Calcul  hauteur des bureaux intérieurs
                let heightOfficesInside;
-                    if (areaOfficesGroundInside==0 && areaOfficesFloorInside==0) {
-                         heightOfficesInside = 0;
-                    }
-                    if (areaOfficesGroundInside>0 && areaOfficesFloorInside==0){
-                         heightOfficesInside = 4.5;
-                    }
-                    if (areaOfficesGroundInside>0 &&areaOfficesFloorInside>0){
-                         heightOfficesInside = inputHeightHallUseful;
-                    }
+               if (areaOfficesGroundInside==0 && areaOfficesFloorInside==0) {
+                    heightOfficesInside = 0;
+               }
+               if (areaOfficesGroundInside>0 && areaOfficesFloorInside==0){
+                    heightOfficesInside = 4.5;
+               }
+               if (areaOfficesGroundInside>0 &&areaOfficesFloorInside>0){
+                    heightOfficesInside = inputHeightHallUseful;
+               }
                console.log(heightOfficesInside);
-          
+               
                // Calcul Bureaux Extérieurs
                let lengthOfficesOutside;
                let widthOfficesOutside;
                let areaOfficesFloorOutside;
-
-                    lengthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside)); 
-                    widthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside));
-                    areaOfficesFloorOutside=officesDimensionsOutside-areaOfficesGroundOutside;
-
+               
+               lengthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside)); 
+               widthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside));
+               areaOfficesFloorOutside=officesDimensionsOutside-areaOfficesGroundOutside;
+               
                console.log(areaOfficesGroundOutside);
                console.log(lengthOfficesOutside);
                console.log(widthOfficesOutside);
                console.log(officesDimensionsOutside);
                console.log(areaOfficesFloorOutside);
-
+               
                // Calcul  hauteur des bureaux Extérieurs
                let heightOfficesOutside;
-                    if (areaOfficesGroundOutside==0 && areaOfficesFloorOutside==0) {
-                         heightOfficesOutside = 0;
-                    }
-                    if (areaOfficesGroundOutside>0 && areaOfficesFloorOutside==0){
-                         heightOfficesOutside = 4.5;
-                    }
-                    if (areaOfficesGroundOutside>0 &&areaOfficesFloorOutside>0){
-                         heightOfficesOutside = 2*4.5;
-                    }
+               if (areaOfficesGroundOutside==0 && areaOfficesFloorOutside==0) {
+                    heightOfficesOutside = 0;
+               }
+               if (areaOfficesGroundOutside>0 && areaOfficesFloorOutside==0){
+                    heightOfficesOutside = 4.5;
+               }
+               if (areaOfficesGroundOutside>0 &&areaOfficesFloorOutside>0){
+                    heightOfficesOutside = 2*4.5;
+               }
                console.log(heightOfficesOutside);
+               //Calcul Massif de fondations des bureaux
+               let numberFondationBlockOffices;
 
-          //comparaison des deux méthodes 
-          // je déduis des données différentes donc je ne peux pas les comparer
-     
+               if (widthOfficesInside/30<1 && widthOfficesOutside/30<1){
+                   numberFondationBlockOffices= (Math.ceil((lengthOfficesInside/6)+1))+(Math.ceil(widthOfficesInside/6)*2)+(Math.ceil((lengthOfficesOutside/6)+1))+(Math.ceil(widthOfficesOutside/6)*2);
+               } 
+               if (widthOfficesInside/30>1 && widthOfficesOutside/30<1){
+                   numberFondationBlockOffices= Math.ceil((lengthOfficesInside/6)+1)*Math.ceil(widthOfficesInside/30)+Math.ceil((widthOfficesInside/6)*2) +(Math.ceil((lengthOfficesOutside/6)+1))+(Math.ceil(widthOfficesOutside/6)*2);
+               } 
+               if (widthOfficesInside/30<1 && widthOfficesOutside/30>1){
+                   numberFondationBlockOffices= (Math.ceil((lengthOfficesInside/6)+1))+(Math.ceil(widthOfficesInside/6)*2)+Math.ceil((lengthOfficesOutside/6)+1)*Math.ceil(widthOfficesOutside/30)+Math.ceil((widthOfficesOutside/6)*2);
+               } 
+               else{
+                   numberFondationBlockOffices= Math.ceil((lengthOfficesInside/6)+1)*Math.ceil(widthOfficesInside/30)+Math.ceil((widthOfficesInside/6)*2) + Math.ceil((lengthOfficesOutside/6)+1)*Math.ceil(widthOfficesOutside/30)+Math.ceil((widthOfficesOutside/6)*2);    
+               }
+           console.log(numberFondationBlockOffices);
+   
+               
+               //comparaison des deux méthodes 
+               // je déduis des données différentes donc je ne peux pas les comparer
+               
+     // Calcul Massif de fondations Hall
+          let numberFondationBlockHall;
+          let widthHall= Math.sqrt(areaBox);
+          let lengthHall= Math.sqrt(areaBox);
+
+          if (widthHall/30<1){
+               numberFondationBlockHall= (Math.ceil((lengthHall/6)+1)*2)+(Math.ceil(widthHall/6)*2);
+          }
+          else{
+               numberFondationBlockHall= Math.ceil((lengthHall/6)+1)*Math.ceil(widthHall/30+1)+Math.ceil((widthHall/6)*2);
+          };
+     console.log(numberFondationBlockHall);
 
 
      // Calcul Spécificités
           // Calcul renfort de sol
           
           // Calcul  cloison intérieure
-          let inputWidthHall= Math.sqrt(areaBox);
           
           // Calcul  Pont roulant
           // calcul du nombre de poteaux renforcés 
@@ -440,7 +488,7 @@ function functionBudget() {
           console.log(areaRoadAndUtilities2);
 
      // Calcul TERRAIN
-          //Calcul TERRAIN au m²
+          //Calcul TERRAIN méthode 1 budget.js au m²
                let areaGround;
 
                switch(choiceGroundOwner){
@@ -496,7 +544,8 @@ function functionBudget() {
      console.log(areaPlantations);
 
 //COUTS
-     // Coût HALL au m²
+//COUT DU HALL
+     // Coût HALL méthode 1 budget.js au m²
           //Coût plus value hauteur bâtiment
                let addedValueHeight;
                if(inputHeightHallUseful>7){
@@ -507,31 +556,22 @@ function functionBudget() {
                };
           //Coût hALL
                const costBox = Number(areaBox)*(costHallCompany +addedValueHeight);
-     // Coût HALL méthode analysedecoût
+     // Coût HALL méthode 2 analysedecout.js
           //constante de coût Hall
-          const ratioFondationBlockHall = 1200 // 1200e/u de fondation hors taxes hors marge
                //Cout Massif de fondations Hall
                     let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
-          const ratioConcreteWorkHall = 9 // 9e/m² de plancher construit pour le gros oeuvre hors taxes hors marge
                //Coût Gros Oeuvre Hall
                     let costConcreteWorkHall=ratioConcreteWorkHall*areaHall;
-          const ratioMetalFrameHall = 76 // 76e/m² de plancher construit pour la structure métallique hors taxes hors marge
                //Coût Structure métallique Hall
                     let costMetalFrameHall=ratioMetalFrameHall*areaBox;
-          const ratioRoofHall = 52 // 52e/m² de plancher construit pour la couverture hors taxes hors marge
                //Coût Couverture Hall
                     let costRoofHall=ratioRoofHall*areaBox;
-          const ratioSidingPanelSimpleHall = 60  // 60e/m² de façade construite pour le bardage standard hors taxes hors marge        
                //Coût Bardage Hall
                     let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((lengthHall+widthHall)*2*heightHallTotal-lengthOfficesOutside*heightOfficesOutside-lengthOfficesInside*heightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
-          const ratioSidingPanelHighHall = 120  // 120e/m² de façade construite pour le bardage luxe hors taxes hors marge
-          const ratioConcreteSlabHall = 30  // 30e/m² de dalle construit hors taxes hors marge        
                //Coût Dallage Hall
                     let costConcreteSlabHall=ratioConcreteSlabHall*areaHall;
-          const ratioRescueDoors = 2500  // 2500 e/u par porte de secours hors taxes hors marge
                //Coût portes et quais Hall
                     let costRescueDoors=ratioRescueDoors*(Math.ceil(((lengthHall+widthHall)*2)/45));
-          const ratioElectricityHall = 22  // 22e/m² de plancher construit pour l'électricité hors taxes hors marge
                //Coût Electricité Hall
                     let costElectricityHall;
                     choiceGreenRate.checked===true?                costElectricityHall=ratioElectricityHall*areaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*areaHall;
@@ -539,8 +579,8 @@ function functionBudget() {
           //Comparaison des deux méthodes
           console.log(costBox);
           console.log(costBox2);
-
-     //Coût des bureaux
+//COUT DES BUREAUX
+     // Coût Bureaux méthode 1 budget.js au m²
           let costOffices
           // coût bureaux intérieur pas extérieur
           if (choiceOfficesInside==="yes" && choiceOfficesOutside==="no"){
@@ -593,6 +633,92 @@ function functionBudget() {
           else if (choiceOfficesInside==="no" && choiceOfficesOutside==="no"){
           costOffices = 0;
           };
+     // Coût BUREAUX méthode 2 analysedecout.js
+
+          //Massif de fondations
+               let costFondationBlockOffices =ratioFondationBlockOffices*numberFondationBlockOffices
+               console.log(costFondationBlockOffices);
+          //Coût Gros Oeuvre Offices
+               let costConcreteWorkOffices=ratioConcreteWorkOffices*areaOfficesInside+ratioConcreteWorkOffices*areaOfficesOutside;
+               console.log(costConcreteWorkOffices);
+          //Coût Structure métallique Offices
+               let costMetalFrameOffices=ratioMetalFrameOffices*(areaOfficesInside)+ratioMetalFrameOffices*(areaOfficesOutside);
+               console.log(costMetalFrameOffices);
+          //Coût Couverture
+               let costRoofOffices=ratioRoofOffices*(lengthOfficesOutside*widthOfficesOutside);
+          console.log(costRoofOffices);
+          //Coût bardage Bureaux
+               let ratioSidingPanelOffices
+               switch(choicePanelOffices){
+                    case'yes':
+                    ratioSidingPanelOffices= ratioSidingPanelHighOffices
+                    break;
+                    case'no':
+                    ratioSidingPanelOffices= ratioSidingPanelSimpleOffices
+                    break;
+                    };
+                    let costSidingPanelOffices=ratioSidingPanelOffices*((lengthOfficesOutside+widthOfficesOutside*2)*heightOfficesOutside)+ratioSidingPanelOffices*((lengthOfficesInside)*heightOfficesInside);
+          console.log(ratioSidingPanelOffices);
+          console.log(costSidingPanelOffices);
+          //Coût Dallage Bureaux
+               let costConcreteSlabOffices=ratioConcreteSlabOffices*(areaOfficesInside+areaOfficesOutside);
+               console.log(costConcreteSlabOffices);
+          //Coût Menuiserie Aluminium Bureaux
+               let costDoorsAndWindowsOffices=ratioDoorsAndWindowsOffices*(areaOfficesInside+areaOfficesOutside);
+               console.log(costDoorsAndWindowsOffices);
+          //Coût Plomberie Bureaux
+               let costPlumbingOffices=ratioPlumbingOffices*(areaOfficesInside+areaOfficesOutside);
+               console.log(costPlumbingOffices);
+          //Coût  Chauffage des bureaux
+               let costHeatingOffices
+               switch(choiceHeatingOffices){
+                    case'airConditioner':
+                    costHeatingOffices =ratioAirConditionningOffices*(areaOfficesInside+areaOfficesOutside)
+                    break;
+                    case'hotWaterHeating':
+                    costHeatingOffices =ratioHotWaterHeatingOffices*(areaOfficesInside+areaOfficesOutside)
+                    break;
+                    case'electricityHeating':
+                    costHeatingOffices =ratioElectrityHeatingOffices*(areaOfficesInside+areaOfficesOutside)
+                    break;                
+               };
+               console.log(costHeatingOffices);
+          //Coût Electricité Bureaux
+                    let costElectricityOffices=ratioElectricityOffices*(areaOfficesInside+areaOfficesOutside);
+                    console.log(costElectricityOffices);
+          //Coût Aménagement Bureaux
+               let ratioInteriorDesignOfficesInside;
+               let ratioInteriorDesignOfficesOutside;
+               switch(choiceOpenspaceOfficesInside){
+                    case'yes':
+                    ratioInteriorDesignOfficesInside= ratioInteriorDesignOfficesWithOpenSPace
+                    break;
+                    case'no':
+                    ratioInteriorDesignOfficesInside= ratioInteriorDesignOfficesWithoutOpenSPace
+                    break;
+                    };
+               switch(choiceOpenspaceOfficesOutside){
+                    case'yes':
+                    ratioInteriorDesignOfficesOutside= ratioInteriorDesignOfficesWithOpenSPace
+                    break;
+                    case'no':
+                    ratioInteriorDesignOfficesOutside= ratioInteriorDesignOfficesWithoutOpenSPace
+                    break;
+                    };
+                    
+                    let costInteriorDesignOffices=ratioInteriorDesignOfficesInside*areaOfficesInside+ratioInteriorDesignOfficesOutside*areaOfficesOutside;
+                    
+          console.log(ratioInteriorDesignOfficesInside);
+          console.log(ratioInteriorDesignOfficesOutside);
+          console.log(costInteriorDesignOffices);
+          //Coût total
+               let costOffices2;
+               costOffices2=costFondationBlockOffices+costConcreteWorkOffices+costMetalFrameOffices+costRoofOffices+costSidingPanelOffices+costConcreteSlabOffices+costDoorsAndWindowsOffices+costPlumbingOffices+costHeatingOffices+costElectricityOffices+costInteriorDesignOffices
+          //Comparaison des deux méthodes
+          console.log(costOffices);
+          console.log(costOffices2);
+
+
 
      //Coût escalier bureaux
           let addedValueStair; // calcul de la plus value escalier
@@ -631,13 +757,13 @@ function functionBudget() {
                     break;
                };
 
-               const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHallUseful));
+               const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(widthHall*inputHeightHallUseful));
 
           console.log(answer8);
           console.log(choicePartitionInside);
           console.log(inputNumberPartitionInside);
           console.log(ratioPartitionInsideSidingPanel);
-          console.log(inputWidthHall);
+          console.log(widthHall);
           console.log(inputHeightHallUseful);
           console.log(costPartitionInsideSidingPanel);
 
