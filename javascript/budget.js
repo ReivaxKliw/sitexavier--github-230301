@@ -319,31 +319,16 @@ function functionBudget() {
                     console.log(numberStairOutside);
                     console.log(numberStair);
 
-               // Calcul de la surface sol totale et surface box;
-                    let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface // nécessaire pour VRD
-                    let areaBox;// surface de la boite si bur intérieurs = ils sont compris dans la surface de la boite // necessaire pour structure bâtiment
-                    let areaHall;// surface de la zone de travail //necessaire pour l'équipement
-                         areaHall =inputAreaHall;
-                         areaBox= areaHall+areaOfficesGroundInside;
-                         areaBuilding = areaBox+areaOfficesGroundOutside;
-                                   
-               console.log(areaHall);
-               console.log(areaOfficesGroundInside);
-               console.log(areaBox);
-               console.log(areaOfficesGroundOutside);
-               console.log(areaBuilding);
-               
-               
-               // calcul BUREAUX méthode analysedecout.js pour comparaison
+          // calcul BUREAUX méthode analysedecout.js pour comparaison
                // dans analysedecout.js on rentre la surface des bureaux puisque nous avons les plans.Ici, je vais utiliser les calculs fait dans calcul m² car je le déduis du nombre de personne. Soit officesDimensionsInside et officesDimensionsOutside, je vais alors leur appliquer le même calcul que dans analyse pour permettre d'avoir la largeur et longueur des bureaux. Les constantes ne sont alors plus des inputconstante puisqu'elles sont issues de calcul
                // Calcul Bureaux Intérieurs
-               let lengthOfficesInside;
-               let widthOfficesInside;
-               let areaOfficesFloorInside;
-               
-               lengthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside)); 
-               widthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside));
-               areaOfficesFloorInside=officesDimensionsInside-areaOfficesGroundInside;
+                    let lengthOfficesInside;
+                    let widthOfficesInside;
+                    let areaOfficesFloorInside;
+                    
+                    lengthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside)); 
+                    widthOfficesInside=Math.round(Math.sqrt(areaOfficesGroundInside));
+                    areaOfficesFloorInside=officesDimensionsInside-areaOfficesGroundInside;
                
                console.log(areaOfficesGroundInside);
                console.log(lengthOfficesInside);
@@ -352,26 +337,26 @@ function functionBudget() {
                console.log(areaOfficesFloorInside);
                
                // Calcul  hauteur des bureaux intérieurs
-               let heightOfficesInside;
-               if (areaOfficesGroundInside==0 && areaOfficesFloorInside==0) {
-                    heightOfficesInside = 0;
-               }
-               if (areaOfficesGroundInside>0 && areaOfficesFloorInside==0){
-                    heightOfficesInside = 4.5;
-               }
-               if (areaOfficesGroundInside>0 &&areaOfficesFloorInside>0){
-                    heightOfficesInside = inputHeightHallUseful;
-               }
+                    let heightOfficesInside;
+                    if (areaOfficesGroundInside==0 && areaOfficesFloorInside==0) {
+                         heightOfficesInside = 0;
+                    }
+                    if (areaOfficesGroundInside>0 && areaOfficesFloorInside==0){
+                         heightOfficesInside = 4.5;
+                    }
+                    if (areaOfficesGroundInside>0 &&areaOfficesFloorInside>0){
+                         heightOfficesInside = inputHeightHallUseful;
+                    }
                console.log(heightOfficesInside);
                
                // Calcul Bureaux Extérieurs
-               let lengthOfficesOutside;
-               let widthOfficesOutside;
-               let areaOfficesFloorOutside;
-               
-               lengthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside)); 
-               widthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside));
-               areaOfficesFloorOutside=officesDimensionsOutside-areaOfficesGroundOutside;
+                    let lengthOfficesOutside;
+                    let widthOfficesOutside;
+                    let areaOfficesFloorOutside;
+                    
+                    lengthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside)); 
+                    widthOfficesOutside=Math.round(Math.sqrt(areaOfficesGroundOutside));
+                    areaOfficesFloorOutside=officesDimensionsOutside-areaOfficesGroundOutside;
                
                console.log(areaOfficesGroundOutside);
                console.log(lengthOfficesOutside);
@@ -380,38 +365,60 @@ function functionBudget() {
                console.log(areaOfficesFloorOutside);
                
                // Calcul  hauteur des bureaux Extérieurs
-               let heightOfficesOutside;
-               if (areaOfficesGroundOutside==0 && areaOfficesFloorOutside==0) {
-                    heightOfficesOutside = 0;
-               }
-               if (areaOfficesGroundOutside>0 && areaOfficesFloorOutside==0){
-                    heightOfficesOutside = 4.5;
-               }
-               if (areaOfficesGroundOutside>0 &&areaOfficesFloorOutside>0){
-                    heightOfficesOutside = 2*4.5;
-               }
+                    let heightOfficesOutside;
+                    if (areaOfficesGroundOutside==0 && areaOfficesFloorOutside==0) {
+                         heightOfficesOutside = 0;
+                    }
+                    if (areaOfficesGroundOutside>0 && areaOfficesFloorOutside==0){
+                         heightOfficesOutside = 4.5;
+                    }
+                    if (areaOfficesGroundOutside>0 &&areaOfficesFloorOutside>0){
+                         heightOfficesOutside = 2*4.5;
+                    }
                console.log(heightOfficesOutside);
+               // Calcul  nombre d'escalier
+                    let numberStairInside2;
+                    let numberStairOutside2;
+                    let numberStair2;
+                    heightOfficesInside>4.5?numberStairInside2=1:numberStairInside2=0;
+                    heightOfficesOutside>4.5?numberStairOutside2=1:numberStairOutside2=0;
+                    numberStair2=numberStairInside2+numberStairOutside2
+               console.log(numberStair2);
                //Calcul Massif de fondations des bureaux
-               let numberFondationBlockOffices;
+                    let numberFondationBlockOffices;
 
-               if (widthOfficesInside/30<1 && widthOfficesOutside/30<1){
-                   numberFondationBlockOffices= (Math.ceil((lengthOfficesInside/6)+1))+(Math.ceil(widthOfficesInside/6)*2)+(Math.ceil((lengthOfficesOutside/6)+1))+(Math.ceil(widthOfficesOutside/6)*2);
-               } 
-               if (widthOfficesInside/30>1 && widthOfficesOutside/30<1){
-                   numberFondationBlockOffices= Math.ceil((lengthOfficesInside/6)+1)*Math.ceil(widthOfficesInside/30)+Math.ceil((widthOfficesInside/6)*2) +(Math.ceil((lengthOfficesOutside/6)+1))+(Math.ceil(widthOfficesOutside/6)*2);
-               } 
-               if (widthOfficesInside/30<1 && widthOfficesOutside/30>1){
-                   numberFondationBlockOffices= (Math.ceil((lengthOfficesInside/6)+1))+(Math.ceil(widthOfficesInside/6)*2)+Math.ceil((lengthOfficesOutside/6)+1)*Math.ceil(widthOfficesOutside/30)+Math.ceil((widthOfficesOutside/6)*2);
-               } 
-               else{
-                   numberFondationBlockOffices= Math.ceil((lengthOfficesInside/6)+1)*Math.ceil(widthOfficesInside/30)+Math.ceil((widthOfficesInside/6)*2) + Math.ceil((lengthOfficesOutside/6)+1)*Math.ceil(widthOfficesOutside/30)+Math.ceil((widthOfficesOutside/6)*2);    
-               }
+                    if (widthOfficesInside/30<1 && widthOfficesOutside/30<1){
+                    numberFondationBlockOffices= (Math.ceil((lengthOfficesInside/6)+1))+(Math.ceil(widthOfficesInside/6)*2)+(Math.ceil((lengthOfficesOutside/6)+1))+(Math.ceil(widthOfficesOutside/6)*2);
+                    } 
+                    if (widthOfficesInside/30>1 && widthOfficesOutside/30<1){
+                    numberFondationBlockOffices= Math.ceil((lengthOfficesInside/6)+1)*Math.ceil(widthOfficesInside/30)+Math.ceil((widthOfficesInside/6)*2) +(Math.ceil((lengthOfficesOutside/6)+1))+(Math.ceil(widthOfficesOutside/6)*2);
+                    } 
+                    if (widthOfficesInside/30<1 && widthOfficesOutside/30>1){
+                    numberFondationBlockOffices= (Math.ceil((lengthOfficesInside/6)+1))+(Math.ceil(widthOfficesInside/6)*2)+Math.ceil((lengthOfficesOutside/6)+1)*Math.ceil(widthOfficesOutside/30)+Math.ceil((widthOfficesOutside/6)*2);
+                    } 
+                    else{
+                    numberFondationBlockOffices= Math.ceil((lengthOfficesInside/6)+1)*Math.ceil(widthOfficesInside/30)+Math.ceil((widthOfficesInside/6)*2) + Math.ceil((lengthOfficesOutside/6)+1)*Math.ceil(widthOfficesOutside/30)+Math.ceil((widthOfficesOutside/6)*2);    
+                    }
            console.log(numberFondationBlockOffices);
    
                
-               //comparaison des deux méthodes 
-               // je déduis des données différentes donc je ne peux pas les comparer
+          //comparaison des deux méthodes 
+          // je déduis des données différentes donc je ne peux pas les comparer
                
+     // Calcul de la surface sol totale et surface box;
+               let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface // nécessaire pour VRD
+               let areaBox;// surface de la boite si bur intérieurs = ils sont compris dans la surface de la boite // necessaire pour structure bâtiment
+               let areaHall;// surface de la zone de travail //necessaire pour l'équipement
+                    areaHall =inputAreaHall;
+                    areaBox= areaHall+areaOfficesGroundInside;
+                    areaBuilding = areaBox+areaOfficesGroundOutside;
+                              
+          console.log(areaHall);
+          console.log(areaOfficesGroundInside);
+          console.log(areaBox);
+          console.log(areaOfficesGroundOutside);
+          console.log(areaBuilding);
+
      // Calcul Massif de fondations Hall
           let numberFondationBlockHall;
           let widthHall= Math.sqrt(areaBox);
@@ -717,35 +724,42 @@ function functionBudget() {
           //Comparaison des deux méthodes
           console.log(costOffices);
           console.log(costOffices2);
-
-
-
-     //Coût escalier bureaux
-          let addedValueStair; // calcul de la plus value escalier
-          addedValueStair=numberStair*costStair;
+     //COUT DES ESCALIERS
+          // Coût ESCALIER méthode 1 budget.js au m²
+               let addedValueStair; // calcul de la plus value escalier
+               addedValueStair=numberStair*costStair;
+          // Coût ESCALIER méthode 2 analysedecout.js
+               let addedValueStair2; // calcul de la plus value escalier mais déduit des mêmes variables sert donc juste à vérifier si les variables sont ok;
+               addedValueStair2=numberStair2*costStair;
+          //Comparaison des deux méthodes
+          console.log(addedValueStair);
+          console.log(addedValueStair2);
 
      //Coûts spécifités
           //Coût spécificité Stockage extérieur
                //compris dans le VRD 
 
-          //Coût spécifité renfort de sol          
+          //Coût spécifité renfort de sol
+               let areaSoilReinforcement;
                let answer2 = [0,Number(areaBuilding)];
 
                switch(choiceSoilReinforcement){
                     case'yes':
-                    choiceStudySoil= answer2[1];
+                    areaSoilReinforcement= answer2[1];
                     break;
                     case'no':
-                    choiceStudySoil= answer2[0];
+                    areaSoilReinforcement= answer2[0];
                     break;
                     case'iDontKnow':
-                    choiceStudySoil= answer2[0];
+                    areaSoilReinforcement= answer2[0];
                     break; 
                };
-               const costChoiceSoil = Number(choiceStudySoil*costSoilReinforcement);
+               const costChoiceSoil = Number(areaSoilReinforcement*costSoilReinforcement);
           console.log(costChoiceSoil);
 
           // Coût  spécifité cloison intérieure
+          // widthHall déduit de la racine de areabox dans méthode 1 et 2
+          // pour les 2 méthodes les calculs sont les mêmes
                let answer8 = [0,inputNumberPartitionInside];
                
                switch(choicePartitionInside){
@@ -756,15 +770,7 @@ function functionBudget() {
                     answer8= answer8[1];
                     break;
                };
-
                const costPartitionInsideSidingPanel=Number(answer8)*(ratioPartitionInsideSidingPanel*(widthHall*inputHeightHallUseful));
-
-          console.log(answer8);
-          console.log(choicePartitionInside);
-          console.log(inputNumberPartitionInside);
-          console.log(ratioPartitionInsideSidingPanel);
-          console.log(widthHall);
-          console.log(inputHeightHallUseful);
           console.log(costPartitionInsideSidingPanel);
 
           // Coût  spécifité pont roulant
@@ -779,10 +785,6 @@ function functionBudget() {
                     break;
                };
                const addedValueOverHeadCrane = Number(answer5)*(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles*inputHeightHallUseful+polesUnderOverHeadCrane*addedValueOverHeadCraneFondation);
-          console.log(answer5);
-          console.log(polesUnderOverHeadCrane);
-          console.log(inputHeightHallUseful);
-          console.log(inputNumberOverHeadCrane);
           console.log(addedValueOverHeadCrane);
 
           //Cout spécificité nombre de quais
@@ -796,16 +798,12 @@ function functionBudget() {
                     answer6= answer6[1];
                     break;
                };
-
                // coût de la plus value pour les quais niveleur, sas, butoir et gros oeuvre
                const addedValueDockShelter = (Number(answer6)*(costDockShelter+costconcreteWorkDockShelter));
-          console.log(answer6);
-          console.log(inputNumberDockShelter);
           console.log(addedValueDockShelter);
           
           //Cout spécificité nombre de portes de plain pied
                let answer7 = [0,inputNumberFloorSectionalDoor];
-
                switch(choiceFloorSectionalDoor){
                     case'no':
                     answer7= answer7[0];
@@ -814,9 +812,7 @@ function functionBudget() {
                     answer7= answer7[1];
                     break;
                };
-
                const addedValueFloorSectionalDoor = (Number(answer7)*(costSectionalDoors));
-          console.log(inputNumberFloorSectionalDoor);
           console.log(addedValueFloorSectionalDoor);
           
           // Coût  spécificité tarif électricité
@@ -870,7 +866,6 @@ function functionBudget() {
                break; 
           };
           let costHeating=answer9*ratioGasHeatingHall;
-
           console.log(costHeating);//vérification de costHeating
           
           // Coût  spécifité RIA Hall
@@ -894,11 +889,6 @@ function functionBudget() {
                addedValueIcpe =addedValueIcpe[0]:addedValueIcpe =addedValueIcpe[1];
 
                additionalGroundAreaIcpe!== 0 ? addedValueIcpe : addedValueIcpe=0;
-
-          console.log(areaGround);
-          console.log(areaIcpe);
-          console.log(additionalGroundAreaIcpe);
-          console.log(addedValueIcpe); //vérification des valeurs de addedValueIcpe
           console.log(inputCostGround);
 
           //Coût terrain
@@ -1022,7 +1012,7 @@ function functionBudget() {
           x2 = answerChoiceStudySoil.yes;
           y2 = answerChoiceStudySoil.no;
 
-          choiceStudySoil > 0 ? x2 : x2=y2;
+          areaSoilReinforcement > 0 ? x2 : x2=y2;
 
      // Texte pont roulant
 
