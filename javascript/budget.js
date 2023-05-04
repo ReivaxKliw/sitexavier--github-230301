@@ -56,7 +56,7 @@ const inputCostGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudr
       
  
 // constante de coût SPECIFICITES
-     const costSoilReinforcement = 19.87 ; // 20 e/m²  pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
+     const ratioSoilReinforcement = 19.87 ; // 20 e/m²  pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
      const addedValueOverHeadCraneOnPoles = 120; // 126 euros/ml  sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
      //const addedValueOverHeadCraneRaceway = 285 ;// 285 euros par ml (HEA300 +carré plein 2,5x2,5) considéré à la charge du fournisseur de pont
      const addedValueOverHeadCraneFondation = 933; // 933 euros par plus value de fondations sous poteau de pont roulant
@@ -72,7 +72,7 @@ const inputCostGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudr
      const ratioGasHeatingHall = 9.22;// e/m² pour chauffage aérotherme gaz 
      const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA 
      const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne 
-     const costStair = 20000;// Prix d'un escalier 
+     const addedValueStair = 20000;// Prix d'un escalier 
 // ________________________________
 
 // FONCTION
@@ -484,7 +484,7 @@ function functionBudget() {
                let areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+Number((inputClercksOfficesInside+inputClercksOfficesOutside+inputWorkersOfficesInside+inputWorkersOfficesOutside)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
 
           //calcul VRD méthode analysedecout.js pour comparaison
- // ne sert à rien peut être supprimé méthode de calcul identique > la seule différenciation se fait sur la surface de bureaux mais la surface des bureaux dans les deux cas est déduite du nombre de personnes 
+          // ne sert à rien peut être supprimé méthode de calcul identique > la seule différenciation se fait sur la surface de bureaux mais la surface des bureaux dans les deux cas est déduite du nombre de personnes 
 
                let areaOfficesInside= officesDimensionsInside;
                let areaOfficesOutside= officesDimensionsOutside;
@@ -726,14 +726,14 @@ function functionBudget() {
           console.log(costOffices2);
      //COUT DES ESCALIERS
           // Coût ESCALIER méthode 1 budget.js au m²
-               let addedValueStair; // calcul de la plus value escalier
-               addedValueStair=numberStair*costStair;
+               let costStair; // calcul de la plus value escalier
+               costStair=numberStair*addedValueStair;
           // Coût ESCALIER méthode 2 analysedecout.js
-               let addedValueStair2; // calcul de la plus value escalier mais déduit des mêmes variables sert donc juste à vérifier si les variables sont ok;
-               addedValueStair2=numberStair2*costStair;
+               let costStair2; // calcul de la plus value escalier mais déduit des mêmes variables sert donc juste à vérifier si les variables sont ok;
+               costStair2=numberStair2*addedValueStair;
           //Comparaison des deux méthodes
-          console.log(addedValueStair);
-          console.log(addedValueStair2);
+          console.log(costStair);
+          console.log(costStair2);
 
      //Coûts spécifités
           //Coût spécificité Stockage extérieur
@@ -754,8 +754,8 @@ function functionBudget() {
                     areaSoilReinforcement= answer2[0];
                     break; 
                };
-               const costChoiceSoil = Number(areaSoilReinforcement*costSoilReinforcement);
-          console.log(costChoiceSoil);
+               const costSoilReinforcement = Number(areaSoilReinforcement*ratioSoilReinforcement);
+          console.log(costSoilReinforcement);
 
           // Coût  spécifité cloison intérieure
           // widthHall déduit de la racine de areabox dans méthode 1 et 2
@@ -889,7 +889,7 @@ function functionBudget() {
                addedValueIcpe =addedValueIcpe[0]:addedValueIcpe =addedValueIcpe[1];
 
                additionalGroundAreaIcpe!== 0 ? addedValueIcpe : addedValueIcpe=0;
-          console.log(inputCostGround);
+          console.log(addedValueIcpe);
 
           //Coût terrain
                // je connais le coût et la surface du terrain
@@ -915,35 +915,22 @@ function functionBudget() {
                console.log(costRoadAndUtilities);
 
           //Coût Total
-               // log des données du TOTAL
-               console.log(studyFeesAndInsurance);
-               console.log(costGroundInput);
-               console.log(costCalculationNeedAreaGround);
-               console.log(costBox);
-               console.log(addedValueHeight);
-               console.log(costOffices);
-               console.log(costRoadAndUtilities);
-               console.log(costChoiceSoil);
-               console.log(costPartitionInsideSidingPanel);
-               console.log(addedValueOverHeadCrane);
-               console.log(addedValueDockShelter);
-               console.log(addedValueFloorSectionalDoor);
-               console.log(costElectricalConnection);
-               console.log(costHeating);
-               console.log(costFireNetworkHall);
-               console.log(addedValueIcpe);
-               console.log(addedValueStair);
-
-               const costGround= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround))*100/100);// calcul du terrain seuls
+               const costGround= Math.round((Number(costGroundInput)+Number(costCalculationNeedAreaGround)+addedValueIcpe)*100/100);// calcul du terrain seuls - costGroundInput c'est le coût si on le connait (issu de Input)- costCalculationNeedAreaGround c'est le côut issu de calcul
                console.log(costGround);
 
                const costEnergyAndSanitation= Math.round ((costElectricalConnection)*100/100);// calcul des concédés
                console.log(costEnergyAndSanitation);
-
-               const costProjectWorks= Math.round ((costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueIcpe+addedValueStair)*100/100);// calcul des travaux seuls
+//________________________________________________________________________________________
+     // VERIFICATION POUR LA CONSOLE 
+               // calcul TRAVAUX méthode 1 budget.js au m²
+                    const costProjectWorks= Math.round ((costBox+costOffices+costRoadAndUtilities+costSoilReinforcement+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+costStair)*100/100);// calcul des travaux seuls
+               //calcul TRAVAUX méthode analysedecout.js pour comparaison
+                    const costProjectWorks2= Math.round ((costBox2+costOffices2+costRoadAndUtilities+costSoilReinforcement+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+costStair2)*100/100);// calcul des travaux seuls
+               //comparaison des deux méthodes
                console.log(costProjectWorks);
-
-               const costProjectWithFeesWithoutCommercialMargin= Math.round ((Number(costGroundInput) + Number(costCalculationNeedAreaGround) +addedValueIcpe+costElectricalConnection+studyFeesAndInsurance*(costBox + costOffices+ costRoadAndUtilities +costChoiceSoil+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+addedValueStair))*100/100);// calcul du coût du bâtiment hors marge commerciale
+               console.log(costProjectWorks2);               
+//________________________________________________________________________________________
+const costProjectWithFeesWithoutCommercialMargin= Math.round((Number(costGroundInput)+Number(costCalculationNeedAreaGround)+addedValueIcpe+costEnergyAndSanitation+studyFeesAndInsurance*(costBox+costOffices+costRoadAndUtilities+costSoilReinforcement+costPartitionInsideSidingPanel+addedValueOverHeadCrane+addedValueDockShelter+addedValueFloorSectionalDoor+costHeating+costFireNetworkHall+costStair))*100/100);// calcul du coût du bâtiment hors marge commerciale
                console.log(costProjectWithFeesWithoutCommercialMargin);
 
                const number = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format( costProjectWithFeesWithoutCommercialMargin);// pour affichage number en euros

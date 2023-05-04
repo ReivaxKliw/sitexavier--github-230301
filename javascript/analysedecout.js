@@ -58,7 +58,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const ratioGasHeatingHall = 9.22  // 9e/m² de plancher construit pour le chauffage gaz hors taxes hors marge
     const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
     const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne
-    const costStair = 20000;// Prix d'un escalier
+    const addedValueStair = 20000;// Prix d'un escalier
 // _____________________________________________________________________________
 // FONCTION
     function costBreakdown(event) {
@@ -691,9 +691,9 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 };
         console.log(addedValueElevator);
         //Coût Escalier bureaux 
-            let addedValueStair;
-                addedValueStair=costStair*numberStair;
-        console.log(addedValueStair);
+            let costStair;
+                costStair=addedValueStair*numberStair;
+        console.log(costStair);
 
     //Coût  TERRAIN
         //coût du terrain quand il n'est pas connu
@@ -725,7 +725,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
             }
             console.log(costRoadAndUtilities);
         // Coût du poste Total travaux HT
-            let costTotalWorks=costRoadAndUtilities+costSoilReinforcement+costFondationBlockHall+addedValueOverHeadCraneFondations+costConcreteWorkHall+addedValueConcreteWorkDockShelter+costFondationBlockOffices+costConcreteWorkOffices+costMetalFrameHall+costMetalFrameOffices+addedValueOverHeadCrane+costRoofHall+costSidingPanelSimpleHall+costPartitionInsideSidingPanel+costSidingPanelOffices+costRoofOffices+costConcreteSlabHall+costConcreteSlabOffices+costRescueDoors+addedValueDockShelter+addedValueSectionalDoors+costDoorsAndWindowsOffices+costGasHeatingHall+costFireNetworkHall+costPlumbingOffices+costHeatingOffices+costElectricityHall+costElectricityOffices+costInteriorDesignOffices+addedValueStair+addedValueElevator;
+            let costTotalWorks=costRoadAndUtilities+costSoilReinforcement+costFondationBlockHall+addedValueOverHeadCraneFondations+costConcreteWorkHall+addedValueConcreteWorkDockShelter+costFondationBlockOffices+costConcreteWorkOffices+costMetalFrameHall+costMetalFrameOffices+addedValueOverHeadCrane+costRoofHall+costSidingPanelSimpleHall+costPartitionInsideSidingPanel+costSidingPanelOffices+costRoofOffices+costConcreteSlabHall+costConcreteSlabOffices+costRescueDoors+addedValueDockShelter+addedValueSectionalDoors+costDoorsAndWindowsOffices+costGasHeatingHall+costFireNetworkHall+costPlumbingOffices+costHeatingOffices+costElectricityHall+costElectricityOffices+costInteriorDesignOffices+costStair+addedValueElevator;
             console.log(costTotalWorks);
 
         // Coût du DIVERS
@@ -858,7 +858,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     console.log(desplayElectricity);
                 // AMENAGEMENT BUREAUX 
                     console.log(costInteriorDesignOffices+addedValueElevator);
-                    let desplayInteriorDesignOffices =costInteriorDesignOffices+addedValueElevator+addedValueStair;
+                    let desplayInteriorDesignOffices =costInteriorDesignOffices+addedValueElevator+costStair;
                     desplayInteriorDesignOffices = new Intl.NumberFormat().format(desplayInteriorDesignOffices);// pour affichage style monétaire x xxx xxx
                     console.log(desplayInteriorDesignOffices);
                 //TOTAL travaux  
