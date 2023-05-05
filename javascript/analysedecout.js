@@ -1,5 +1,9 @@
+//déclaration des variables utilisées dans le code
 
-// déclaration des valeurs pour les calculs
+
+// __________________________________
+const studyFeesAndInsurance = 1.2555 // 25,55% taxe et frais :etude de sol, bureau de controle, thermique, SPS, assurance décennale et RC  
+// __________________________________
 const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra aprés faire une demande de la région de construction et prendre un prix moyen de la région
 // constante de coût VRD
     const ratioBuilding1 = 94; //94 euros/m² de construit hors taxes hors marge si le ration (voirie+Bâtiment)/terrain est <65%
@@ -20,9 +24,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const ratioConcreteSlabHall = 30  // 30e/m² de dalle construit hors taxes hors marge
     const ratioRescueDoors = 2500  // 2500 e/u par porte de secours hors taxes hors marge
     const ratioElectricityHall = 22  // 22e/m² de plancher construit pour l'électricité hors taxes hors marge
-    const ratioElectricHeatingHall = 4  // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
-    const ratioGasHeatingHall = 9.22  // 9e/m² de plancher construit pour le chauffage gaz hors taxes hors marge
-    const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
+    
 //constante de coût Bureaux
     const ratioFondationBlockOffices = 1200 // 550e/u de fondation hors taxes hors marge
     const ratioConcreteWorkOffices = 55 // 55e/m² de plancher construit pour le gros oeuvre hors taxes hors marge
@@ -38,11 +40,11 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const ratioAirConditionningOffices = 90  // 90e/m² de plancher construit pour l'air conditionnée hors taxes hors marge
     const ratioElectrityHeatingOffices = 40  // 40e/m² de plancher construit pour le chauffage par convecteur électrique hors taxes hors marge
     const ratioInteriorDesignOfficesWithOpenSPace = 300  // 300e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge avec Open Space, Show room, atelier….
-    const ratioInteriorDesignOfficesWithoutOpenSPace = 450  // 300e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge sans Open Space, Show room, atelier….
+    const ratioInteriorDesignOfficesWithoutOpenSPace = 450  // 450e/m² de plancher construit pour l'aménagement intérieur hors taxes hors marge sans Open Space, Show room, atelier….
 //constante des spécificités
     const ratioSoilReinforcement = 19.87 ; // 20 e/m² pour des colonnes réalisées sur l'ensemble du bâtiment à une moyenne de 7m
-    const addedValueOverHeadCraneOnPoles = 126; // euros par poteaux
-    const addedValueOverHeadCraneRaceway = 285;// euros par ml 
+    const addedValueOverHeadCraneOnPoles = 120 ; // euros par ml de poteaux sur la base d'un HEA 300(90kg/ml) passé en HEA 400(127,4kg/ml) à 3e du kg 
+    //const addedValueOverHeadCraneRaceway = 285;// euros par ml non utilisé car rail considéré comme à la charge du fournisseur de pont roulant
     const addedValueOverHeadCraneFondationByPole = 933; // euros par plus value de fondations sous poteau de pont roulant
     const costDockShelter = 11000; //euros par unité
     const costconcreteWorkDockShelter = 4000; //euros par unité
@@ -52,22 +54,26 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
     const costGreenRate = 15000;// coût d'un tarif vert
     const costGreenRateAddedValueElectricity = 45000;// coût du transfo à la charge du lot Electricité
     const ratioPartitionInsideSidingPanel = 90;// 90 e/m² pour cloison de division intérieure du hall
+    const ratioElectricHeatingHall = 4 //NON UTILISE // 4e/m² de plancher construit pour le chauffage electrique hors taxes hors marge
+    const ratioGasHeatingHall = 9.22  // 9e/m² de plancher construit pour le chauffage gaz hors taxes hors marge
+    const ratioFireNetworkHall = 5  // 5e/m² de plancher construit pour le réseau RIA hors taxes hors marge
     const costElevator = 35000;// Prix d'un ascenseur comprenant la cabine et la colonne
-    const costStair = 20000;// Prix d'un escalier
+    const addedValueStair = 20000;// Prix d'un escalier
 // _____________________________________________________________________________
 // FONCTION
     function costBreakdown(event) {
         // _____________________________________________________________________________
         // TEXTE DES ERREURS
-        // let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);
-        // let inputAreaGround = Number(document.getElementById("inputAreaGround").value);
-        // let inputCostGround =  Number(document.getElementById("inputCostGround").value);
-        // let inputAreaBox = Number(document.getElementById("inputAreaBox").value);
-        // let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);
-        // let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);
-        // const choiceBlueRate = document.getElementById('choiceBlueRate');
-        // const choiceYellowRate = document.getElementById('choiceYellowRate');
-        // const choiceGreenRate = document.getElementById('choiceGreenRate');
+        let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);
+        let inputAreaGround = Number(document.getElementById("inputAreaGround").value);
+        let inputCostGround =  Number(document.getElementById("inputCostGround").value);
+        let inputAreaBox = Number(document.getElementById("inputAreaBox").value);
+        let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);
+        let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);
+        const choiceBlueRate = document.getElementById('choiceBlueRate');
+        const choiceYellowRate = document.getElementById('choiceYellowRate');
+        const choiceGreenRate = document.getElementById('choiceGreenRate');
+        
         // if (inputSellingPrice==0){
         //     alert("vous n'avez pas indiqué le prix de vente de votre projet");
         //     event.stopPropagation();
@@ -100,146 +106,375 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
 // _____________________________________________________________________________
-// RECUPERATION DES DONNEES et CALCULS CARACTERISTIQUES BATIMENTS
+// RECUPERATION DES DONNEES
 
-    //Prix de vente du bâtimet clef en main________________________________________________________
-            let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);
+    // RécupérationPrix de vente du bâtimet clef en main________________________________________________________
+            //let inputSellingPrice = Number(document.getElementById("inputSellingPrice").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
         console.log(inputSellingPrice);
             
     //récupération Hauteur hall
-    let inputHeightHall = Number(document.getElementById("inputHeightHall").value);
-    console.log(inputHeightHall);
+    let inputHeightHallTotal = Number(document.getElementById("inputHeightHallTotal").value);
+    console.log(inputHeightHallTotal);
         
-    //Les bureaux du Bâtiment____________________________________________________
-        //Bureaux Intérieurs
-        let choiceOfficesInside = document.getElementById("choiceOfficesInside").value;
-            //Surface Longueur Largeur bureaux
-            let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);
+    // RécupérationLes bureaux du Bâtiment____________________________________________________
+        // RécupérationBureaux Intérieurs
+            let choiceOfficesInside = document.getElementById("choiceOfficesInside").value;
+            //let inputAreaOfficesGroundInside = Number(document.getElementById("inputAreaOfficesGroundInside").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
             let inputLengthOfficesInside = Number(document.getElementById("inputLengthOfficesInside").value);
             let inputWidthOfficesInside = Number(document.getElementById("inputWidthOfficesInside").value);
-            //Etage bureaux
             let inputAreaOfficesFloorInside = Number(document.getElementById("inputAreaOfficesFloorInside").value);
-            let inputAreaOfficesInside=inputAreaOfficesGroundInside +inputAreaOfficesFloorInside;
-            inputLengthOfficesInside==0? inputLengthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputLengthOfficesInside ; 
-            inputWidthOfficesInside==0? inputWidthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputWidthOfficesInside ; 
-            inputAreaOfficesGroundInside==0? inputAreaOfficesGroundInside= inputLengthOfficesInside*inputWidthOfficesInside:inputAreaOfficesGroundInside;
-            console.log(inputAreaOfficesGroundInside);
-            console.log(inputAreaOfficesFloorInside);
-            console.log(inputAreaOfficesInside);
+
             console.log(inputLengthOfficesInside);
             console.log(inputWidthOfficesInside);
+            console.log(inputAreaOfficesFloorInside);
 
-            // hauteur des bureaux intérieurs
-            let inputHeightOfficesInside;
-            if (inputAreaOfficesGroundInside==0 && inputAreaOfficesFloorInside==0) {
-                inputHeightOfficesInside = 0;
-            }
-            if (inputAreaOfficesGroundInside>0 && inputAreaOfficesFloorInside==0){
-                inputHeightOfficesInside = 4.5;
-            }
-            if (inputAreaOfficesGroundInside>0 &&inputAreaOfficesFloorInside>0){
-                inputHeightOfficesInside = inputHeightHall-1.20;
-            }
-            console.log(inputHeightOfficesInside);
-        //Bureaux Extérieurs
-        let choiceOfficesOutside = document.getElementById("choiceOfficesOutside").value;
-            //Surface Longueur Largeur bureaux
-            let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);
+        // Récupération Bureaux Extérieurs
+            let choiceOfficesOutside = document.getElementById("choiceOfficesOutside").value;
+            //let inputAreaOfficesGroundOutside = Number(document.getElementById("inputAreaOfficesGroundOutside").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
             let inputLengthOfficesOutside = Number(document.getElementById("inputLengthOfficesOutside").value);
             let inputWidthOfficesOutside = Number(document.getElementById("inputWidthOfficesOutside").value);
-            //Etage bureaux
             let inputAreaOfficesFloorOutside = Number(document.getElementById("inputAreaOfficesFloorOutside").value);
-            let inputAreaOfficesOutside=inputAreaOfficesGroundOutside +inputAreaOfficesFloorOutside;
+            
+            console.log(inputLengthOfficesOutside);
+            console.log(inputWidthOfficesOutside);
+            console.log(inputAreaOfficesFloorOutside);
+            
+        // Récupération Hall du Bâtiment_________________________
+            // Récupération Surface hall
+                //inputHeightHallTotal récupérée au début car nécessaire dans les bureaux
+                //let inputAreaBox = Number(document.getElementById("inputAreaBox").value);déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
+                let inputLengthHall = Number(document.getElementById("inputLengthHall").value);
+                let inputWidthHall = Number(document.getElementById("inputWidthHall").value);
+
+                console.log(inputLengthHall);
+                console.log(inputWidthHall);
+
+    // Récupération Spécificités_________________________________________________
+        // Récupération Renfort de sol :
+            let choiceSoilReinforcement = document.getElementById("choiceSoilReinforcement").value;
+
+        // Récupération Cloison intérieure
+            let choicePartitionInside = document.getElementById("choicePartitionInside").value;
+            let inputNumberPartitionInside = document.getElementById("inputNumberPartitionInside").value;  
+
+
+        // Récupération Pont roulant :
+            let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
+            let inputNumberOverHeadCrane = document.getElementById("inputNumberOverHeadCrane").value; 
+
+        // Récupération Niveleur de quai :
+            let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
+            let inputNumberDockShelter = document.getElementById("inputNumberDockShelter").value; 
+        
+        // Récupération Porte Sectionnelle de plain pied :
+            let choiceFloorSectionalDoor = document.getElementById("choiceFloorSectionalDoor").value; 
+            let inputNumberFloorSectionalDoor = document.getElementById("inputNumberFloorSectionalDoor").value; 
+        
+        // Récupération Stockage extérieur :
+            let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
+            let inputAreaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("inputAreaRoadAndUtilitiesStorageOutdoor").value); 
+
+        // Récupération Raccordement électrique
+            //const choiceBlueRate = document.getElementById('choiceBlueRate').value;récupérée dans le texte des erreurs
+            //const choiceYellowRate = document.getElementById('choiceYellowRate').value;récupérée dans le texte des erreurs
+            //const choiceGreenRate = document.getElementById('choiceGreenRate').value;récupérée dans le texte des erreurs
+            let inputBlueRate = document.getElementById("inputBlueRate").value; 
+            let inputYellowRate = document.getElementById("inputYellowRate").value; 
+
+        // Récupération Chauffage Hall
+            let choiceHeatingHall = document.getElementById("choiceHeatingHall").value;
+
+        // Récupération Ria Hall
+            let choiceFireNetworkHall = document.getElementById("choiceFireNetworkHall").value;
+
+        // Récupération Open Space dans les bureaux
+            let choiceOpenSpace = document.getElementById("choiceOpenSpace").value;
+
+        // Récupération Bardage luxe pour les bureaux
+            let choicePanelOffices = document.getElementById("choicePanelOffices").value;
+
+        // Récupération  chauffage des bureaux
+            let choiceHeatingOffices = document.getElementById('choiceHeatingOffices').value;
+
+            
+         // Récupération Ascenseur :
+            let choiceElevator = document.getElementById("choiceElevator").value; 
+
+        // Récupération  ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
+
+        // Récupération Terrain________________________________________________________
+            let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
+            let choiceAreaGround = document.getElementById("choiceAreaGround").value;
+            //let inputAreaGround = document.getElementById("inputAreaGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
+            let choiceCostGround = document.getElementById("choiceCostGround").value;
+            //let inputCostGround = document.getElementById("inputCostGround").value;déclarée dans le texte des erreures fonction aprés déclenchement fonction costBreakdown(event)
+
+        // Récupération VRD________________________________________________________
+            let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
+            let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
+
+        // Récupération Tout compris_________________________________
+            let choiceAllIn = document.getElementById("choiceAllIn").value;
+        // Récupération TAxes PC___________________________
+            let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit").value;
+        // Récupération Insurance________________________________________
+            let choiceInsurance = document.getElementById("choiceInsurance").value;
+        // Récupération Maitrise d'Oeuvre_____________________
+            let choiceManagement = document.getElementById("choiceManagement").value;
+        // Récupération Agence commerciale____________________
+            let choiceBusinessAgency = document.getElementById("choiceBusinessAgency").value;
+        // Récupération Promoteur____________________________
+            let choiceDevelopper = document.getElementById("choiceDevelopper").value;
+            
+// _____________________________________________________________________________
+//CALCULS CARACTERISTIQUES BATIMENTS
+    // Calcul bureaux du Bâtiment____________________________________________________
+        // Calcul Bureaux Intérieurs
+            let areaOfficesInside=inputAreaOfficesGroundInside +inputAreaOfficesFloorInside;
+            inputLengthOfficesInside==0? inputLengthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputLengthOfficesInside ; 
+            inputWidthOfficesInside==0? inputWidthOfficesInside=Math.round(Math.sqrt(inputAreaOfficesGroundInside)):inputWidthOfficesInside ; 
+            inputWidthOfficesInside==0? inputAreaOfficesGroundInside= inputLengthOfficesInside*inputWidthOfficesInside:inputAreaOfficesGroundInside;
+            console.log(inputAreaOfficesGroundInside);
+            console.log(inputAreaOfficesFloorInside);
+            console.log(inputLengthOfficesInside);
+            console.log(inputWidthOfficesInside);
+            console.log(areaOfficesInside);
+
+        // Calcul  hauteur des bureaux intérieurs
+            let heightOfficesInside;
+            if (inputAreaOfficesGroundInside==0 && inputAreaOfficesFloorInside==0) {
+                heightOfficesInside = 0;
+            }
+            if (inputAreaOfficesGroundInside>0 && inputAreaOfficesFloorInside==0){
+                heightOfficesInside = 4.5;
+            }
+            if (inputAreaOfficesGroundInside>0 &&inputAreaOfficesFloorInside>0){
+                heightOfficesInside = inputHeightHallTotal-1.20;
+            }
+            console.log(heightOfficesInside);
+        
+        // Calcul Bureaux Extérieurs
+            let areaOfficesOutside=inputAreaOfficesGroundOutside +inputAreaOfficesFloorOutside;
             inputLengthOfficesOutside==0? inputLengthOfficesOutside=Math.round(Math.sqrt(inputAreaOfficesGroundOutside)):inputLengthOfficesOutside ; 
             inputWidthOfficesOutside==0? inputWidthOfficesOutside=Math.round(Math.sqrt(inputAreaOfficesGroundOutside)):inputWidthOfficesOutside ; 
             inputAreaOfficesGroundOutside==0? inputAreaOfficesGroundOutside= inputLengthOfficesOutside*inputWidthOfficesOutside:inputAreaOfficesGroundOutside;
             console.log(inputAreaOfficesGroundOutside);
             console.log(inputAreaOfficesFloorOutside);
-            console.log(inputAreaOfficesOutside);
             console.log(inputLengthOfficesOutside);
             console.log(inputWidthOfficesOutside);
+            console.log(areaOfficesOutside);
             
-            // hauteur des bureaux
-            let inputHeightOfficesOutside
+        // Calcul  hauteur des bureaux
+            let heightOfficesOutside
             if (inputAreaOfficesGroundOutside==0 && inputAreaOfficesFloorOutside==0) {
-                inputHeightOfficesOutside = 0;
+                heightOfficesOutside = 0;
             }
             if (inputAreaOfficesGroundOutside>0 && inputAreaOfficesFloorOutside==0){
-                inputHeightOfficesOutside = 4.5;
+                heightOfficesOutside = 4.5;
             }
             if (inputAreaOfficesGroundOutside>0 &&inputAreaOfficesFloorOutside>0){
-                inputHeightOfficesOutside = 2*4.5;
+                heightOfficesOutside = 2*4.5;
             }
-            console.log(inputHeightOfficesOutside);
-    //Le Hall du Bâtiment____________________________________________________
-    //Surface hall
-        //inputHeightHall récupérée au début car nécessaire dans les bureaux
-        let inputAreaBox = Number(document.getElementById("inputAreaBox").value);
-        let inputLengthHall = Number(document.getElementById("inputLengthHall").value);
-        let inputWidthHall = Number(document.getElementById("inputWidthHall").value);
-        inputLengthHall==0? inputLengthHall=(Math.sqrt(inputAreaBox)):inputLengthHall ; 
-        inputWidthHall==0? inputWidthHall=(Math.sqrt(inputAreaBox)):inputWidthHall ; 
-        inputAreaBox==0? inputAreaBox= inputLengthHall*inputWidthHall:inputAreaBox;
+            console.log(heightOfficesOutside);
+        // Calcul  escaliers des bureaux
+            let numberStair;
+            if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside==0){
+                numberStair=1;
+            }
+            else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside>0){
+                numberStair=1;
+            }
+            else if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside>0){
+                numberStair=2;
+            }
+            else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside==0){
+                numberStair=0;
+            }
+        console.log(numberStair);
 
-        let inputAreaHall
-        if (inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-            inputAreaHall = inputAreaBox-inputAreaOfficesGroundInside;
-        }
-        if (inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-            inputAreaHall = inputAreaBox-inputAreaOfficesGroundInside;
-        }
-        if (inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-            inputAreaHall = inputAreaBox;
-        };
-        if (inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside==0){
-            inputAreaHall = inputAreaBox;
-        };
+        //Calcul Massif de fondations des bureaux
 
-        console.log(inputAreaHall);
-        console.log(inputLengthHall);
-        console.log(inputWidthHall);
+            let numberFondationBlockOffices;
 
-    //Spécificités_________________________________________________
-        //Renfort de sol :
-        let selectSoilReinforcement = document.getElementById("selectSoilReinforcement").value;
+            if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30<1){
+                numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
+            } 
+            if (inputWidthOfficesInside/30>1 && inputWidthOfficesOutside/30<1){
+                numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) +(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
+            } 
+            if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30>1){
+                numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);
+            } 
+            else{
+                numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) + Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);    
+            }
+        console.log(numberFondationBlockOffices);
 
-        //Cloison intérieure
-        let inputPartitionInside = document.getElementById("inputPartitionInside").value;  
-
-        //Pont roulant :
-        let choiceOverHeadCrane = document.getElementById("choiceOverHeadCrane").value; 
-
-        //Niveleur de quai :
-        let choiceDockShelter = document.getElementById("choiceDockShelter").value; 
-        let numberDockShelter = document.getElementById("numberDockShelter").value; 
         
-        //Porte Sectionnelle de plein pied :
-        let choiceSectionalDoors = document.getElementById("choiceSectionalDoors").value; 
-        let numberFloorSectionalDoor = document.getElementById("numberFloorSectionalDoor").value; 
+    // Calcul Hall du Bâtiment
+        // Calcul de la surface sol totale et surface box;
+        let areaBuilding; // surface au sol avec les bureaux donc si les bureaux sont extérieurs plus de surface // nécessaire pour VRD
+        let areaBox;// surface de la boite si bur intérieurs = ils sont compris dans la surface de la boite // necessaire pour structure bâtiment
+        let areaHall;// surface de la zone de travail //necessaire pour l'équipement
+            areaBox= inputAreaBox;
+            areaHall =areaBox-inputAreaOfficesGroundInside;
+            areaBuilding = areaBox+inputAreaOfficesGroundOutside;
+                        
+        console.log(areaBox);
+        console.log(inputAreaOfficesGroundInside);
+        console.log(areaHall);
+        console.log(inputAreaOfficesGroundOutside);
+        console.log(areaBuilding);
+    
+        // Calcul Surface hall
+        let lengthHall;
+        let widthHall;
+        inputLengthHall==0? lengthHall=(Math.sqrt(areaBox)):lengthHall=inputLengthHall ; 
+        inputWidthHall==0? widthHall=(Math.sqrt(areaBox)):widthHall=inputWidthHall ; 
         
-        //Stockage extérieur :
-        let choiceStorageOutdoor = document.getElementById("choiceStorageOutdoor").value; 
-        let areaRoadAndUtilitiesStorageOutdoor = Number(document.getElementById("areaRoadAndUtilitiesStorageOutdoor").value); 
+            inputAreaOfficesGroundInside>0?areaHall = areaBox-inputAreaOfficesGroundInside:areaHall = areaBox;
+        console.log(lengthHall);
+        console.log(widthHall);
+        console.log(areaHall);
+        
+        // Calcul Massif de fondations Hall
+        let numberFondationBlockHall;
+        if (widthHall/30<1){
+            numberFondationBlockHall= (Math.ceil((lengthHall/6)+1)*2)+(Math.ceil(widthHall/6)*2);
+        }
+        else{
+            numberFondationBlockHall= Math.ceil((lengthHall/6)+1)*Math.ceil(widthHall/30+1)+Math.ceil((widthHall/6)*2);    
+        };
 
-        //Puissance électrique : voir calcul pour les choixrécupération de donnée intégrée dans le calcul _ ici récupération des quantités tarif bleus et jaune
-        let inputBlueRate = document.getElementById("inputBlueRate").value; 
-        let inputYellowRate = document.getElementById("inputYellowRate").value; 
-        //Open Space dans les bureaux_______________________________________
-            let selectOpenSpace = document.getElementById("selectOpenSpace").value;
-            let ratioInteriorDesignOffices
-            switch(selectOpenSpace){
+        console.log(numberFondationBlockHall);
+
+    // Calcul Spécificités
+        // Calcul Renfort de sol :
+
+        // Calcul Cloison intérieure
+
+        // Calcul Pont roulant :
+
+        // Calcul Niveleur de quai :
+        //utilisé si on ne connait pas la surface de VRD
+            let areaRoadAndUtilitiesDockShelter;
+                inputNumberDockShelter>0?areaRoadAndUtilitiesDockShelter=Number(inputNumberDockShelter*(5*35+20*5)) :areaRoadAndUtilitiesDockShelter=0;// 5*35+20*5 c'est la surface de VRD nécessaire en cas de quai soit 5 m de large par 30 m de long devant le quai + 20 x5 nécessaire pour la mise à quai
+            console.log(areaRoadAndUtilitiesDockShelter);
+        
+        // Calcul Porte Sectionnelle de plain pied :
+        //utilisé si on ne connait pas la surface de VRD
+
+            let areaRoadAndUtilitiesFloorSectionelDoor;
+                inputNumberFloorSectionalDoor>0?areaRoadAndUtilitiesFloorSectionelDoor =Number(inputNumberFloorSectionalDoor*(5*20)):areaRoadAndUtilitiesFloorSectionelDoor=0;// 5*20 c'est la surface de VRD nécessaire en cas de porte de plain pied soit 5 m de large par 20 m de long devant la porte / pas de surface supplémentaire comptée pour la mise à la porte car souvent couplée avec les quais et donc utilisation de cette surface
+            console.log(areaRoadAndUtilitiesFloorSectionelDoor);
+        
+        // Calcul Stockage extérieur :
+
+        // Calcul Raccordement électrique :  
+
+        // Calcul Chauffage Hall
+
+        // Calcul Ria Hall
+
+        // Calcul Open Space dans les bureaux
+
+        // Calcul Bardage luxe pour les bureaux
+
+        // Calcul Ascenseur :
+
+        // Calcul  ICPE pas nécessaire car lors de la vérification de devis on vérifie des éléments déjà calculés
+
+        // Calcul Terrain
+            //Calcul pour le cas où on ne connait pas la surface de VRD
+                let areaGround;
+                switch(choiceAreaGround){
+                    case'yes':
+                    areaGround = inputAreaGround;
+                    break;
+                    case'no':
+                    areaGround =(areaBuilding+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesGroundInside+inputAreaOfficesGroundOutside)/15)*(2.5*8*1.2)))*1.2;
+                    break;
+                    };
+                console.log(areaGround);
+
+        // Calcul VRD________________________________________________________
+            //calcul de la surface de VRD
+            let areaRoadAndUtilities;
+            let areaPlantations;
+
+            switch(choiceAreaRoadAndUtilities){
                 case'yes':
-                ratioInteriorDesignOffices= ratioInteriorDesignOfficesWithOpenSPace
+                    areaRoadAndUtilities = inputAreaRoadAndUtilities;
+                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                 break;
                 case'no':
-                ratioInteriorDesignOffices= ratioInteriorDesignOfficesWithoutOpenSPace
+                    areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+inputAreaRoadAndUtilitiesStorageOutdoor+(((areaOfficesInside+areaOfficesOutside)/15)*(2.5*8*2));//calcul surface VRD selon nombre de quai de porte de plain pied, de surface de cour de stockage et du nombre d'employés, // multiplie par 2 la surface de parking car il faut la surface de parking et la surface de la route d'accés au parking
+                    areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
                 break;
                 };
-        console.log(ratioInteriorDesignOffices);
-        //Bardage luxe pour les bureaux_______________________________________
-            let selectPanelOffices = document.getElementById("selectPanelOffices").value;
+        console.log(areaRoadAndUtilities);
+        console.log(areaBuilding);
+        console.log(areaPlantations);
+
+
+        // Calcul Tout compris
+
+        // Calcul TAxes PC
+
+        // Calcul Insurance
+
+        // Calcul Maitrise d'Oeuvre
+
+        // Calcul Agence commerciale
+
+        // Calcul Promoteur
+            
+//COUTS
+    //COUT HALL
+        //Cout Massif de fondations Hall
+            let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
+            console.log(costFondationBlockHall);
+        //Coût Gros Oeuvre Hall
+            let costConcreteWorkHall=ratioConcreteWorkHall*areaHall;
+            console.log(costConcreteWorkHall);
+        //Coût Structure métallique Hall
+            let costMetalFrameHall=ratioMetalFrameHall*areaBox;
+            console.log(costMetalFrameHall);
+        //Coût Couverture Hall
+            let costRoofHall=ratioRoofHall*areaBox;
+            console.log(costRoofHall);
+        //Coût Bardage Hall
+        //  ATTENTION NE TIENT PAS COMPTE DE BARDAGE HAUT DE GAMME POUR LE HALL
+            let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((lengthHall+widthHall)*2*inputHeightHallTotal-inputLengthOfficesOutside*heightOfficesOutside-inputLengthOfficesInside*heightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
+            console.log(costSidingPanelSimpleHall);
+        //Coût Dallage Hall
+            let costConcreteSlabHall=ratioConcreteSlabHall*areaHall;
+            console.log(costConcreteSlabHall);
+        //Coût portes et quais Hall
+            let costRescueDoors=ratioRescueDoors*(Math.ceil(((lengthHall+widthHall)*2)/45));
+            console.log(costRescueDoors);
+        //Coût Electricité Hall
+                let costElectricityHall;
+                choiceGreenRate.checked===true?                costElectricityHall=ratioElectricityHall*areaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*areaHall;
+                console.log(costElectricityHall);
+
+    // COUTBUREAUX
+        //Massif de fondations
+            let costFondationBlockOffices =ratioFondationBlockOffices*numberFondationBlockOffices
+            console.log(costFondationBlockOffices);
+        //Coût Gros Oeuvre Offices
+            let costConcreteWorkOffices=ratioConcreteWorkOffices*areaOfficesInside+ratioConcreteWorkOffices*areaOfficesOutside;
+            console.log(costConcreteWorkOffices);
+        //Coût Structure métallique Offices
+            let costMetalFrameOffices=ratioMetalFrameOffices*(areaOfficesInside)+ratioMetalFrameOffices*(areaOfficesOutside);
+            console.log(costMetalFrameOffices);
+        //Coût Couverture
+            let costRoofOffices=ratioRoofOffices*(inputLengthOfficesOutside*inputWidthOfficesOutside); // ne pas prendre en compte inputAreaOffices car il tient compte de la surface totale des bureaux
+        console.log(costRoofOffices);
+        
+        //Coût bardage Bureaux
             let ratioSidingPanelOffices
-            switch(selectPanelOffices){
+            switch(choicePanelOffices){
                 case'yes':
                 ratioSidingPanelOffices= ratioSidingPanelHighOffices
                 break;
@@ -247,540 +482,331 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                 ratioSidingPanelOffices= ratioSidingPanelSimpleOffices
                 break;
                 };
+                
+                let costSidingPanelOffices=ratioSidingPanelOffices*((inputLengthOfficesOutside+inputWidthOfficesOutside*2)*heightOfficesOutside)+ratioSidingPanelOffices*((inputLengthOfficesInside)*heightOfficesInside);
+
         console.log(ratioSidingPanelOffices);
-         //Ascenseur :
-         let choiceElevator = document.getElementById("choiceElevator").value; 
+        console.log(costSidingPanelOffices);
 
+        //Coût Dallage Bureaux
+            let costConcreteSlabOffices=ratioConcreteSlabOffices*(areaOfficesInside+areaOfficesOutside);
+            console.log(costConcreteSlabOffices);
+        //Coût Menuiserie Aluminium Bureaux
+            let costDoorsAndWindowsOffices=ratioDoorsAndWindowsOffices*(areaOfficesInside+areaOfficesOutside);
+            console.log(costDoorsAndWindowsOffices);
+        //Coût Plomberie Bureaux
+            let costPlumbingOffices=ratioPlumbingOffices*(areaOfficesInside+areaOfficesOutside);
+            console.log(costPlumbingOffices);
+        //Coût  Chauffage des bureaux
+            let costHeatingOffices
+            switch(choiceHeatingOffices){
+                case'airConditioner':
+                costHeatingOffices =ratioAirConditionningOffices*(areaOfficesInside+areaOfficesOutside)
+                break;
+                case'hotWaterHeating':
+                costHeatingOffices =ratioHotWaterHeatingOffices*(areaOfficesInside+areaOfficesOutside)
+                break;
+                case'electricityHeating':
+                costHeatingOffices =ratioElectrityHeatingOffices*(areaOfficesInside+areaOfficesOutside)
+                break;                
+            };
+            console.log(costHeatingOffices);
+        //Coût Electricité Bureaux
+                let costElectricityOffices=ratioElectricityOffices*(areaOfficesInside+areaOfficesOutside);
+                console.log(costElectricityOffices);
+        //Coût Aménagement Bureaux
+            let ratioInteriorDesignOffices
+            switch(choiceOpenSpace){
+                case'yes':
+                ratioInteriorDesignOffices= ratioInteriorDesignOfficesWithOpenSPace
+                break;
+                case'no':
+                ratioInteriorDesignOffices= ratioInteriorDesignOfficesWithoutOpenSPace
+                break;
+                };
+                
+                let costInteriorDesignOffices=ratioInteriorDesignOffices*(areaOfficesInside+areaOfficesOutside);
+                
+            console.log(ratioInteriorDesignOffices);
+            console.log(costInteriorDesignOffices);
+    // COUT SPECIFICITES
+        //Coût Renfort de sol
+            let costSoilReinforcement;
+            switch(choiceSoilReinforcement){
+                case'yes':
+                    costSoilReinforcement= ratioSoilReinforcement*(areaBuilding);
+                break;
+                case'no':
+                    costSoilReinforcement= 0;
+                break;
+                };
+            console.log(areaBuilding);
+            console.log(costSoilReinforcement);
+        //Coût Cloison(s) intérieure(s)
+            let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(widthHall*inputHeightHallTotal)*inputNumberPartitionInside;
 
-    //Terrain________________________________________________________
-        let choiceGroundOwner = document.getElementById("choiceGroundOwner").value;
-        let choiceAreaGround = document.getElementById("choiceAreaGround").value;
-        let inputAreaGround = document.getElementById("inputAreaGround").value;
-        let choiceCostGround = document.getElementById("choiceCostGround").value;
-        let inputCostGround = document.getElementById("inputCostGround").value;
-    //VRD________________________________________________________
-        let choiceAreaRoadAndUtilities = document.getElementById("choiceAreaRoadAndUtilities").value;
-        let inputAreaRoadAndUtilities = document.getElementById("inputAreaRoadAndUtilities").value;
-    //Tout compris________________________________________________________
-        let choiceAllIn = document.getElementById("choiceAllIn").value;
-    //TAxes PC________________________________________________________
-        let choiceFeeBuildingPermit = document.getElementById("choiceFeeBuildingPermit").value;
-    //Insurance________________________________________________________
-        let choiceInsurance = document.getElementById("choiceInsurance").value;
-    //Maitrise d'Oeuvre________________________________________________________
-        let choiceManagement = document.getElementById("choiceManagement").value;
-    //Agence commerciale________________________________________________________
-        let choiceBusinessAgency = document.getElementById("choiceBusinessAgency").value;
-    //Promoteur________________________________________________________
-        let choiceDevelopper = document.getElementById("choiceDevelopper").value;
+            switch(choicePartitionInside){
+                case'yes':
+                costPartitionInsideSidingPanel
+                break;
+                case'no':
+                costPartitionInsideSidingPanel = 0;
+                break;
+            };
+            console.log(costPartitionInsideSidingPanel);
+        //Coût Ponts roulants
+            let polesUnderOverHeadCrane;
+            let lengthRaceway;
+            let addedValueOverHeadCrane;
+            let addedValueOverHeadCraneFondations;
+            switch(choiceOverHeadCrane){
+                case'yes':
+                    polesUnderOverHeadCrane = (Math.ceil((lengthHall/6)+1)*2);
+                    //lengthRaceway = ((lengthHall)*2); Neutralisé travail du poseur de pont
+                    addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles)*inputHeightHallTotal*inputNumberOverHeadCrane;// pas de rails compté à la charge du fournisseur de pont
+                    addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole*inputNumberOverHeadCrane;
+                    break;
+                case'no':
+                    polesUnderOverHeadCrane= 0;
+                    //lengthRaceway= 0;neutralisé à la charge du fournisseur de pont
+                    addedValueOverHeadCrane= 0;
+                    addedValueOverHeadCraneFondations=0;
+                    break;
+                };
+        console.log(polesUnderOverHeadCrane);
+        console.log(inputHeightHallTotal);
+        console.log(inputNumberOverHeadCrane);
+        console.log(addedValueOverHeadCrane);
+        console.log(addedValueOverHeadCraneFondations);
+
+        //Coût Quai Niveleur
+                let addedValueDockShelter;
+                let addedValueConcreteWorkDockShelter;
+                switch(choiceDockShelter){
+                    case'yes':
+                        // coût de la plus value pour les quais + plus value pour la voirie aire de manoeuvre
+                        addedValueDockShelter = Number(inputNumberDockShelter)*(costDockShelter);
+                        //Plus value VRD compté dans le calcul VRD;
+                        addedValueConcreteWorkDockShelter = Number(inputNumberDockShelter) *costconcreteWorkDockShelter;//coût de la fosse à haillon
+                        break;
+                    case'no':
+                        addedValueDockShelter = 0;
+                        addedValueConcreteWorkDockShelter = 0;
+                        break;
+                    };
+        console.log(addedValueDockShelter);
+        console.log(addedValueConcreteWorkDockShelter);
+
+        //Coût Portes Sectionnelles de plain pied
+                let addedValueSectionalDoors;
+                switch(choiceFloorSectionalDoor){
+                    case'yes':
+                        // coût de la plus value pour porte sectionnelles
+                        addedValueSectionalDoors = Number(inputNumberFloorSectionalDoor)*(costSectionalDoors);
+                        //Plus value VRD compté dans le calcul VRD;
+                        break;
+                    case'no':
+                        addedValueSectionalDoors = 0;
+                        break;
+                    };
+        console.log(inputNumberFloorSectionalDoor);
+        console.log(addedValueSectionalDoors);
+        //Coût Stockage extérieur compté dans le VRD
+
+        //Coût  Puissance Electrique
+                let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
+                
+                if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
+                    inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                    inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                    costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate+costElectricalConnection[2];
+            }
+                else if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
+                    inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                    inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                    costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate;
+            }
+                else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===false ){
+                    inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                    costElectricalConnection=costElectricalConnection[0]*inputBlueRate;
+            }
+                else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
+                    inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                    costElectricalConnection=costElectricalConnection[1]*inputYellowRate;
+            }
+                else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===true ){
+                    inputYellowRate==''?inputYellowRate=1:inputYellowRate;
+                    costElectricalConnection= costElectricalConnection[1]*inputYellowRate+costElectricalConnection[2];
+            }
+                else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
+                    inputBlueRate==''?inputBlueRate=1:inputBlueRate;
+                    costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[2];
+            }
+                else if (choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
+                    costElectricalConnection= costElectricalConnection[2];
+            }
+                else{
+                    costElectricalConnection=costElectricalConnection[3];
+                };
+        console.log(inputBlueRate);
+        console.log(inputYellowRate);
+        console.log(costElectricalConnection);
         
-//_____________________________________________________________________________________________
-    // CALCULS TRAVAUX
-        //HALL
-            //Massif de fondations Hall
-                let numberFondationBlockHall;
-                if (inputWidthHall/30<1){
-                    numberFondationBlockHall= (Math.ceil((inputLengthHall/6)+1)*2)+(Math.ceil(inputWidthHall/6)*2);
-                }
-                else{
-                    numberFondationBlockHall= Math.ceil((inputLengthHall/6)+1)*Math.ceil(inputWidthHall/30+1)+Math.ceil((inputWidthHall/6)*2);    
-                }
-                let costFondationBlockHall =ratioFondationBlockHall*numberFondationBlockHall
-                console.log(numberFondationBlockHall);
-                console.log(costFondationBlockHall);
-            //Gros Oeuvre Hall
-                let costConcreteWorkHall=ratioConcreteWorkHall*inputAreaHall;
-                console.log(costConcreteWorkHall);
-            //Structure métallique Hall
-                let costMetalFrameHall=ratioMetalFrameHall*inputAreaBox;
-                console.log(costMetalFrameHall);
-            //Couverture Hall
-                let costRoofHall=ratioRoofHall*inputAreaBox;
-                console.log(costRoofHall);
-            //Bardage Hall
-            //  ATTENTION NE TIENT PAS COMPTE DE BARDAGE HAUT DE GAMME POUR LE HALL
-                let costSidingPanelSimpleHall=ratioSidingPanelSimpleHall*((inputLengthHall+inputWidthHall)*2*inputHeightHall-inputLengthOfficesOutside*inputHeightOfficesOutside-inputLengthOfficesInside*inputHeightOfficesInside);//on compte Inside et Outside car lorsqu'il y a les 2 Types des bureaux, ils sont souvent séparés
-                console.log(costSidingPanelSimpleHall);
-            //Dallage Hall
-                let costConcreteSlabHall=ratioConcreteSlabHall*inputAreaHall;
-                console.log(costConcreteSlabHall);
-            //portes et quais Hall
-                let costRescueDoors=ratioRescueDoors*(Math.ceil(((inputLengthHall+inputWidthHall)*2)/45));
-                console.log(costRescueDoors);
-            //Electricité Hall
-                    let costElectricityHall=ratioElectricityHall*inputAreaHall;
-                    choiceGreenRate.checked===true?
-                    costElectricityHall=ratioElectricityHall*inputAreaHall+costGreenRateAddedValueElectricity:costElectricityHall=ratioElectricityHall*inputAreaHall;
-                    console.log(costElectricityHall);
-
-        // BUREAUX
-            //Massif de fondations
-                let numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
-                if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30<1){
-                    numberFondationBlockOffices;
-                } 
-                if (inputWidthOfficesInside/30>1 && inputWidthOfficesOutside/30<1){
-                    numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) +(Math.ceil((inputLengthOfficesOutside/6)+1))+(Math.ceil(inputWidthOfficesOutside/6)*2);
-                } 
-                if (inputWidthOfficesInside/30<1 && inputWidthOfficesOutside/30>1){
-                    numberFondationBlockOffices= (Math.ceil((inputLengthOfficesInside/6)+1))+(Math.ceil(inputWidthOfficesInside/6)*2)+Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);
-                } 
-                else{
-                    numberFondationBlockOffices= Math.ceil((inputLengthOfficesInside/6)+1)*Math.ceil(inputWidthOfficesInside/30)+Math.ceil((inputWidthOfficesInside/6)*2) + Math.ceil((inputLengthOfficesOutside/6)+1)*Math.ceil(inputWidthOfficesOutside/30)+Math.ceil((inputWidthOfficesOutside/6)*2);    
-                }
-                let costFondationBlockOffices =ratioFondationBlockOffices*numberFondationBlockOffices
-                console.log(costFondationBlockOffices);
-            //Gros Oeuvre Offices
-                let costConcreteWorkOffices=ratioConcreteWorkOffices*inputAreaOfficesInside+ratioConcreteWorkOffices*inputAreaOfficesOutside;
-                console.log(costConcreteWorkOffices);
-            //Structure métallique Offices
-                let costMetalFrameOffices=ratioMetalFrameOffices*(inputAreaOfficesInside)+ratioMetalFrameOffices*(inputAreaOfficesOutside);
-                console.log(costMetalFrameOffices);
-            //Couverture et bardage Bureaux
-                let costRoofOffices=ratioRoofOffices*(inputLengthOfficesOutside*inputWidthOfficesOutside); // ne pas prendre en compte inputAreaOffices car il tient compte de la surface totale des bureaux
-            //  ATTENTION NE TIENT PAS COMPTE DU BARDAGE HAUT DE GAMME POUR LE HALL
-                let costSidingPanelOffices=ratioSidingPanelOffices*((inputLengthOfficesOutside+inputWidthOfficesOutside*2)*inputHeightOfficesOutside)+ratioSidingPanelOffices*((inputLengthOfficesInside)*inputHeightOfficesInside);
-                console.log(costRoofOffices);
-                console.log(costSidingPanelOffices);
-            //Dallage Bureaux
-                let costConcreteSlabOffices=ratioConcreteSlabOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
-                console.log(costConcreteSlabOffices);
-            //Menuiserie Aluminium Bureaux
-                let costDoorsAndWindowsOffices=ratioDoorsAndWindowsOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
-                console.log(costDoorsAndWindowsOffices);
-            //Plomberie Bureaux
-                let costPlumbingOffices=ratioPlumbingOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
-                console.log(costPlumbingOffices);
-            // Chauffage des bureaux
-                let costHeatingOffices
-                let selectHeatingOffices = document.getElementById('selectHeatingOffices').value;
-                switch(selectHeatingOffices){
-                    case'airConditioner':
-                    costHeatingOffices =ratioAirConditionningOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
+        //Coût Chauffage Hall
+            //  ATTENTION TIENT COMPTE UNIQUEMENT DU CHAUFFAGE AEROTHERME GAZ 
+            let costGasHeatingHall=ratioGasHeatingHall*areaHall;
+            switch(choiceHeatingHall){
+                case'yes':
+                costGasHeatingHall
+                break;
+                case'no':
+                costGasHeatingHall = 0;
+                break;
+            };
+            console.log(costGasHeatingHall);
+        //Coût RIA Hall
+            let costFireNetworkHall=ratioFireNetworkHall*areaHall;
+            switch(choiceFireNetworkHall){
+                case'yes':
+                costFireNetworkHall
+                break;
+                case'no':
+                costFireNetworkHall = 0;
+                break;
+            };
+            console.log(costFireNetworkHall);
+        //Coût Chauffage bureaux 
+            //Calcul : voir bureaux
+        //Coût Bardage luxe bureaux 
+            //Calcul : voir bureaux
+        //Coût Ascenseur bureaux 
+            let addedValueElevator;
+            switch(choiceElevator){
+                case'yes':
+                addedValueElevator=costElevator;
                     break;
-                    case'hotWaterHeating':
-                    costHeatingOffices =ratioHotWaterHeatingOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
-                    break;
-                    case'electricityHeating':
-                    costHeatingOffices =ratioElectrityHeatingOffices*(inputAreaOfficesInside+inputAreaOfficesOutside)
-                    break;                
-                };
-                console.log(costHeatingOffices);
-                //Electricité Bureaux
-                    let costElectricityOffices=ratioElectricityOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
-                    console.log(costElectricityOffices);
-                //Aménagement Bureaux
-                    let costInteriorDesignOffices=ratioInteriorDesignOffices*(inputAreaOfficesInside+inputAreaOfficesOutside);
-                    console.log(costInteriorDesignOffices);
-        // SPECIFICITES
-            //Renfort de sol
-                //Calcul
-                let costSoilReinforcement;
-                switch(selectSoilReinforcement){
-                    case'yes':
-                    if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no' ||inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                        costSoilReinforcement= ratioSoilReinforcement*(inputAreaBox);
-                    }
-                    if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                        costSoilReinforcement= ratioSoilReinforcement*(inputAreaBox+inputAreaOfficesGroundOutside);
-                    }
-                    if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                        costSoilReinforcement= ratioSoilReinforcement*(inputAreaBox+inputAreaOfficesGroundOutside);
-                    }
-                    else if (choiceOfficesInside==='no' && choiceOfficesOutside==='no' || inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                        costSoilReinforcement= ratioSoilReinforcement*(inputAreaBox+inputAreaOfficesGroundOutside);
-                    };
-                    break;
-                    case'no':
-                        costSoilReinforcement= 0;
-                    break;
-                    };
-                console.log(inputAreaBox);
-                console.log(inputAreaOfficesGroundOutside);
-                console.log(costSoilReinforcement);
-            //Cloison(s) intérieure(s)
-                //Calcul
-                let costPartitionInsideSidingPanel=ratioPartitionInsideSidingPanel*(inputWidthHall*inputHeightHall)*inputPartitionInside;
-
-                let selectPartitionInside = document.getElementById("selectPartitionInside").value;
-                switch(selectPartitionInside){
-                    case'yes':
-                    costPartitionInsideSidingPanel
-                    break;
-                    case'no':
-                    costPartitionInsideSidingPanel = 0;
+                case'no':
+                addedValueElevator = 0;
                     break;
                 };
-                console.log(costPartitionInsideSidingPanel);
-            //Ponts roulants
-            //Calcul
-                let polesUnderOverHeadCrane;
-                let lengthRaceway;
-                let addedValueOverHeadCrane;
-                let addedValueOverHeadCraneFondations;
-                switch(choiceOverHeadCrane){
-                    case'yes':
-                        polesUnderOverHeadCrane = (Math.ceil((inputLengthHall/6)+1)*2);
-                        lengthRaceway = ((inputLengthHall)*2);
-                        addedValueOverHeadCrane =(polesUnderOverHeadCrane*addedValueOverHeadCraneOnPoles+lengthRaceway*addedValueOverHeadCraneRaceway);
-                        addedValueOverHeadCraneFondations= polesUnderOverHeadCrane*addedValueOverHeadCraneFondationByPole
-                        break;
-                    case'no':
-                        polesUnderOverHeadCrane= 0;
-                        lengthRaceway= 0;
-                        addedValueOverHeadCrane= 0;
-                        addedValueOverHeadCraneFondations=0;
-                        break;
-                    };
-            console.log(polesUnderOverHeadCrane);
-            console.log(lengthRaceway);
-            console.log(addedValueOverHeadCrane);
-            console.log(addedValueOverHeadCraneFondations);
-
-            //Quai Niveleur
-                //Calcul
-                    let addedValueDockShelter;
-                    let addedValueConcreteWorkDockShelter;
-                    switch(choiceDockShelter){
-                        case'yes':
-                            // coût de la plus value pour les quais + plus value pour la voirie aire de manoeuvre
-                            addedValueDockShelter = Number(numberDockShelter)*(costDockShelter);
-                            //Plus value VRD compté dans le calcul VRD;
-                            addedValueConcreteWorkDockShelter = Number(numberDockShelter) *costconcreteWorkDockShelter;//coût de la fosse à haillon
-                            break;
-                        case'no':
-                            addedValueDockShelter = 0;
-                            addedValueConcreteWorkDockShelter = 0;
-                            break;
-                        };
-            console.log(addedValueDockShelter);
-            console.log(addedValueConcreteWorkDockShelter);
-
-            //Portes Sectionnelles de plain pied
-                //Calcul
-                    let addedValueSectionalDoors;
-                    switch(choiceSectionalDoors){
-                        case'yes':
-                            // coût de la plus value pour porte sectionnelles
-                            addedValueSectionalDoors = Number(numberFloorSectionalDoor)*(costSectionalDoors);
-                            //Plus value VRD compté dans le calcul VRD;
-                            break;
-                        case'no':
-                            addedValueSectionalDoors = 0;
-                            break;
-                        };
-            console.log(numberFloorSectionalDoor);
-            console.log(addedValueSectionalDoors);
-            //Stockage extérieur compté dans le VRD
-
-            // Puissance Electrique
-            //Récupération des données
-                    //à l'origine de la fonction costBreakdown(event) sauf pour les quantités
-            //Calcul
-                    let costElectricalConnection = [costBlueRate,costYellowRate,costGreenRate,0];
-                    
-                    if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===true){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate+costElectricalConnection[2];
-                }
-                    else if (choiceBlueRate.checked===true && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[1]*inputYellowRate;
-                }
-                    else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===false ){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate;
-                }
-                    else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===false ){
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection=costElectricalConnection[1]*inputYellowRate;
-                }
-                    else if (choiceBlueRate.checked===false && choiceYellowRate.checked===true && choiceGreenRate.checked===true ){
-                        inputYellowRate==''?inputYellowRate=1:inputYellowRate;
-                        costElectricalConnection= costElectricalConnection[1]*inputYellowRate+costElectricalConnection[2];
-                }
-                    else if (choiceBlueRate.checked===true && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
-                        inputBlueRate==''?inputBlueRate=1:inputBlueRate;
-                        costElectricalConnection=costElectricalConnection[0]*inputBlueRate + costElectricalConnection[2];
-                }
-                    else if (choiceBlueRate.checked===false && choiceYellowRate.checked===false && choiceGreenRate.checked===true){
-                        costElectricalConnection= costElectricalConnection[2];
-                }
-                    else{
-                        costElectricalConnection=costElectricalConnection[3];
-                    };
-            console.log(inputBlueRate);
-            console.log(inputYellowRate);
-            console.log(costElectricalConnection);
-            //Chauffage Hall
-                //Calcul
-                //  ATTENTION TIENT COMPTE UNIQUEMENT DU CHAUFFAGE AEROTHERME GAZ 
-                let costGasHeatingHall=ratioGasHeatingHall*inputAreaHall;
-                let selectHeatingHall = document.getElementById("selectHeatingHall").value;
-                switch(selectHeatingHall){
-                    case'yes':
-                    costGasHeatingHall
-                    break;
-                    case'no':
-                    costGasHeatingHall = 0;
-                    break;
-                };
-                console.log(costGasHeatingHall);
-            //RIA Hall
-                //Calcul
-                let costFireNetworkHall=ratioFireNetworkHall*inputAreaHall;
-                let selectFireNetworkHall = document.getElementById("selectFireNetworkHall").value;
-                switch(selectFireNetworkHall){
-                    case'yes':
-                    costFireNetworkHall
-                    break;
-                    case'no':
-                    costFireNetworkHall = 0;
-                    break;
-                };
-                console.log(costFireNetworkHall);
-            //Chauffage bureaux 
-                //Calcul : voir bureaux
-            //Bardage luxe bureaux 
-                //Calcul : voir bureaux
-            //Ascenseur bureaux 
-                //Calcul
-                let addedValueElevator;
-                switch(choiceElevator){
-                    case'yes':
-                    addedValueElevator=costElevator;
-                        break;
-                    case'no':
-                    addedValueElevator = 0;
-                        break;
-                    };
         console.log(addedValueElevator);
-            //Escalier bureaux 
-                //Calcul
-                let numberStairs;
-                let addedValueStair;
-                if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside==0){
-                    numberStairs=1;
-                    addedValueStair=costStair*numberStairs;
-            }
-                else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside>0){
-                    numberStairs=1;
-                    addedValueStair=costStair*numberStairs;
-            }
-                else if (inputAreaOfficesFloorInside>0 && inputAreaOfficesFloorOutside>0){
-                    numberStairs=2;
-                    addedValueStair=costStair*numberStairs;
-            }
-                else if (inputAreaOfficesFloorInside==0 && inputAreaOfficesFloorOutside==0){
-                    numberStairs=0;
-                    addedValueStair=costStair*numberStairs;
-            }
-        console.log(addedValueStair);
-    
-        // TERRAIN
+        //Coût Escalier bureaux 
+            let costStair;
+                costStair=addedValueStair*numberStair;
+        console.log(costStair);
 
-        //pour le cas où on ne connait pas la surface de VRD
-                    let areaRoadAndUtilitiesDockShelter;
-                    let areaRoadAndUtilitiesFloorSectionelDoor;
-        
-                    if (numberDockShelter>0 && numberFloorSectionalDoor>0) {
-                        areaRoadAndUtilitiesDockShelter=Number(numberDockShelter*5*35+20*5);
-                        areaRoadAndUtilitiesFloorSectionelDoor =Number(numberFloorSectionalDoor*(5*20));
-                    }
-                    if (numberDockShelter>0 && numberFloorSectionalDoor<=0) {
-                        areaRoadAndUtilitiesDockShelter=Number(numberDockShelter*5*20+20*20);
-                        areaRoadAndUtilitiesFloorSectionelDoor =0;
-                    }
-                    if (numberDockShelter<=0 && numberFloorSectionalDoor>0) {
-                        areaRoadAndUtilitiesDockShelter=0;
-                        areaRoadAndUtilitiesFloorSectionelDoor =Number(numberFloorSectionalDoor*(5*20)+20*5);
-                    }
-                    if (numberDockShelter<=0 && numberFloorSectionalDoor<=0) {
-                        areaRoadAndUtilitiesDockShelter=0;
-                        areaRoadAndUtilitiesFloorSectionelDoor=0;
-                    };
-                console.log(areaRoadAndUtilitiesDockShelter);
-                console.log(areaRoadAndUtilitiesFloorSectionelDoor);
-                console.log(areaRoadAndUtilitiesStorageOutdoor);
+    //Coût  TERRAIN
+        //coût du terrain quand il n'est pas connu
+            let costGround;
+            switch(choiceGroundOwner){
+                case 'yes':
+                    switch(choiceCostGround){
+                        case'yes':
+                        costGround = Math.round(areaGround*inputCostGround);
+                        break;
+                        case'no':
+                        costGround = areaGround*costGroundByRegion;
+                        break;
+                        };
+                break;
+                case 'no':
+                        costGround = 0;
+                break;
+                };
+            console.log(costGround);
+    //Coût VRD
+        // Coût du poste VRD En fonction de la surface et de l'occupation du terrain
+            let costRoadAndUtilities;
+            if (((areaRoadAndUtilities+areaBuilding)/areaGround)> 0.65&& areaGround>5000){
+                costRoadAndUtilities= areaBuilding*ratioBuilding2+areaRoadAndUtilities*ratioRoadAndUtilities2+areaPlantations*ratioPlantations2+areaGround*ratioFencing2;
+            }
+            else {
+                costRoadAndUtilities= areaBuilding*ratioBuilding1+areaRoadAndUtilities*ratioRoadAndUtilities1+areaPlantations*ratioPlantations1+areaGround*ratioFencing1;
+            }
+            console.log(costRoadAndUtilities);
+        // Coût du poste Total travaux HT
+            let costTotalWorks=costRoadAndUtilities+costSoilReinforcement+costFondationBlockHall+addedValueOverHeadCraneFondations+costConcreteWorkHall+addedValueConcreteWorkDockShelter+costFondationBlockOffices+costConcreteWorkOffices+costMetalFrameHall+costMetalFrameOffices+addedValueOverHeadCrane+costRoofHall+costSidingPanelSimpleHall+costPartitionInsideSidingPanel+costSidingPanelOffices+costRoofOffices+costConcreteSlabHall+costConcreteSlabOffices+costRescueDoors+addedValueDockShelter+addedValueSectionalDoors+costDoorsAndWindowsOffices+costGasHeatingHall+costFireNetworkHall+costPlumbingOffices+costHeatingOffices+costElectricityHall+costElectricityOffices+costInteriorDesignOffices+costStair+addedValueElevator;
+            console.log(costTotalWorks);
 
-             //calcul de la surface du terrain quand elle n'est pas connue
-                let areaGround;
-                switch(choiceAreaGround){
-                    case'yes':
-                    areaGround = (inputAreaGround);
-                    break;
-                    case'no':
-                    areaGround =(inputAreaBox+inputAreaOfficesGroundOutside+areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2)))*1.2;
-                    break;
-                    };
-                console.log(areaGround);
-            //calcul du coût du terrain quand il n'est pas connu
-                let costGround;
-                switch(choiceGroundOwner){
+        // Coût du DIVERS
+            // Coût Clef en main
+                let costAllIn;
+                switch(choiceAllIn){
                     case 'yes':
-                        switch(choiceCostGround){
-                            case'yes':
-                            costGround = Math.round(areaGround*inputCostGround);
-                            break;
-                            case'no':
-                            costGround = areaGround*costGroundByRegion;
-                            break;
-                            };
+                        costAllIn = Math.round(costTotalWorks*0.0115+costElectricalConnection);
                     break;
                     case 'no':
-                            costGround = 0;
+                        costAllIn = 0;
                     break;
                     };
-                console.log(costGround);
-        //VRD
-            //calcul de la surface de VRD
-                let areaRoadAndUtilities;
-                let areaBuilding;
-                let areaPlantations;
-
-                switch(choiceAreaRoadAndUtilities){
-                    case'yes':
-                    if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no' || inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                        areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                        areaBuilding = inputAreaBox;
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
-                    if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                        areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                        areaBuilding = inputAreaBox+inputAreaOfficesGroundOutside;
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                        }
-                    if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes' || inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                        areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                        areaBuilding = inputAreaBox+inputAreaOfficesGroundOutside;
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                        }
-                    if (choiceOfficesInside==='no' && choiceOfficesOutside==='no' || inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                        areaRoadAndUtilities = inputAreaRoadAndUtilities;
-                        areaBuilding = inputAreaBox+inputAreaOfficesGroundOutside;
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                        }
+                console.log(costAllIn);
+            // Coût Taxes Permis de construire
+                let costFeeBuildingPermit;
+                switch(choiceFeeBuildingPermit){
+                    case 'yes':
+                        costFeeBuildingPermit = Math.round(costTotalWorks*0.0741);
                     break;
-                    case'no':
-                        if (choiceOfficesInside==='yes' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside==0){
-                        areaRoadAndUtilities = areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));// quand on ne connait pas la surface de voiries, elle est calculé en fonction des quais, portes sectionneLles, stockage ext et besoin de parking des bureaux
-                        areaBuilding = inputAreaBox;
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                    }
-                    if (choiceOfficesInside==='no' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside==0 && inputAreaOfficesGroundOutside>0){
-                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
-                        areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                        }
-                    if (choiceOfficesInside==='yes' && choiceOfficesOutside==='yes'|| inputAreaOfficesGroundInside>0 && inputAreaOfficesGroundOutside>0){
-                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
-                        areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                        }
-                    if (choiceOfficesInside==='no' && choiceOfficesOutside==='no'|| inputAreaOfficesGroundInside>=0 && inputAreaOfficesGroundOutside>=0){
-                        areaRoadAndUtilities =areaRoadAndUtilitiesDockShelter+areaRoadAndUtilitiesFloorSectionelDoor+areaRoadAndUtilitiesStorageOutdoor+(((inputAreaOfficesInside+inputAreaOfficesOutside)/15)*(2.5*8*1.2));//idem
-                        areaBuilding = (inputAreaBox+inputAreaOfficesGroundOutside);
-                        areaPlantations =areaGround-areaRoadAndUtilities-areaBuilding;
-                        }
+                    case 'no':
+                        costFeeBuildingPermit = 0;
                     break;
                     };
-                console.log(areaRoadAndUtilities);
-                console.log(areaBuilding);
-                console.log(areaPlantations);
-            //calcul du poste VRD
-                let costRoadAndUtilities;
-                if (((areaRoadAndUtilities+areaBuilding)/areaGround)> 0.65&& areaGround>5000){
-                    costRoadAndUtilities= areaBuilding*ratioBuilding2+areaRoadAndUtilities*ratioRoadAndUtilities2+areaPlantations*ratioPlantations2+areaGround*ratioFencing2;
-                }
-                else {
-                    costRoadAndUtilities= areaBuilding*ratioBuilding1+areaRoadAndUtilities*ratioRoadAndUtilities1+areaPlantations*ratioPlantations1+areaGround*ratioFencing1;
-                }
-                console.log(costRoadAndUtilities);
-            //calcul du poste Total travaux HT
-                let costTotalWorks=costRoadAndUtilities+costSoilReinforcement+costFondationBlockHall+addedValueOverHeadCraneFondations+costConcreteWorkHall+addedValueConcreteWorkDockShelter+costFondationBlockOffices+costConcreteWorkOffices+costMetalFrameHall+costMetalFrameOffices+addedValueOverHeadCrane+costRoofHall+costSidingPanelSimpleHall+costPartitionInsideSidingPanel+costSidingPanelOffices+costRoofOffices+costConcreteSlabHall+costConcreteSlabOffices+costRescueDoors+addedValueDockShelter+addedValueSectionalDoors+costDoorsAndWindowsOffices+costGasHeatingHall+costFireNetworkHall+costPlumbingOffices+costHeatingOffices+costElectricityHall+costElectricityOffices+costInteriorDesignOffices+addedValueStair+addedValueElevator;
-                console.log(costTotalWorks);
-
-            //calcul du DIVERS
-                //Clef en main
-                    let costAllIn;
-                    switch(choiceAllIn){
-                        case 'yes':
-                            costAllIn = Math.round(costTotalWorks*0.0115+costElectricalConnection);
-                        break;
-                        case 'no':
-                            costAllIn = 0;
-                        break;
-                        };
-                    console.log(costAllIn);
-                //Taxes Permis de construire
-                    let costFeeBuildingPermit;
-                    switch(choiceFeeBuildingPermit){
-                        case 'yes':
-                            costFeeBuildingPermit = Math.round(costTotalWorks*0.0741);
-                        break;
-                        case 'no':
-                            costFeeBuildingPermit = 0;
-                        break;
-                        };
-                    console.log(costFeeBuildingPermit);
-                //Dommage Ouvrage
-                    let costInsurance;
-                    switch(choiceInsurance){
-                        case 'yes':
-                            costInsurance = Math.round(costTotalWorks*0.0345);
-                        break;
-                        case 'no':
-                            costInsurance = 0;
-                        break;
-                        };
-                    console.log(costInsurance);
-                //Maitrise d'Oeuvre
-                    let costManagement;
-                    switch(choiceManagement){
-                        case 'yes':
-                            costManagement = Math.round(costTotalWorks*0.12);
-                        break;
-                        case 'no':
-                            costManagement = 0;
-                        break;
-                        };
-                    console.log(costManagement);
-                //Agence commerciale
-                    let costBusinessAgency;
-                    switch(choiceBusinessAgency){
-                        case 'yes':
-                            costBusinessAgency = Math.round(costTotalWorks*0.0375);
-                        break;
-                        case 'no':
-                            costBusinessAgency = 0;
-                        break;
-                        };
-                    console.log(costBusinessAgency);
-                //Promoteur
-                    let costDevelopper;
-                    switch(choiceDevelopper){
-                        case 'yes':
-                            costDevelopper = Math.round(costTotalWorks*0.06);
-                        break;
-                        case 'no':
-                            costDevelopper = 0;
-                        break;
-                        };
-                    console.log(costDevelopper);
-                //calcul du poste Total Administrative
-                    let costTotalAdministrative=costGround+costAllIn+costFeeBuildingPermit+costInsurance+costManagement+costBusinessAgency+costDevelopper;
-                    console.log(costTotalAdministrative);
-                //calcul du Total Général pour comparaison avec L'offre reçue par le client
-                    let costTotalGeneral=costTotalAdministrative+costTotalWorks;
-                    console.log(costTotalGeneral);
-                //calcul de La différence entre le Total Général/Offre reçue par le client
-                    let costDifference=inputSellingPrice-costTotalGeneral;
-                    console.log(costDifference);
+                console.log(costFeeBuildingPermit);
+            // Coût Dommage Ouvrage
+                let costInsurance;
+                switch(choiceInsurance){
+                    case 'yes':
+                        costInsurance = Math.round(costTotalWorks*0.0345);
+                    break;
+                    case 'no':
+                        costInsurance = 0;
+                    break;
+                    };
+                console.log(costInsurance);
+            // Coût Maitrise d'Oeuvre
+                let costManagement;
+                switch(choiceManagement){
+                    case 'yes':
+                        costManagement = Math.round(costTotalWorks*0.12);
+                    break;
+                    case 'no':
+                        costManagement = 0;
+                    break;
+                    };
+                console.log(costManagement);
+            // Coût Agence commerciale
+                let costBusinessAgency;
+                switch(choiceBusinessAgency){
+                    case 'yes':
+                        costBusinessAgency = Math.round(costTotalWorks*0.0375);
+                    break;
+                    case 'no':
+                        costBusinessAgency = 0;
+                    break;
+                    };
+                console.log(costBusinessAgency);
+            // Coût Promoteur
+                let costDevelopper;
+                switch(choiceDevelopper){
+                    case 'yes':
+                        costDevelopper = Math.round(costTotalWorks*0.06);
+                    break;
+                    case 'no':
+                        costDevelopper = 0;
+                    break;
+                    };
+                console.log(costDevelopper);
+            // Coût du poste Total Administrative
+                let costTotalAdministrative=costGround+costAllIn+costFeeBuildingPermit+costInsurance+costManagement+costBusinessAgency+costDevelopper;
+                console.log(costTotalAdministrative);
+            // Coût du Total Général pour comparaison avec L'offre reçue par le client
+                let costTotalGeneral=costTotalAdministrative+costTotalWorks;
+                console.log(costTotalGeneral);
+            // Coût de La différence entre le Total Général/Offre reçue par le client
+                let costDifference=inputSellingPrice-costTotalGeneral;
+                console.log(costDifference);
 
 //_____________________________________________________________________________________________
-// Affichage de répartition des Lots
+// AFFICHAGE DE REPARTITION DES LOTS
                 // DEMOLITION : sans objet
                 // VRD + PORTAIL/CLOTURE+EV
                     console.log(costRoadAndUtilities);
@@ -832,7 +858,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     console.log(desplayElectricity);
                 // AMENAGEMENT BUREAUX 
                     console.log(costInteriorDesignOffices+addedValueElevator);
-                    let desplayInteriorDesignOffices =costInteriorDesignOffices+addedValueElevator+addedValueStair;
+                    let desplayInteriorDesignOffices =costInteriorDesignOffices+addedValueElevator+costStair;
                     desplayInteriorDesignOffices = new Intl.NumberFormat().format(desplayInteriorDesignOffices);// pour affichage style monétaire x xxx xxx
                     console.log(desplayInteriorDesignOffices);
                 //TOTAL travaux  
@@ -878,7 +904,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
                     console.log(desplayDifference);                    
                     
                 
-                // TEXTES_______________________________________
+// TEXTES_______________________________________
     //HALL
         // si la surface n'est pas égal à la longueur x largeur
         let verificationAreaHall = {null : "vous n'avez pas rentré de valeur pour la longueur et la largeur du Hall, celles-ci ont été déduites", yes :"la surface du hall corresponds à la largeur par la longueur", no : "Attention : la surface du hall que vous avez rentrée ne corresponds pas à la largeur x la longueur"};
@@ -887,7 +913,7 @@ const costGroundByRegion= 65; //prix fixé à 65 e pour l'instant. Il faudra apr
         if( Number(document.getElementById("inputLengthHall").value)==0 && Number(document.getElementById("inputWidthHall").value)==0){ 
         x2 =verificationAreaHall.null;
         }
-        else if(inputAreaBox == Number(document.getElementById("inputLengthHall").value)*Number(document.getElementById("inputWidthHall").value))
+        else if(areaBox == Number(document.getElementById("inputLengthHall").value)*Number(document.getElementById("inputWidthHall").value))
         { 
         x2 =verificationAreaHall.yes;
         }
