@@ -580,15 +580,7 @@ function getAreas() {
      // Calcul  Spécificités____________________________________________________
           // Calcul renfort de sol
           
-          // Calcul  cloison intérieure
-          let inputWidthHall= Math.sqrt(areaBox);
-          
-          // Calcul  Pont roulant
-          // calcul du nombre de poteaux renforcés 
-          const polesUnderOverHeadCrane = (Math.ceil((((Math.sqrt(areaBox))/6)+1)*2));
-          //const lengthRaceway = ((Math.sqrt(areaBox))*2); considéré comme à la charge du fournisseur de pont
-
-          
+       
           // Calcul Niveleur de quais
           
           // Calcul Porte Sectionnelle de Plain-Pied
